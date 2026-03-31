@@ -1,0 +1,91 @@
+<svg width="1500" height="420" viewBox="0 0 1500 420" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Logo I³ APS v2 - rede de cuidado integrado suportada por dados interoperáveis">
+  <defs>
+    <linearGradient id="i3_v2_bg_grad" x1="40" y1="40" x2="300" y2="300" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0B5FAE"/>
+      <stop offset="1" stop-color="#1493DA"/>
+    </linearGradient>
+
+    <style>
+      .wordmark {
+        font: 700 114px 'Inter', 'Segoe UI', Arial, sans-serif;
+        fill: #123D5B;
+        letter-spacing: 0.3px;
+      }
+      .sup {
+        font-size: 62%;
+        baseline-shift: super;
+      }
+      .tagline {
+        font: 500 33px 'Inter', 'Segoe UI', Arial, sans-serif;
+        fill: #3E6682;
+      }
+      .node {
+        fill: #FFFFFF;
+      }
+      .link {
+        stroke: #E2F4FF;
+        stroke-width: 6.5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        fill: none;
+      }
+      .care-line {
+        stroke: #CFEAFF;
+        stroke-width: 4.2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        fill: none;
+      }
+      .core-ring {
+        stroke: #D8EEFC;
+        stroke-width: 4;
+        fill: none;
+      }
+      .core {
+        fill: #FFFFFF;
+      }
+      .db {
+        stroke: #0E6AB9;
+        stroke-width: 6;
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+    </style>
+  </defs>
+
+  <rect width="1500" height="420" fill="#FFFFFF"/>
+
+  <g transform="translate(20,50)">
+    <rect x="0" y="0" width="320" height="320" rx="78" fill="url(#i3_v2_bg_grad)"/>
+
+    <!-- Triângulo de interoperabilidade -->
+    <path d="M160 88 L96 228 L224 228 Z" class="link" opacity="0.86"/>
+    <path d="M160 160 L160 88" class="link"/>
+    <path d="M160 160 L96 228" class="link"/>
+    <path d="M160 160 L224 228" class="link"/>
+
+    <!-- Linha contínua de cuidado longitudinal + pulso clínico sutil -->
+    <path d="M160 88 C146 116 126 152 96 228 C142 226 188 226 224 228 C212 198 202 178 188 160 C182 172 176 182 170 160 C166 146 162 166 160 160" class="care-line"/>
+
+    <circle cx="160" cy="88" r="13" class="node"/>
+    <circle cx="96" cy="228" r="13" class="node"/>
+    <circle cx="224" cy="228" r="13" class="node"/>
+
+    <!-- Núcleo da infraestrutura -->
+    <circle cx="160" cy="160" r="69" class="core-ring"/>
+    <circle cx="160" cy="160" r="53" class="core"/>
+
+    <!-- Banco simplificado (flat) -->
+    <ellipse cx="160" cy="146" rx="24" ry="8" class="db"/>
+    <path d="M136 146V176" class="db"/>
+    <path d="M184 146V176" class="db"/>
+    <path d="M136 176 C136 182 147 186 160 186 C173 186 184 182 184 176" class="db"/>
+    <path d="M142 160 C146 162 152 163 160 163 C168 163 174 162 178 160" class="db"/>
+  </g>
+
+  <g transform="translate(390,96)">
+    <text x="0" y="124" class="wordmark">I<tspan class="sup">3</tspan> APS</text>
+    <text x="2" y="194" class="tagline">Interoperabilidade, Informação e Inteligência para o cuidado na APS</text>
+  </g>
+</svg>

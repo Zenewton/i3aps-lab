@@ -1,0 +1,65 @@
+# ----------------------------
+# OS / Editor
+# ----------------------------
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# ----------------------------
+# Python
+# ----------------------------
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Packaging
+build/
+dist/
+*.egg-info/
+
+# ----------------------------
+# Node / Frontend toolchain
+# ----------------------------
+node_modules/
+.next/
+.nuxt/
+out/
+*.tsbuildinfo
+
+# ----------------------------
+# Streamlit / Runtime
+# ----------------------------
+streamlit.log
+
+# ----------------------------
+# Local data / databases
+# ----------------------------
+data/*.db
+data/*.sqlite
+data/*.sqlite3
+*.db-journal
+logos/*.pdf
+
+# ----------------------------
+# Secrets / env
+# ----------------------------
+.env
+.env.*
+!.env.example
+secrets.toml
+.streamlit/secrets.toml

@@ -1,0 +1,35 @@
+<svg width="420" height="420" viewBox="0 0 420 420" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Marca I³ APS v3">
+  <defs>
+    <linearGradient id="mark_v3_bg_grad" x1="52" y1="52" x2="368" y2="368" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0B5FAE"/>
+      <stop offset="1" stop-color="#1493DA"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="420" height="420" fill="#FFFFFF"/>
+  <rect x="50" y="50" width="320" height="320" rx="78" fill="url(#mark_v3_bg_grad)"/>
+
+  <circle cx="210" cy="210" r="121" stroke="#E8F5FF" stroke-width="8" fill="none"/>
+
+  <path d="M210 142 L152 274 L268 274 Z" stroke="#DDF2FF" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M210 210 L210 142" stroke="#DDF2FF" stroke-width="6" stroke-linecap="round"/>
+  <path d="M210 210 L152 274" stroke="#DDF2FF" stroke-width="6" stroke-linecap="round"/>
+  <path d="M210 210 L268 274" stroke="#DDF2FF" stroke-width="6" stroke-linecap="round"/>
+
+  <path d="M210 142 L210 89" stroke="#E8F5FF" stroke-width="6" stroke-linecap="round"/>
+  <path d="M152 274 L126 298" stroke="#E8F5FF" stroke-width="6" stroke-linecap="round"/>
+  <path d="M268 274 L294 298" stroke="#E8F5FF" stroke-width="6" stroke-linecap="round"/>
+
+  <circle cx="210" cy="142" r="13" fill="#FFFFFF"/>
+  <circle cx="152" cy="274" r="13" fill="#FFFFFF"/>
+  <circle cx="268" cy="274" r="13" fill="#FFFFFF"/>
+
+  <circle cx="210" cy="210" r="72" stroke="#D1E9FB" stroke-width="4" fill="none"/>
+  <circle cx="210" cy="210" r="54" fill="#FFFFFF"/>
+
+  <ellipse cx="210" cy="196" rx="24" ry="8" stroke="#0E6AB9" stroke-width="6" fill="none"/>
+  <path d="M186 196V226" stroke="#0E6AB9" stroke-width="6" stroke-linecap="round"/>
+  <path d="M234 196V226" stroke="#0E6AB9" stroke-width="6" stroke-linecap="round"/>
+  <path d="M186 226 C186 232 197 236 210 236 C223 236 234 232 234 226" stroke="#0E6AB9" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M192 210 C196 212 202 213 210 213 C218 213 224 212 228 210" stroke="#0E6AB9" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

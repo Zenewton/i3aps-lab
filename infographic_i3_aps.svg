@@ -1,0 +1,170 @@
+<svg width="1600" height="1000" viewBox="0 0 1600 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1000" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F8FBFF"/>
+      <stop offset="1" stop-color="#F1F6FB"/>
+    </linearGradient>
+
+    <linearGradient id="infraGrad" x1="220" y1="0" x2="1380" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0D6FC5"/>
+      <stop offset="1" stop-color="#118FD6"/>
+    </linearGradient>
+
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="170%" filterUnits="objectBoundingBox">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#123A5C" flood-opacity="0.12"/>
+    </filter>
+
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0 0 L12 6 L0 12 Z" fill="#4B6A82"/>
+    </marker>
+
+    <style>
+      .title { font: 700 36px 'SF Pro Display', 'Inter', 'Segoe UI', Arial, sans-serif; fill: #12344D; }
+      .subtitle { font: 500 19px 'SF Pro Text', 'Inter', 'Segoe UI', Arial, sans-serif; fill: #3C5A71; }
+      .layer { font: 700 20px 'SF Pro Text', 'Inter', 'Segoe UI', Arial, sans-serif; fill: #1E4A66; }
+
+      .source { font: 600 20px 'SF Pro Text', 'Inter', 'Segoe UI', Arial, sans-serif; fill: #1D435C; }
+      .sourceAps { font: 700 23px 'SF Pro Text', 'Inter', 'Segoe UI', Arial, sans-serif; fill: #0B4B79; }
+
+      .infraTitle { font: 700 36px 'SF Pro Display', 'Inter', 'Segoe UI', Arial, sans-serif; fill: #FFFFFF; }
+      .infraSub { font: 500 22px 'SF Pro Text', 'Inter', 'Segoe UI', Arial, sans-serif; fill: #EAF6FF; }
+
+      .chipBlue { font: 600 20px 'SF Pro Text', 'Inter', 'Segoe UI', Arial, sans-serif; fill: #0D3A58; }
+      .chipGray { font: 600 20px 'SF Pro Text', 'Inter', 'Segoe UI', Arial, sans-serif; fill: #2C4355; }
+      .chipWhite { font: 600 20px 'SF Pro Text', 'Inter', 'Segoe UI', Arial, sans-serif; fill: #153951; }
+      .chipDark { font: 600 19px 'SF Pro Text', 'Inter', 'Segoe UI', Arial, sans-serif; fill: #FFFFFF; }
+
+      .serviceTitle { font: 700 23px 'SF Pro Text', 'Inter', 'Segoe UI', Arial, sans-serif; fill: #163E59; }
+      .serviceBody { font: 500 18px 'SF Pro Text', 'Inter', 'Segoe UI', Arial, sans-serif; fill: #3D5D74; }
+
+      .care { font: 600 20px 'SF Pro Text', 'Inter', 'Segoe UI', Arial, sans-serif; fill: #1F4560; }
+    </style>
+  </defs>
+
+  <rect width="1600" height="1000" fill="url(#bg)"/>
+
+  <text x="800" y="82" text-anchor="middle" class="title">Laboratório Multiusuário I<tspan baseline-shift="super" font-size="70%">3</tspan>-APS</text>
+
+  <text x="800" y="132" text-anchor="middle" class="subtitle">
+    <tspan x="800" dy="0">Infraestrutura nacional estratégica para dados clínicos seguros, interoperabilidade, telemedicina</tspan>
+    <tspan x="800" dy="28">e inteligência artificial aplicada ao cuidado integrado na APS</tspan>
+  </text>
+
+  <rect x="80" y="170" width="1440" height="116" rx="22" fill="#FFFFFF" stroke="#D7E4EE" filter="url(#softShadow)"/>
+  <text x="108" y="204" class="layer">1) FONTES DE DADOS DO SUS</text>
+
+  <g filter="url(#softShadow)">
+    <rect x="160" y="220" width="220" height="52" rx="14" fill="#F9FCFF" stroke="#CFE0ED"/>
+    <rect x="400" y="220" width="220" height="52" rx="14" fill="#F9FCFF" stroke="#CFE0ED"/>
+    <rect x="640" y="212" width="320" height="68" rx="18" fill="#EAF5FF" stroke="#7FB8E3"/>
+    <rect x="980" y="220" width="220" height="52" rx="14" fill="#F9FCFF" stroke="#CFE0ED"/>
+    <rect x="1220" y="220" width="220" height="52" rx="14" fill="#F9FCFF" stroke="#CFE0ED"/>
+  </g>
+
+  <text x="270" y="253" text-anchor="middle" class="source">Atenção especializada</text>
+  <text x="510" y="253" text-anchor="middle" class="source">Urgência (UPA)</text>
+  <text x="800" y="253" text-anchor="middle" class="sourceAps">APS (ELEMENTO CENTRAL)</text>
+  <text x="1090" y="253" text-anchor="middle" class="source">Atenção hospitalar</text>
+  <text x="1330" y="245" text-anchor="middle" class="source">
+    <tspan x="1330" dy="0">Vigilância e</tspan>
+    <tspan x="1330" dy="22">monitoramento</tspan>
+  </text>
+
+  <text x="108" y="324" class="layer">2) INFRAESTRUTURA NACIONAL DE DADOS CLÍNICOS</text>
+
+  <g filter="url(#softShadow)">
+    <rect x="220" y="342" width="1160" height="244" rx="30" fill="url(#infraGrad)"/>
+  </g>
+
+  <text x="800" y="410" text-anchor="middle" class="infraTitle">Infraestrutura Nacional de Dados Clínicos Interoperáveis - I<tspan baseline-shift="super" font-size="70%">3</tspan>-APS</text>
+  <text x="800" y="446" text-anchor="middle" class="infraSub">Ambiente seguro, interoperável e escalável para o SUS</text>
+
+  <g filter="url(#softShadow)">
+    <rect x="254" y="484" width="204" height="64" rx="16" fill="#D9EEFF"/>
+    <rect x="476" y="484" width="204" height="64" rx="16" fill="#E9EDF2"/>
+    <rect x="698" y="484" width="204" height="64" rx="16" fill="#FFFFFF"/>
+    <rect x="920" y="484" width="204" height="64" rx="16" fill="#FFFFFF"/>
+    <rect x="1142" y="484" width="204" height="64" rx="16" fill="#0E5FA8"/>
+  </g>
+
+  <text x="356" y="523" text-anchor="middle" class="chipBlue">Dados clínicos</text>
+  <text x="578" y="516" text-anchor="middle" class="chipGray">
+    <tspan x="578" dy="0">Dados</tspan>
+    <tspan x="578" dy="20">administrativos</tspan>
+  </text>
+  <text x="800" y="516" text-anchor="middle" class="chipWhite">
+    <tspan x="800" dy="0">Integração com</tspan>
+    <tspan x="800" dy="20">RNDS</tspan>
+  </text>
+  <text x="1022" y="516" text-anchor="middle" class="chipWhite">
+    <tspan x="1022" dy="0">Governança</tspan>
+    <tspan x="1022" dy="20">de dados</tspan>
+  </text>
+  <text x="1244" y="506" text-anchor="middle" class="chipDark">
+    <tspan x="1244" dy="0">Segurança e</tspan>
+    <tspan x="1244" dy="18">privacidade</tspan>
+    <tspan x="1244" dy="18">(LGPD)</tspan>
+  </text>
+
+  <text x="108" y="642" class="layer">3) SERVIÇOS DIGITAIS EM SAÚDE</text>
+
+  <g filter="url(#softShadow)">
+    <rect x="220" y="660" width="1160" height="130" rx="24" fill="#FFFFFF" stroke="#D4E3EE"/>
+
+    <rect x="258" y="686" width="346" height="88" rx="18" fill="#FFFFFF" stroke="#CFE0EE"/>
+    <rect x="627" y="686" width="346" height="88" rx="18" fill="#FFFFFF" stroke="#CFE0EE"/>
+    <rect x="996" y="686" width="346" height="88" rx="18" fill="#FFFFFF" stroke="#CFE0EE"/>
+  </g>
+
+  <text x="431" y="718" text-anchor="middle" class="serviceTitle">Interoperabilidade</text>
+  <text x="431" y="744" text-anchor="middle" class="serviceBody">APIs / prontuário eletrônico</text>
+
+  <text x="800" y="718" text-anchor="middle" class="serviceTitle">Telemedicina</text>
+  <text x="800" y="736" text-anchor="middle" class="serviceBody">
+    <tspan x="800" dy="0">Telemonitoramento, teleintervenção</tspan>
+    <tspan x="800" dy="20">e suporte ao autocuidado</tspan>
+  </text>
+
+  <text x="1169" y="718" text-anchor="middle" class="serviceTitle">Inteligência artificial</text>
+  <text x="1169" y="744" text-anchor="middle" class="serviceBody">
+    <tspan x="1169" dy="0">IA aplicada ao cuidado</tspan>
+    <tspan x="1169" dy="20">(baseada em dados interoperáveis)</tspan>
+  </text>
+
+  <text x="108" y="836" class="layer">4) CUIDADO LONGITUDINAL NA APS - CONDIÇÕES CRÔNICAS</text>
+
+  <g filter="url(#softShadow)">
+    <rect x="220" y="854" width="1160" height="122" rx="24" fill="#FFFFFF" stroke="#D4E3EE"/>
+
+    <rect x="249" y="880" width="206" height="72" rx="16" fill="#F6FAFE" stroke="#CFE0EE"/>
+    <rect x="473" y="880" width="206" height="72" rx="16" fill="#F6FAFE" stroke="#CFE0EE"/>
+    <rect x="697" y="880" width="206" height="72" rx="16" fill="#F6FAFE" stroke="#CFE0EE"/>
+    <rect x="921" y="880" width="206" height="72" rx="16" fill="#F6FAFE" stroke="#CFE0EE"/>
+    <rect x="1145" y="880" width="206" height="72" rx="16" fill="#F6FAFE" stroke="#CFE0EE"/>
+  </g>
+
+  <text x="352" y="916" text-anchor="middle" class="care">
+    <tspan x="352" dy="0">Estratificação</tspan>
+    <tspan x="352" dy="22">de risco</tspan>
+  </text>
+  <text x="576" y="916" text-anchor="middle" class="care">
+    <tspan x="576" dy="0">Predição de</tspan>
+    <tspan x="576" dy="22">desfechos</tspan>
+  </text>
+  <text x="800" y="916" text-anchor="middle" class="care">
+    <tspan x="800" dy="0">Priorização de</tspan>
+    <tspan x="800" dy="22">pacientes</tspan>
+  </text>
+  <text x="1024" y="916" text-anchor="middle" class="care">
+    <tspan x="1024" dy="0">Suporte à</tspan>
+    <tspan x="1024" dy="22">decisão clínica</tspan>
+  </text>
+  <text x="1248" y="916" text-anchor="middle" class="care">
+    <tspan x="1248" dy="0">Coordenação</tspan>
+    <tspan x="1248" dy="22">do cuidado</tspan>
+  </text>
+
+  <path d="M800 280 L800 334" stroke="#5A7A93" stroke-width="4" marker-end="url(#arrow)"/>
+  <path d="M800 586 L800 652" stroke="#4D6F89" stroke-width="4" marker-end="url(#arrow)"/>
+  <path d="M800 790 L800 846" stroke="#4D6F89" stroke-width="4" marker-end="url(#arrow)"/>
+</svg>

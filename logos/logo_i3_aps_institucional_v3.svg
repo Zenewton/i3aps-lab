@@ -1,0 +1,104 @@
+<svg width="1500" height="420" viewBox="0 0 1500 420" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Logo I³ APS v3 - infraestrutura nacional interoperável em saúde">
+  <defs>
+    <linearGradient id="i3_v3_bg_grad" x1="40" y1="40" x2="300" y2="300" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0B5FAE"/>
+      <stop offset="1" stop-color="#1493DA"/>
+    </linearGradient>
+
+    <style>
+      .wordmark {
+        font: 700 114px 'Inter', 'Segoe UI', Arial, sans-serif;
+        fill: #123D5B;
+        letter-spacing: 0.3px;
+      }
+      .sup {
+        font-size: 62%;
+        baseline-shift: super;
+      }
+      .tagline {
+        font: 500 33px 'Inter', 'Segoe UI', Arial, sans-serif;
+        fill: #3E6682;
+      }
+      .outer-ring {
+        stroke: #E8F5FF;
+        stroke-width: 8;
+        fill: none;
+      }
+      .ring-link {
+        stroke: #E8F5FF;
+        stroke-width: 6;
+        stroke-linecap: round;
+        fill: none;
+      }
+      .triangle {
+        stroke: #DDF2FF;
+        stroke-width: 6;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        fill: none;
+      }
+      .core-link {
+        stroke: #DDF2FF;
+        stroke-width: 6;
+        stroke-linecap: round;
+        fill: none;
+      }
+      .node {
+        fill: #FFFFFF;
+      }
+      .core-ring {
+        stroke: #D1E9FB;
+        stroke-width: 4;
+        fill: none;
+      }
+      .core {
+        fill: #FFFFFF;
+      }
+      .db {
+        stroke: #0E6AB9;
+        stroke-width: 6;
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+    </style>
+  </defs>
+
+  <rect width="1500" height="420" fill="#FFFFFF"/>
+
+  <g transform="translate(20,50)">
+    <rect x="0" y="0" width="320" height="320" rx="78" fill="url(#i3_v3_bg_grad)"/>
+
+    <!-- Anel externo: escala nacional -->
+    <circle cx="160" cy="160" r="121" class="outer-ring"/>
+
+    <!-- Rede triangular de interoperabilidade -->
+    <path d="M160 92 L102 224 L218 224 Z" class="triangle"/>
+    <path d="M160 160 L160 92" class="core-link"/>
+    <path d="M160 160 L102 224" class="core-link"/>
+    <path d="M160 160 L218 224" class="core-link"/>
+
+    <!-- Conexão dos nós ao anel nacional -->
+    <path d="M160 92 L160 39" class="ring-link"/>
+    <path d="M102 224 L76 248" class="ring-link"/>
+    <path d="M218 224 L244 248" class="ring-link"/>
+
+    <circle cx="160" cy="92" r="13" class="node"/>
+    <circle cx="102" cy="224" r="13" class="node"/>
+    <circle cx="218" cy="224" r="13" class="node"/>
+
+    <!-- Núcleo de dados -->
+    <circle cx="160" cy="160" r="72" class="core-ring"/>
+    <circle cx="160" cy="160" r="54" class="core"/>
+    <ellipse cx="160" cy="146" rx="24" ry="8" class="db"/>
+    <path d="M136 146V176" class="db"/>
+    <path d="M184 146V176" class="db"/>
+    <path d="M136 176 C136 182 147 186 160 186 C173 186 184 182 184 176" class="db"/>
+    <path d="M142 160 C146 162 152 163 160 163 C168 163 174 162 178 160" class="db"/>
+  </g>
+
+  <g transform="translate(390,96)">
+    <text x="0" y="124" class="wordmark">I<tspan class="sup">3</tspan> APS</text>
+    <text x="2" y="194" class="tagline">Interoperabilidade, Informação e Inteligência para o cuidado na APS</text>
+  </g>
+</svg>

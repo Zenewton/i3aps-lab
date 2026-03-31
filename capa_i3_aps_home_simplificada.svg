@@ -1,0 +1,85 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="900" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F8FBFF"/>
+      <stop offset="1" stop-color="#F2F6FA"/>
+    </linearGradient>
+
+    <linearGradient id="centerGrad" x1="520" y1="0" x2="1080" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0E73C9"/>
+      <stop offset="1" stop-color="#1493DA"/>
+    </linearGradient>
+
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="160%" filterUnits="objectBoundingBox">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#143A57" flood-opacity="0.12"/>
+    </filter>
+
+    <marker id="arrow" markerWidth="16" markerHeight="16" refX="13" refY="8" orient="auto">
+      <path d="M0 0 L16 8 L0 16 Z" fill="#1186D4"/>
+    </marker>
+
+    <style>
+      .title { font: 700 46px 'SF Pro Display', 'Inter', 'Segoe UI', Arial, sans-serif; fill: #12344D; }
+      .sub { font: 500 22px 'SF Pro Text', 'Inter', 'Segoe UI', Arial, sans-serif; fill: #36586F; }
+
+      .cardTitle { font: 700 32px 'SF Pro Display', 'Inter', 'Segoe UI', Arial, sans-serif; fill: #173E59; }
+      .cardText { font: 500 20px 'SF Pro Text', 'Inter', 'Segoe UI', Arial, sans-serif; fill: #3B5A72; }
+
+      .centerTitle { font: 700 54px 'SF Pro Display', 'Inter', 'Segoe UI', Arial, sans-serif; fill: #FFFFFF; }
+      .centerText { font: 500 21px 'SF Pro Text', 'Inter', 'Segoe UI', Arial, sans-serif; fill: #EAF6FF; }
+
+      .iconStroke { stroke: #2C6D99; stroke-width: 3; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .iconStrokeCenter { stroke: #DDF1FF; stroke-width: 3; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+    </style>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bg)"/>
+
+  <text x="800" y="96" text-anchor="middle" class="title">Laboratório Multiusuário I<tspan baseline-shift="super" font-size="70%">3</tspan>-APS</text>
+  <text x="800" y="138" text-anchor="middle" class="sub">Infraestrutura nacional de dados clínicos interoperáveis para integração do cuidado às condições crônicas no SUS</text>
+
+  <g filter="url(#shadow)">
+    <rect x="100" y="230" width="360" height="380" rx="12" fill="#FFFFFF" stroke="#D3E2EC"/>
+    <rect x="520" y="200" width="560" height="440" rx="12" fill="url(#centerGrad)"/>
+    <rect x="1140" y="230" width="360" height="380" rx="12" fill="#FFFFFF" stroke="#D3E2EC"/>
+  </g>
+
+  <!-- Left icon (outline network) -->
+  <g transform="translate(280,320)">
+    <circle cx="0" cy="0" r="52" class="iconStroke"/>
+    <circle cx="-18" cy="-10" r="7" class="iconStroke"/>
+    <circle cx="18" cy="-10" r="7" class="iconStroke"/>
+    <circle cx="0" cy="20" r="7" class="iconStroke"/>
+    <path d="M-12 -6 L-2 14 M12 -6 L2 14 M-11 -10 L11 -10" class="iconStroke"/>
+  </g>
+
+  <!-- Center icon (outline data stack) -->
+  <g transform="translate(800,320)">
+    <circle cx="0" cy="0" r="44" class="iconStrokeCenter"/>
+    <ellipse cx="0" cy="-12" rx="22" ry="7" class="iconStrokeCenter"/>
+    <path d="M-22 -12 V2 C-22 6 -12 9 0 9 C12 9 22 6 22 2 V-12" class="iconStrokeCenter"/>
+    <path d="M-22 2 V16 C-22 20 -12 23 0 23 C12 23 22 20 22 16 V2" class="iconStrokeCenter"/>
+  </g>
+
+  <!-- Right icon (outline care pulse) -->
+  <g transform="translate(1320,320)">
+    <circle cx="0" cy="0" r="52" class="iconStroke"/>
+    <path d="M-28 6 H-12 L-2 -12 L10 14 L20 0 H30" class="iconStroke"/>
+  </g>
+
+  <text x="280" y="418" text-anchor="middle" class="cardTitle">Rede do SUS</text>
+  <text x="280" y="450" text-anchor="middle" class="cardText">
+    <tspan x="280" dy="0">APS, atenção especializada,</tspan>
+    <tspan x="280" dy="22">urgência e vigilância</tspan>
+  </text>
+
+  <text x="800" y="430" text-anchor="middle" class="centerTitle">I<tspan baseline-shift="super" font-size="70%">3</tspan>-APS</text>
+  <text x="800" y="470" text-anchor="middle" class="centerText">Infraestrutura nacional interoperável de dados clínicos</text>
+  <text x="800" y="502" text-anchor="middle" class="centerText">Integra dados para apoiar o cuidado na APS</text>
+
+  <text x="1320" y="418" text-anchor="middle" class="cardTitle">Cuidado longitudinal</text>
+  <text x="1320" y="456" text-anchor="middle" class="cardText">Decisão clínica, telemedicina e IA</text>
+
+  <path d="M468 420 L508 420" stroke="#1186D4" stroke-width="5" marker-end="url(#arrow)"/>
+  <path d="M1088 420 L1128 420" stroke="#1186D4" stroke-width="5" marker-end="url(#arrow)"/>
+</svg>
