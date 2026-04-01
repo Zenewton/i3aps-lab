@@ -94,7 +94,7 @@ def _render_home_flow_animation(animate_once: bool) -> None:
             </div>
             <div class="flow-title-center">I<span class="sup">3</span> APS</div>
           </div>
-          <div class="flow-line-center">Plataforma nacional de dados clínicos interoperáveis</div>
+          <div class="flow-line-center">Ambiente multiusuário de dados clínicos interoperáveis</div>
           <div class="flow-line-center">Repositório seguro • Integração RNDS/FHIR • Serviços de IA • Governança de dados</div>
         </div>
 
@@ -701,7 +701,7 @@ def render_hero(set_page) -> None:
         unsafe_allow_html=True,
     )
     st.write(
-        "Plataforma multiusuário para desenvolvimento, validação e operação de "
+        "Ambiente multiusuário para desenvolvimento, validação e operação de "
         "soluções digitais, telemedicina e inteligência artificial em ambiente real de atenção à saúde"
     )
     b1, b2 = st.columns(2)
