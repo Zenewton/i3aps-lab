@@ -45,6 +45,8 @@ out/
 # Streamlit / Runtime
 # ----------------------------
 streamlit.log
+streamlit-*.log
+.runlogs/
 
 # ----------------------------
 # Local data / databases

@@ -9,7 +9,7 @@ from pages import admin, agendamento, catalogo, dashboard, home, servicos, sobre
 
 
 st.set_page_config(
-    page_title="Laboratório I³ APS",
+    page_title="I³ APS",
     page_icon="🏥",
     layout="wide",
     initial_sidebar_state="expanded",
@@ -44,10 +44,23 @@ def apply_custom_style() -> None:
             [data-testid="stSidebar"] .sidebar-brand-title {
                 text-align: center;
                 color: #f0f6fc;
-                font-size: 1.1rem;
-                font-weight: 650;
-                letter-spacing: 0.1px;
-                margin: 0 0 0.2rem 0;
+                font-size: 1.3rem;
+                font-weight: 760;
+                letter-spacing: 0.3px;
+                margin: 0 0 0.1rem 0;
+            }
+            [data-testid="stSidebar"] .sidebar-brand-subtitle {
+                text-align: center;
+                color: #d4e7f7;
+                font-size: 0.88rem;
+                font-weight: 620;
+                margin: 0 0 0.05rem 0;
+            }
+            [data-testid="stSidebar"] .sidebar-brand-caption {
+                text-align: center;
+                color: #bfd8ea;
+                font-size: 0.8rem;
+                margin: 0 0 0.6rem 0;
             }
             [data-testid="stSidebar"] * {
                 color: #f0f6fc;
@@ -151,12 +164,12 @@ def sidebar_navigation() -> None:
             pass
 
     st.sidebar.markdown(
-        '<div class="sidebar-brand-title">Laboratório I³ APS</div>',
+        '<div class="sidebar-brand-title">I³ APS</div>',
         unsafe_allow_html=True,
     )
-    st.sidebar.caption(
-        "Laboratório Multiusuário do Centro Nacional de Interoperabilidade, "
-        "Informação e Inteligência na Atenção Primária à Saúde"
+    st.sidebar.markdown(
+        '<div class="sidebar-brand-subtitle"><strong>Ambiente multiusuário</strong></div>',
+        unsafe_allow_html=True,
     )
 
     nav_items = [

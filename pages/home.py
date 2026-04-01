@@ -346,19 +346,42 @@ def _render_home_flow_animation(animate_once: bool) -> None:
       }}
 
       @media (max-width: 860px) {{
+        .i3-flow {{
+          padding: 14px;
+        }}
         .flow-grid {{
           grid-template-columns: 1fr;
-          gap: 10px;
+          gap: 8px;
         }}
         .flow-card {{
-          min-height: 170px;
+          min-height: 0;
+          padding: 14px 12px;
         }}
         .flow-center {{
-          min-height: 210px;
+          min-height: 0;
+          padding: 16px 14px;
+        }}
+        .icon-wrap {{
+          width: 58px;
+          height: 58px;
+          margin-bottom: 8px;
+        }}
+        .flow-title {{
+          font-size: 21px;
+          margin-bottom: 6px;
+        }}
+        .flow-title-center {{
+          font-size: 34px;
+          margin-bottom: 6px;
+        }}
+        .flow-line,
+        .flow-line-center {{
+          font-size: 15px;
+          line-height: 1.28;
         }}
         .flow-arrow {{
           width: 0;
-          height: 40px;
+          height: 30px;
           margin: 0 auto;
         }}
         .flow-arrow::before {{
@@ -430,6 +453,37 @@ def _render_home_flow_animation(animate_once: bool) -> None:
         }}
       }}
 
+      @media (max-width: 520px) {{
+        .i3-flow {{
+          padding: 12px;
+        }}
+        .flow-card {{
+          padding: 12px 10px;
+        }}
+        .flow-center {{
+          padding: 14px 10px;
+        }}
+        .icon-wrap {{
+          width: 52px;
+          height: 52px;
+          margin-bottom: 7px;
+        }}
+        .flow-title {{
+          font-size: 19px;
+        }}
+        .flow-title-center {{
+          font-size: 30px;
+        }}
+        .flow-line,
+        .flow-line-center {{
+          font-size: 14px;
+          line-height: 1.26;
+        }}
+        .flow-arrow {{
+          height: 24px;
+        }}
+      }}
+
       @media (prefers-reduced-motion: reduce) {{
         .seq1, .seq2, .seq3, .seq4, .seq5 {{
           opacity: 1 !important;
@@ -488,7 +542,7 @@ def _render_home_flow_animation(animate_once: bool) -> None:
       }})();
     </script>
     """
-    components.html(html, height=540, scrolling=False)
+    components.html(html, height=620, scrolling=False)
 
 
 def _resolve_logo_candidates() -> tuple[Path | None, Path | None, Path | None]:
@@ -557,7 +611,7 @@ def render_hero(set_page) -> None:
             display: flex;
             align-items: center;
             gap: 28px;
-            margin-bottom: 18px;
+            margin-bottom: 16px;
           }
           .hero-logo-wrap {
             width: clamp(180px, 24vw, 240px);
@@ -571,17 +625,17 @@ def render_hero(set_page) -> None:
           .hero-brand-text {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 8px;
           }
           .hero-name {
-            font: 700 18px "SF Pro Text", "Inter", "Segoe UI", Arial, sans-serif;
-            color: #2a5574;
-            line-height: 1.05;
-            letter-spacing: 0.8px;
+            font: 820 34px "SF Pro Display", "Inter", "Segoe UI", Arial, sans-serif;
+            color: #0b2f49;
+            line-height: 1;
+            letter-spacing: 0.2px;
             text-transform: uppercase;
           }
           .hero-name .sup {
-            font-size: 62%;
+            font-size: 48%;
             vertical-align: super;
           }
           .hero-main .sup {
@@ -589,17 +643,17 @@ def render_hero(set_page) -> None:
             vertical-align: super;
           }
           .hero-main {
-            font: 650 46px "SF Pro Display", "Inter", "Segoe UI", Arial, sans-serif;
+            font: 650 42px "SF Pro Display", "Inter", "Segoe UI", Arial, sans-serif;
             color: #0b2f49;
-            line-height: 1.08;
+            line-height: 1.1;
             letter-spacing: -0.3px;
             margin: 0;
           }
           .hero-subtitle {
-            font: 600 28px "SF Pro Display", "Inter", "Segoe UI", Arial, sans-serif;
+            font: 600 26px "SF Pro Display", "Inter", "Segoe UI", Arial, sans-serif;
             color: #214862;
-            margin: 18px 0 10px 0;
-            line-height: 1.18;
+            margin: 16px 0 8px 0;
+            line-height: 1.2;
           }
           @media (max-width: 860px) {
             .hero-brand {
@@ -611,13 +665,13 @@ def render_hero(set_page) -> None:
               width: min(56vw, 210px);
             }
             .hero-name {
-              font-size: 15px;
+              font-size: 28px;
             }
             .hero-main {
-              font-size: 34px;
+              font-size: 31px;
             }
             .hero-subtitle {
-              font-size: 22px;
+              font-size: 20px;
             }
           }
         </style>
@@ -632,7 +686,7 @@ def render_hero(set_page) -> None:
               <div class="hero-logo-wrap">{mark_svg}</div>
               <div class="hero-brand-text">
                 <div class="hero-name">I<span class="sup">3</span> APS</div>
-                <h1 class="hero-main">Laboratório Multiusuário de Infraestrutura Nacional em Dados Clínicos</h1>
+                <h1 class="hero-main">Interoperabilidade, Informação e Inteligência na Atenção Primária à Saúde</h1>
               </div>
             </div>
             """,
@@ -640,17 +694,16 @@ def render_hero(set_page) -> None:
         )
     else:
         st.markdown('<div class="hero-name">I<span class="sup">3</span> APS</div>', unsafe_allow_html=True)
-        st.markdown('<h1 class="hero-main">Laboratório Multiusuário de Infraestrutura Nacional em Dados Clínicos</h1>', unsafe_allow_html=True)
+        st.markdown('<h1 class="hero-main">Interoperabilidade, Informação e Inteligência na Atenção Primária à Saúde</h1>', unsafe_allow_html=True)
 
     st.markdown(
-        '<div class="hero-subtitle">Integra dados clínicos interoperáveis para coordenação do cuidado às condições crônicas na Atenção Primária à Saúde (APS)</div>',
+        '<div class="hero-subtitle">Infraestrutura nacional de dados clínicos para coordenação do cuidado longitudinal de condições crônicas na APS</div>',
         unsafe_allow_html=True,
     )
     st.write(
-        "Ambiente nacional multiusuário para desenvolvimento, validação e operação de "
-        "soluções interoperáveis, telemedicina e inteligência artificial em escala real no SUS."
+        "Plataforma multiusuário para desenvolvimento, validação e operação de "
+        "soluções digitais, telemedicina e inteligência artificial em ambiente real de atenção à saúde"
     )
-
     b1, b2 = st.columns(2)
     if b1.button("Explorar Infraestrutura", use_container_width=True, key="hero_explorar"):
         _go_to(set_page, "catalogo")
