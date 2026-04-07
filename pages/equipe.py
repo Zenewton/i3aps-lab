@@ -202,7 +202,7 @@ def render() -> None:
     """Renderiza página da equipe com agrupamento temático."""
     st.title("Equipe do I³ APS")
     st.write(
-        "A equipe do I³-APS reúne pesquisadores líderes nas áreas de saúde coletiva, "
+        "A equipe do I³ APS reúne pesquisadores líderes nas áreas de saúde coletiva, "
         "engenharia de software, inteligência artificial e epidemiologia, refletindo a "
         "natureza interdisciplinar necessária para a construção de uma infraestrutura "
         "nacional de dados clínicos interoperáveis voltada ao cuidado longitudinal no SUS."

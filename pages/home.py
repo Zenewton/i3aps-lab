@@ -7,6 +7,7 @@ import textwrap
 from pathlib import Path
 
 import streamlit as st
+import streamlit.components.v1 as components
 
 def _go_to(set_page, page_key: str) -> None:
     """Navegação reutilizável para botões de ação."""
@@ -518,7 +519,7 @@ def _render_home_flow_animation(animate_once: bool) -> None:
     </style>
 
     """
-    st.markdown(textwrap.dedent(html), unsafe_allow_html=True)
+    components.html(textwrap.dedent(html), height=560, scrolling=False)
 
 
 def _to_data_uri(path: Path | None) -> str | None:
@@ -868,7 +869,7 @@ def render_hero() -> None:
             {hero_logo_html}
             <div class="hero-brand-text">
               <h1 class="hero-main">Infraestrutura nacional de dados clínicos interoperáveis para o cuidado na Atenção Primária à&nbsp;Saúde</h1>
-              <p class="hero-subtitle">I<span class="sup">3</span>-APS: plataforma nacional para integração segura de dados clínicos, inteligência artificial e telemedicina, voltada ao cuidado longitudinal de condições crônicas na APS.</p>
+              <p class="hero-subtitle">I<span class="sup">3</span> APS: plataforma nacional para integração segura de dados clínicos, inteligência artificial e telemedicina, voltada ao cuidado longitudinal de condições crônicas na APS.</p>
             </div>
           </div>
         </div>
@@ -1144,7 +1145,7 @@ def render_concept_i3_section() -> None:
     """Renderiza conceito I3 com ícones coloridos e cards institucionais."""
     st.markdown("### Conceito I³")
     st.markdown(
-        "O I³-APS é estruturado a partir de três pilares integrados:"
+        "O I³ APS é estruturado a partir de três pilares integrados:"
     )
     st.markdown(
         """
