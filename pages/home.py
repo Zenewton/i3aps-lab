@@ -66,15 +66,6 @@ def _render_home_flow_animation(animate_once: bool) -> None:
         <div class="flow-card flow-center seq3">
           <div class="flow-card-content pulse-2">
             <div class="center-live">
-              <div class="icon-wrap center-node-wrap">
-                <svg viewBox="0 0 64 64" aria-hidden="true">
-                  <circle cx="32" cy="32" r="25" class="icon-stroke-center-soft"></circle>
-                  <circle cx="32" cy="32" r="20" class="icon-stroke-center"></circle>
-                  <ellipse cx="32" cy="25" rx="10" ry="3.5" class="icon-stroke-center"></ellipse>
-                  <path d="M22 25 V32 C22 34 27 36 32 36 C37 36 42 34 42 32 V25" class="icon-stroke-center"></path>
-                  <path d="M22 32 V39 C22 41 27 43 32 43 C37 43 42 41 42 39 V32" class="icon-stroke-center"></path>
-                </svg>
-              </div>
               <div class="flow-title-center">I<span class="sup">3</span> APS</div>
             </div>
             <div class="flow-line-center">Dados clínicos interoperáveis para o SUS</div>
@@ -105,14 +96,14 @@ def _render_home_flow_animation(animate_once: bool) -> None:
 
     <style>
       .i3-flow-shell {{
-        max-width: 1280px;
+        max-width: 1360px;
         margin: 0 auto;
       }}
       .i3-flow {{
         background: linear-gradient(180deg, #f8fbff 0%, #f2f6fa 100%);
         border: 1px solid #d7e5ef;
         border-radius: 12px;
-        padding: 22px;
+        padding: 24px;
         opacity: 0;
         transform: translateY(6px);
         transition: opacity .4s ease-out, transform .4s ease-out;
@@ -133,7 +124,7 @@ def _render_home_flow_animation(animate_once: bool) -> None:
         border-radius: 12px;
         background: #ffffff;
         box-shadow: 0 10px 20px rgba(20, 58, 87, 0.10);
-        min-height: 260px;
+        min-height: 274px;
         padding: 20px 16px;
         display: flex;
         flex-direction: column;
@@ -158,32 +149,28 @@ def _render_home_flow_animation(animate_once: bool) -> None:
         animation-delay: 2s;
       }}
       .flow-center {{
-        min-height: 320px;
-        padding: 28px 22px;
+        min-height: 336px;
+        padding: 34px 22px 28px 22px;
         background: linear-gradient(90deg, #0e73c9 0%, #1493da 100%);
         border-color: #0e73c9;
         position: relative;
       }}
       .center-live {{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding-top: 8px;
+        margin-bottom: 10px;
         transform-origin: center;
         will-change: transform;
         animation: centerPulse 3.8s ease-in-out 1.35s infinite;
       }}
       .icon-wrap {{
-        width: 80px;
-        height: 80px;
+        width: 84px;
+        height: 84px;
         margin-bottom: 12px;
-      }}
-      .center-node-wrap {{
-        position: relative;
-      }}
-      .center-node-wrap::after {{
-        content: "";
-        position: absolute;
-        inset: -5px;
-        border-radius: 999px;
-        border: 1px solid rgba(223, 242, 255, 0.36);
-        animation: ringSweep 9.5s ease-in-out infinite;
       }}
       .icon-wrap svg {{
         width: 100%;
@@ -196,18 +183,6 @@ def _render_home_flow_animation(animate_once: bool) -> None:
         stroke-linecap: round;
         stroke-linejoin: round;
       }}
-      .icon-stroke-center {{
-        stroke: #dff2ff;
-        stroke-width: 2.8;
-        fill: none;
-        stroke-linecap: round;
-        stroke-linejoin: round;
-      }}
-      .icon-stroke-center-soft {{
-        stroke: rgba(223, 242, 255, 0.52);
-        stroke-width: 1.6;
-        fill: none;
-      }}
       .flow-title {{
         font: 700 28px "SF Pro Display", "Inter", "Segoe UI", Arial, sans-serif;
         color: #173e59;
@@ -216,7 +191,7 @@ def _render_home_flow_animation(animate_once: bool) -> None:
       .flow-title-center {{
         font: 700 46px "SF Pro Display", "Inter", "Segoe UI", Arial, sans-serif;
         color: #ffffff;
-        margin-bottom: 8px;
+        margin: 0 0 10px 0;
       }}
       .flow-title-center .sup {{
         font-size: 62%;
@@ -348,16 +323,6 @@ def _render_home_flow_animation(animate_once: bool) -> None:
           box-shadow: 0 0 0 4px rgba(175, 223, 251, 0.2);
         }}
       }}
-      @keyframes ringSweep {{
-        0%, 100% {{
-          opacity: 0.28;
-          transform: rotate(0deg) scale(1);
-        }}
-        50% {{
-          opacity: 0.52;
-          transform: rotate(3deg) scale(1.015);
-        }}
-      }}
       @keyframes cardPulse {{
         0%,
         11%,
@@ -381,7 +346,7 @@ def _render_home_flow_animation(animate_once: bool) -> None:
 
       @media (max-width: 860px) {{
         .i3-flow {{
-          padding: 14px;
+          padding: 16px;
         }}
         .flow-grid {{
           grid-template-columns: 1fr;
@@ -395,7 +360,7 @@ def _render_home_flow_animation(animate_once: bool) -> None:
         }}
         .flow-center {{
           min-height: 0;
-          padding: 16px 14px;
+          padding: 20px 14px 16px 14px;
         }}
         .icon-wrap {{
           width: 58px;
@@ -408,7 +373,7 @@ def _render_home_flow_animation(animate_once: bool) -> None:
         }}
         .flow-title-center {{
           font-size: 34px;
-          margin-bottom: 6px;
+          margin-bottom: 8px;
         }}
         .flow-line,
         .flow-line-center {{
@@ -501,7 +466,7 @@ def _render_home_flow_animation(animate_once: bool) -> None:
           padding: 12px 10px;
         }}
         .flow-center {{
-          padding: 14px 10px;
+          padding: 18px 10px 14px 10px;
         }}
         .icon-wrap {{
           width: 52px;
@@ -538,8 +503,7 @@ def _render_home_flow_animation(animate_once: bool) -> None:
         .flow-grid,
         .center-live,
         .arrow-stream,
-        .arrow-node,
-        .center-node-wrap::after {{
+        .arrow-node {{
           animation: none !important;
           transition: none !important;
         }}
@@ -697,17 +661,49 @@ def _resolve_logo_candidates() -> list[tuple[str, Path | None]]:
 
 def render_hero() -> None:
     """Renderiza topo enxuto com label, título e linha dos 3 Is."""
+    hero_logo_candidates = [
+        Path("logos/logo_i3_aps_institucional_mark_v3.svg"),
+        Path("logos/logo_i3_aps_institucional_mark_v2.svg"),
+    ]
+    hero_logo_path = next((path for path in hero_logo_candidates if path.exists()), None)
+    if hero_logo_path is None:
+        hero_logo_path = _resolve_logo_path(
+            "i3_aps_institucional_mark_v3",
+            "i3_aps_institucional_mark_v2",
+            "institucional_mark",
+        )
+    hero_logo_uri = _to_data_uri(hero_logo_path)
 
     st.markdown(
         """
         <style>
           .hero-brand {
-            margin-bottom: 2px;
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding-top: 18px;
+            margin-bottom: 12px;
+          }
+          .hero-logo-wrap {
+            width: 72px;
+            height: 72px;
+            flex: 0 0 72px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+          .hero-logo {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
           }
           .hero-brand-text {
             display: flex;
             flex-direction: column;
-            gap: 3px;
+            gap: 6px;
+            padding-top: 1px;
           }
           .hero-name {
             font: 780 30px "SF Pro Display", "Inter", "Segoe UI", Arial, sans-serif;
@@ -725,18 +721,47 @@ def render_hero() -> None:
             color: #0b2f49;
             line-height: 1.12;
             letter-spacing: -0.3px;
-            margin: 0 0 1px 0;
+            margin: 0 0 4px 0;
             max-width: 800px;
           }
           .hero-three-is {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
             font: 560 16px "SF Pro Text", "Inter", "Segoe UI", Arial, sans-serif;
-            color: #4b5f70;
-            line-height: 1.3;
-            letter-spacing: 0.15px;
+            color: #374151;
+            line-height: 1.35;
+            letter-spacing: 0.1px;
             margin: 0;
             max-width: 820px;
           }
+          .hero-is-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+          }
+          .hero-is-item svg {
+            width: 14px;
+            height: 14px;
+            display: block;
+          }
+          .hero-is-dot {
+            color: #6b7280;
+            font-weight: 600;
+          }
           @media (max-width: 860px) {
+            .hero-brand {
+              gap: 12px;
+              padding-top: 14px;
+              margin-bottom: 10px;
+            }
+            .hero-logo-wrap {
+              width: 64px;
+              height: 64px;
+              flex-basis: 64px;
+            }
             .hero-name {
               font-size: 26px;
             }
@@ -747,18 +772,76 @@ def render_hero() -> None:
               font-size: 15px;
             }
           }
+          @media (max-width: 620px) {
+            .hero-brand {
+              align-items: center;
+            }
+            .hero-logo-wrap {
+              width: 60px;
+              height: 60px;
+              flex-basis: 60px;
+            }
+            .hero-brand-text {
+              gap: 5px;
+            }
+            .hero-main {
+              font-size: 28px;
+            }
+            .hero-three-is {
+              gap: 6px;
+            }
+          }
         </style>
         """,
         unsafe_allow_html=True,
     )
 
+    if hero_logo_uri:
+        hero_logo_html = (
+            '<div class="hero-logo-wrap">'
+            f'<img class="hero-logo" src="{hero_logo_uri}" alt="I3 APS" />'
+            "</div>"
+        )
+    else:
+        hero_logo_html = ""
+
     st.markdown(
-        """
+        f"""
         <div class="hero-brand">
+          {hero_logo_html}
           <div class="hero-brand-text">
             <div class="hero-name">I<span class="sup">3</span> APS</div>
             <h1 class="hero-main">Dados clínicos interoperáveis para o cuidado na APS</h1>
-            <div class="hero-three-is">Interoperabilidade • Informação • Inteligência</div>
+            <div class="hero-three-is">
+              <span class="hero-is-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#0f6fb9" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M10.5 13.5l3-3"></path>
+                  <path d="M7.8 16.2a3 3 0 0 1 0-4.2l2-2a3 3 0 0 1 4.2 4.2l-.7.7"></path>
+                  <path d="M16.2 7.8a3 3 0 0 1 0 4.2l-2 2a3 3 0 1 1-4.2-4.2l.7-.7"></path>
+                </svg>
+                Interoperabilidade
+              </span>
+              <span class="hero-is-dot">•</span>
+              <span class="hero-is-item">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <rect x="3" y="12" width="4" height="9" fill="#16a34a"></rect>
+                  <rect x="10" y="8" width="4" height="13" fill="#0ea5e9"></rect>
+                  <rect x="17" y="5" width="4" height="16" fill="#64748b"></rect>
+                </svg>
+                Informação
+              </span>
+              <span class="hero-is-dot">•</span>
+              <span class="hero-is-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#be185d" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M8 6c-2 0-3.5 1.7-3.5 3.7 0 1.4.7 2.6 1.8 3.2-.6 2 .4 4.1 2.5 4.8"></path>
+                  <path d="M16 6c2 0 3.5 1.7 3.5 3.7 0 1.4-.7 2.6-1.8 3.2.6 2-.4 4.1-2.5 4.8"></path>
+                  <path d="M9 8.8c1 .6 2 .9 3 .9s2-.3 3-.9"></path>
+                  <path d="M12 9.7v8.1"></path>
+                  <path d="M9 13h6"></path>
+                </svg>
+                Inteligência
+              </span>
+            </div>
           </div>
         </div>
         """,
