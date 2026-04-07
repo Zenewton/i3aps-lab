@@ -349,7 +349,7 @@ def _render_home_flow_animation(animate_once: bool) -> None:
         50% {{ transform: translateX(4px); }}
       }}
 
-      @media (max-width: 860px) {{
+      @media (max-width: 620px) {{
         .i3-flow {{
           padding: 10px 10px;
         }}
@@ -581,7 +581,7 @@ def _render_home_flow_animation(animate_once: bool) -> None:
       }})();
     </script>
     """
-    components.html(html, height=300, scrolling=False)
+    components.html(html, height=400, scrolling=False)
 
 
 def _to_data_uri(path: Path | None) -> str | None:
