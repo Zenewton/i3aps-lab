@@ -811,7 +811,7 @@ def render_hero() -> None:
           {hero_logo_html}
           <div class="hero-brand-text">
             <div class="hero-name">I<span class="sup">3</span> APS</div>
-            <h1 class="hero-main">Dados clínicos interoperáveis para o cuidado na APS</h1>
+            <h1 class="hero-main">Centro nacional de dados clínicos interoperáveis para o cuidado integrado na Atenção Primária à Saúde</h1>
             <div class="hero-three-is">
               <span class="hero-is-item">
                 <svg viewBox="0 0 24 24" fill="none" stroke="#0f6fb9" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
