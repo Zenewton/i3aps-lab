@@ -1,11 +1,12 @@
 """Página inicial institucional do Laboratório Multiusuário I³ APS."""
 
 from __future__ import annotations
+import base64
+import html
 from pathlib import Path
 
 import streamlit as st
 import streamlit.components.v1 as components
-from PIL import Image
 
 def _go_to(set_page, page_key: str) -> None:
     """Navegação reutilizável para botões de ação."""
@@ -16,7 +17,7 @@ def _go_to(set_page, page_key: str) -> None:
 def _resolve_logo_path(*patterns: str) -> Path | None:
     """Busca logo em logo/ e logos/ com nomes alternativos."""
     folders = [Path("logo"), Path("logos")]
-    allowed_suffixes = {".png", ".jpg", ".jpeg", ".webp"}
+    allowed_suffixes = {".svg", ".png", ".jpg", ".jpeg", ".webp"}
     for folder in folders:
         if not folder.exists():
             continue
@@ -33,46 +34,27 @@ def _resolve_logo_path(*patterns: str) -> Path | None:
     return None
 
 
-def _resolve_i3_brand_mark_path() -> Path | None:
-    """Resolve marca I³ APS para destaque no hero."""
-    candidates = [
-        Path("logos/logo_i3_aps_institucional_mark_v3.svg"),
-        Path("logos/logo_i3_aps_institucional_mark_v2.svg"),
-    ]
-    for candidate in candidates:
-        if candidate.exists():
-            return candidate
-    return None
-
-
-def _load_svg(path: Path | None) -> str | None:
-    """Carrega conteúdo SVG para renderização inline."""
-    if path is None or path.suffix.lower() != ".svg":
-        return None
-    try:
-        return path.read_text(encoding="utf-8")
-    except OSError:
-        return None
-
-
 def _render_home_flow_animation(animate_once: bool) -> None:
     """Renderiza diagrama com entrada única e microanimações contínuas sutis."""
     mode = "first-run" if animate_once else "static"
     html = f"""
-    <div id="i3-flow" class="i3-flow {mode}">
+    <div class="i3-flow-shell">
+      <div id="i3-flow" class="i3-flow {mode}">
       <div class="flow-grid">
         <div class="flow-card flow-left seq1">
-          <div class="icon-wrap">
-            <svg viewBox="0 0 64 64" aria-hidden="true">
-              <circle cx="32" cy="32" r="24" class="icon-stroke"></circle>
-              <circle cx="24" cy="27" r="3.5" class="icon-stroke"></circle>
-              <circle cx="40" cy="27" r="3.5" class="icon-stroke"></circle>
-              <circle cx="32" cy="38" r="3.5" class="icon-stroke"></circle>
-              <path d="M26 30 L30 35 M38 30 L34 35 M27 27 L37 27" class="icon-stroke"></path>
-            </svg>
+          <div class="flow-card-content pulse-1">
+            <div class="icon-wrap">
+              <svg viewBox="0 0 64 64" aria-hidden="true">
+                <circle cx="32" cy="32" r="24" class="icon-stroke"></circle>
+                <circle cx="24" cy="27" r="3.5" class="icon-stroke"></circle>
+                <circle cx="40" cy="27" r="3.5" class="icon-stroke"></circle>
+                <circle cx="32" cy="38" r="3.5" class="icon-stroke"></circle>
+                <path d="M26 30 L30 35 M38 30 L34 35 M27 27 L37 27" class="icon-stroke"></path>
+              </svg>
+            </div>
+            <div class="flow-title">Rede do SUS</div>
+            <div class="flow-line">APS e rede de atenção à saúde</div>
           </div>
-          <div class="flow-title">Rede do SUS</div>
-          <div class="flow-line">APS, atenção especializada, urgência e vigilância</div>
         </div>
 
         <div class="flow-arrow seq2" aria-hidden="true">
@@ -82,20 +64,21 @@ def _render_home_flow_animation(animate_once: bool) -> None:
         </div>
 
         <div class="flow-card flow-center seq3">
-          <div class="center-live">
-            <div class="icon-wrap center-node-wrap">
-              <svg viewBox="0 0 64 64" aria-hidden="true">
-                <circle cx="32" cy="32" r="25" class="icon-stroke-center-soft"></circle>
-                <circle cx="32" cy="32" r="20" class="icon-stroke-center"></circle>
-                <ellipse cx="32" cy="25" rx="10" ry="3.5" class="icon-stroke-center"></ellipse>
-                <path d="M22 25 V32 C22 34 27 36 32 36 C37 36 42 34 42 32 V25" class="icon-stroke-center"></path>
-                <path d="M22 32 V39 C22 41 27 43 32 43 C37 43 42 41 42 39 V32" class="icon-stroke-center"></path>
-              </svg>
+          <div class="flow-card-content pulse-2">
+            <div class="center-live">
+              <div class="icon-wrap center-node-wrap">
+                <svg viewBox="0 0 64 64" aria-hidden="true">
+                  <circle cx="32" cy="32" r="25" class="icon-stroke-center-soft"></circle>
+                  <circle cx="32" cy="32" r="20" class="icon-stroke-center"></circle>
+                  <ellipse cx="32" cy="25" rx="10" ry="3.5" class="icon-stroke-center"></ellipse>
+                  <path d="M22 25 V32 C22 34 27 36 32 36 C37 36 42 34 42 32 V25" class="icon-stroke-center"></path>
+                  <path d="M22 32 V39 C22 41 27 43 32 43 C37 43 42 41 42 39 V32" class="icon-stroke-center"></path>
+                </svg>
+              </div>
+              <div class="flow-title-center">I<span class="sup">3</span> APS</div>
             </div>
-            <div class="flow-title-center">I<span class="sup">3</span> APS</div>
+            <div class="flow-line-center">Dados clínicos interoperáveis para o SUS</div>
           </div>
-          <div class="flow-line-center">Ambiente multiusuário de dados clínicos interoperáveis</div>
-          <div class="flow-line-center">Repositório seguro • Integração RNDS/FHIR • Serviços de IA • Governança de dados</div>
         </div>
 
         <div class="flow-arrow seq4" aria-hidden="true">
@@ -105,47 +88,78 @@ def _render_home_flow_animation(animate_once: bool) -> None:
         </div>
 
         <div class="flow-card flow-right seq5">
-          <div class="icon-wrap">
-            <svg viewBox="0 0 64 64" aria-hidden="true">
-              <circle cx="32" cy="32" r="24" class="icon-stroke"></circle>
-              <path d="M18 35 H25 L31 24 L37 40 L42 32 H47" class="icon-stroke"></path>
-            </svg>
+          <div class="flow-card-content pulse-3">
+            <div class="icon-wrap">
+              <svg viewBox="0 0 64 64" aria-hidden="true">
+                <circle cx="32" cy="32" r="24" class="icon-stroke"></circle>
+                <path d="M18 35 H25 L31 24 L37 40 L42 32 H47" class="icon-stroke"></path>
+              </svg>
+            </div>
+            <div class="flow-title">Cuidado longitudinal</div>
+            <div class="flow-line">Cuidado contínuo ao longo do tempo</div>
           </div>
-          <div class="flow-title">Cuidado longitudinal</div>
-          <div class="flow-line">Decisão clínica, telemedicina e IA</div>
         </div>
+      </div>
       </div>
     </div>
 
     <style>
+      .i3-flow-shell {{
+        max-width: 1280px;
+        margin: 0 auto;
+      }}
       .i3-flow {{
         background: linear-gradient(180deg, #f8fbff 0%, #f2f6fa 100%);
         border: 1px solid #d7e5ef;
         border-radius: 12px;
-        padding: 18px;
+        padding: 22px;
+        opacity: 0;
+        transform: translateY(6px);
+        transition: opacity .4s ease-out, transform .4s ease-out;
+      }}
+      .i3-flow.in-view {{
+        opacity: 1;
+        transform: translateY(0);
       }}
       .flow-grid {{
         display: grid;
         grid-template-columns: 1fr 56px 1.25fr 56px 1fr;
         align-items: center;
-        gap: 12px;
+        gap: 14px;
+        animation: gridDrift 8.8s ease-in-out infinite;
       }}
       .flow-card {{
         border: 1px solid #d2e2ec;
         border-radius: 12px;
         background: #ffffff;
         box-shadow: 0 10px 20px rgba(20, 58, 87, 0.10);
-        min-height: 230px;
-        padding: 18px 16px;
+        min-height: 260px;
+        padding: 20px 16px;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: flex-start;
         text-align: center;
       }}
+      .flow-card-content {{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        border-radius: 10px;
+        animation: cardPulse 5.6s ease-in-out infinite;
+        will-change: filter, box-shadow;
+      }}
+      .flow-card-content.pulse-2 {{
+        animation-delay: 1s;
+      }}
+      .flow-card-content.pulse-3 {{
+        animation-delay: 2s;
+      }}
       .flow-center {{
-        min-height: 280px;
-        padding: 24px 20px;
+        min-height: 320px;
+        padding: 28px 22px;
         background: linear-gradient(90deg, #0e73c9 0%, #1493da 100%);
         border-color: #0e73c9;
         position: relative;
@@ -156,9 +170,9 @@ def _render_home_flow_animation(animate_once: bool) -> None:
         animation: centerPulse 3.8s ease-in-out 1.35s infinite;
       }}
       .icon-wrap {{
-        width: 72px;
-        height: 72px;
-        margin-bottom: 10px;
+        width: 80px;
+        height: 80px;
+        margin-bottom: 12px;
       }}
       .center-node-wrap {{
         position: relative;
@@ -195,12 +209,12 @@ def _render_home_flow_animation(animate_once: bool) -> None:
         fill: none;
       }}
       .flow-title {{
-        font: 700 25px "SF Pro Display", "Inter", "Segoe UI", Arial, sans-serif;
+        font: 700 28px "SF Pro Display", "Inter", "Segoe UI", Arial, sans-serif;
         color: #173e59;
         margin-bottom: 8px;
       }}
       .flow-title-center {{
-        font: 700 41px "SF Pro Display", "Inter", "Segoe UI", Arial, sans-serif;
+        font: 700 46px "SF Pro Display", "Inter", "Segoe UI", Arial, sans-serif;
         color: #ffffff;
         margin-bottom: 8px;
       }}
@@ -209,12 +223,12 @@ def _render_home_flow_animation(animate_once: bool) -> None:
         vertical-align: super;
       }}
       .flow-line {{
-        font: 500 18px "SF Pro Text", "Inter", "Segoe UI", Arial, sans-serif;
+        font: 520 19px "SF Pro Text", "Inter", "Segoe UI", Arial, sans-serif;
         color: #3a5a72;
         line-height: 1.35;
       }}
       .flow-line-center {{
-        font: 500 18px "SF Pro Text", "Inter", "Segoe UI", Arial, sans-serif;
+        font: 520 19px "SF Pro Text", "Inter", "Segoe UI", Arial, sans-serif;
         color: #eaf6ff;
         line-height: 1.35;
       }}
@@ -344,6 +358,26 @@ def _render_home_flow_animation(animate_once: bool) -> None:
           transform: rotate(3deg) scale(1.015);
         }}
       }}
+      @keyframes cardPulse {{
+        0%,
+        11%,
+        100% {{
+          filter: brightness(1);
+          box-shadow: 0 0 0 rgba(15, 58, 88, 0);
+        }}
+        4% {{
+          filter: brightness(1.08);
+          box-shadow: 0 10px 24px rgba(15, 58, 88, 0.18);
+        }}
+        8% {{
+          filter: brightness(1.05);
+          box-shadow: 0 8px 20px rgba(15, 58, 88, 0.14);
+        }}
+      }}
+      @keyframes gridDrift {{
+        0%, 100% {{ transform: translateX(0); }}
+        50% {{ transform: translateX(4px); }}
+      }}
 
       @media (max-width: 860px) {{
         .i3-flow {{
@@ -352,6 +386,8 @@ def _render_home_flow_animation(animate_once: bool) -> None:
         .flow-grid {{
           grid-template-columns: 1fr;
           gap: 8px;
+          animation-name: gridDriftMobile;
+          animation-duration: 9.5s;
         }}
         .flow-card {{
           min-height: 0;
@@ -451,6 +487,10 @@ def _render_home_flow_animation(animate_once: bool) -> None:
           65% {{ opacity: 0.48; }}
           100% {{ opacity: 0; transform: translate(-50%, calc(100% - 26px)); }}
         }}
+        @keyframes gridDriftMobile {{
+          0%, 100% {{ transform: translateX(0); }}
+          50% {{ transform: translateX(2px); }}
+        }}
       }}
 
       @media (max-width: 520px) {{
@@ -494,6 +534,8 @@ def _render_home_flow_animation(animate_once: bool) -> None:
         .i3-flow.first-run.in-view .seq3,
         .i3-flow.first-run.in-view .seq4,
         .i3-flow.first-run.in-view .seq5,
+        .flow-card-content,
+        .flow-grid,
         .center-live,
         .arrow-stream,
         .arrow-node,
@@ -542,20 +584,44 @@ def _render_home_flow_animation(animate_once: bool) -> None:
       }})();
     </script>
     """
-    components.html(html, height=620, scrolling=False)
+    components.html(html, height=700, scrolling=False)
 
 
-def _resolve_logo_candidates() -> tuple[Path | None, Path | None, Path | None]:
-    """Resolve logos institucionais principais (somente formatos de imagem)."""
+def _to_data_uri(path: Path | None) -> str | None:
+    """Converte arquivo de imagem local para data URI."""
+    if path is None or not path.exists():
+        return None
+
+    mime_by_suffix = {
+        ".svg": "image/svg+xml",
+        ".png": "image/png",
+        ".jpg": "image/jpeg",
+        ".jpeg": "image/jpeg",
+        ".webp": "image/webp",
+    }
+    mime = mime_by_suffix.get(path.suffix.lower())
+    if mime is None:
+        return None
+
+    try:
+        encoded = base64.b64encode(path.read_bytes()).decode("ascii")
+    except OSError:
+        return None
+
+    return f"data:{mime};base64,{encoded}"
+
+
+def _resolve_logo_candidates() -> list[tuple[str, Path | None]]:
+    """Resolve logos institucionais de parceiros, priorizando arquivos de maior qualidade."""
     ufrn_logo = None
     qualisaude_logo = None
     imd_logo = None
+    sus_logo = None
+    finep_logo = None
 
     ufrn_candidates = [
-        Path("logo/UFRN.png"),
-        Path("logos/UFRN.png"),
-        Path("logo/ufrn.png"),
-        Path("logos/ufrn.png"),
+        Path("logos/ufrn-alta.png"),
+        Path("logo/ufrn-alta.png"),
     ]
     qualisaude_candidates = [
         Path("logo/logo_qualisaude_horizontal.png"),
@@ -569,10 +635,22 @@ def _resolve_logo_candidates() -> tuple[Path | None, Path | None, Path | None]:
         Path("logos/logo horizontal Qualisaúde.jpg"),
     ]
     imd_candidates = [
-        Path("logo/logo_imd.png"),
-        Path("logos/logo_imd.png"),
-        Path("logo/imd.png"),
-        Path("logos/imd.png"),
+        Path("logos/imd-inovai.svg"),
+        Path("logo/imd-inovai.svg"),
+    ]
+    sus_candidates = [
+        Path("logos/logo-sus.svg"),
+        Path("logo/logo-sus.svg"),
+        Path("logos/sus-logo.svg"),
+        Path("logo/sus-logo.svg"),
+        Path("logos/sus-logo.png"),
+        Path("logo/sus-logo.png"),
+    ]
+    finep_candidates = [
+        Path("logos/finep-logo.svg"),
+        Path("logo/finep-logo.svg"),
+        Path("logos/finep-logo.png"),
+        Path("logo/finep-logo.png"),
     ]
 
     for candidate in ufrn_candidates:
@@ -587,91 +665,86 @@ def _resolve_logo_candidates() -> tuple[Path | None, Path | None, Path | None]:
         if candidate.exists():
             imd_logo = candidate
             break
+    for candidate in sus_candidates:
+        if candidate.exists():
+            sus_logo = candidate
+            break
+    for candidate in finep_candidates:
+        if candidate.exists():
+            finep_logo = candidate
+            break
 
     # Fallback final por nome parcial.
     if ufrn_logo is None:
-        ufrn_logo = _resolve_logo_path("ufrn")
+        ufrn_logo = _resolve_logo_path("ufrn-alta")
     if qualisaude_logo is None:
         qualisaude_logo = _resolve_logo_path("qualis", "quali")
     if imd_logo is None:
-        imd_logo = _resolve_logo_path("imd")
+        imd_logo = _resolve_logo_path("imd-inovai", "inovai")
+    if sus_logo is None:
+        sus_logo = _resolve_logo_path("sus-logo", "logo-sus", "sus")
+    if finep_logo is None:
+        finep_logo = _resolve_logo_path("finep-logo", "finep")
 
-    return ufrn_logo, qualisaude_logo, imd_logo
+    return [
+        ("UFRN", ufrn_logo),
+        ("Qualisaúde", qualisaude_logo),
+        ("IMD-InovAI", imd_logo),
+        ("SUS", sus_logo),
+        ("FINEP", finep_logo),
+    ]
 
 
-def render_hero(set_page) -> None:
-    """Renderiza hero principal com diagrama animado em largura total."""
-    mark_path = _resolve_i3_brand_mark_path()
-    mark_svg = _load_svg(mark_path)
+def render_hero() -> None:
+    """Renderiza topo enxuto com label, título e linha dos 3 Is."""
 
     st.markdown(
         """
         <style>
           .hero-brand {
-            display: flex;
-            align-items: center;
-            gap: 28px;
-            margin-bottom: 16px;
-          }
-          .hero-logo-wrap {
-            width: clamp(180px, 24vw, 240px);
-            flex: 0 0 auto;
-          }
-          .hero-logo-wrap svg {
-            width: 100%;
-            height: auto;
-            display: block;
+            margin-bottom: 2px;
           }
           .hero-brand-text {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 3px;
           }
           .hero-name {
-            font: 820 34px "SF Pro Display", "Inter", "Segoe UI", Arial, sans-serif;
+            font: 780 30px "SF Pro Display", "Inter", "Segoe UI", Arial, sans-serif;
             color: #0b2f49;
             line-height: 1;
             letter-spacing: 0.2px;
             text-transform: uppercase;
           }
           .hero-name .sup {
-            font-size: 48%;
-            vertical-align: super;
-          }
-          .hero-main .sup {
-            font-size: 62%;
+            font-size: 50%;
             vertical-align: super;
           }
           .hero-main {
-            font: 650 42px "SF Pro Display", "Inter", "Segoe UI", Arial, sans-serif;
+            font: 680 40px "SF Pro Display", "Inter", "Segoe UI", Arial, sans-serif;
             color: #0b2f49;
-            line-height: 1.1;
+            line-height: 1.12;
             letter-spacing: -0.3px;
-            margin: 0;
+            margin: 0 0 1px 0;
+            max-width: 800px;
           }
-          .hero-subtitle {
-            font: 600 26px "SF Pro Display", "Inter", "Segoe UI", Arial, sans-serif;
-            color: #214862;
-            margin: 16px 0 8px 0;
-            line-height: 1.2;
+          .hero-three-is {
+            font: 560 16px "SF Pro Text", "Inter", "Segoe UI", Arial, sans-serif;
+            color: #4b5f70;
+            line-height: 1.3;
+            letter-spacing: 0.15px;
+            margin: 0;
+            max-width: 820px;
           }
           @media (max-width: 860px) {
-            .hero-brand {
-              flex-direction: column;
-              align-items: flex-start;
-              gap: 10px;
-            }
-            .hero-logo-wrap {
-              width: min(56vw, 210px);
-            }
             .hero-name {
-              font-size: 28px;
+              font-size: 26px;
             }
             .hero-main {
               font-size: 31px;
             }
-            .hero-subtitle {
-              font-size: 20px;
+            .hero-three-is {
+              font-size: 15px;
             }
           }
         </style>
@@ -679,41 +752,361 @@ def render_hero(set_page) -> None:
         unsafe_allow_html=True,
     )
 
-    if mark_svg:
-        st.markdown(
-            f"""
-            <div class="hero-brand">
-              <div class="hero-logo-wrap">{mark_svg}</div>
-              <div class="hero-brand-text">
-                <div class="hero-name">I<span class="sup">3</span> APS</div>
-                <h1 class="hero-main">Interoperabilidade, Informação e Inteligência na Atenção Primária à Saúde</h1>
-              </div>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
-    else:
-        st.markdown('<div class="hero-name">I<span class="sup">3</span> APS</div>', unsafe_allow_html=True)
-        st.markdown('<h1 class="hero-main">Interoperabilidade, Informação e Inteligência na Atenção Primária à Saúde</h1>', unsafe_allow_html=True)
-
     st.markdown(
-        '<div class="hero-subtitle">Infraestrutura nacional de dados clínicos para coordenação do cuidado longitudinal de condições crônicas na APS</div>',
+        """
+        <div class="hero-brand">
+          <div class="hero-brand-text">
+            <div class="hero-name">I<span class="sup">3</span> APS</div>
+            <h1 class="hero-main">Dados clínicos interoperáveis para o cuidado na APS</h1>
+            <div class="hero-three-is">Interoperabilidade • Informação • Inteligência</div>
+          </div>
+        </div>
+        """,
         unsafe_allow_html=True,
     )
-    st.write(
-        "Ambiente multiusuário para desenvolvimento, validação e operação de "
-        "soluções digitais, telemedicina e inteligência artificial em ambiente real de atenção à saúde"
-    )
-    b1, b2 = st.columns(2)
-    if b1.button("Explorar Infraestrutura", use_container_width=True, key="hero_explorar"):
-        _go_to(set_page, "catalogo")
-    if b2.button("Agendar Uso", use_container_width=True, key="hero_agendar"):
-        _go_to(set_page, "agendamento")
 
-    animate_once = not st.session_state.get("home_flow_animation_seen", False)
-    _render_home_flow_animation(animate_once=animate_once)
-    if animate_once:
-        st.session_state["home_flow_animation_seen"] = True
+
+def render_main_diagram() -> None:
+    """Renderiza diagrama principal da home."""
+    _render_home_flow_animation(animate_once=True)
+
+
+def render_infrastructure_overview_section() -> None:
+    """Renderiza bloco visual sobre a infraestrutura em grid 2x2."""
+    st.markdown("### Sobre a infraestrutura")
+    st.markdown(
+        """
+        <style>
+          .infra-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+            margin-top: 10px;
+          }
+          .infra-card {
+            border: 1px solid #d7e5ef;
+            border-radius: 16px;
+            background: #ffffff;
+            box-shadow: 0 8px 18px rgba(10, 47, 79, 0.06);
+            padding: 16px;
+            min-height: 132px;
+          }
+          .infra-icon {
+            width: 24px;
+            height: 24px;
+            margin-bottom: 8px;
+            display: block;
+          }
+          .infra-title {
+            margin: 0 0 6px 0;
+            font: 700 19px "SF Pro Display", "Inter", "Segoe UI", Arial, sans-serif;
+            color: #21384d;
+          }
+          .infra-text {
+            margin: 0;
+            font: 510 15px "SF Pro Text", "Inter", "Segoe UI", Arial, sans-serif;
+            color: #43596e;
+            line-height: 1.35;
+          }
+          @media (max-width: 760px) {
+            .infra-grid { grid-template-columns: 1fr; }
+          }
+        </style>
+        <div class="infra-grid">
+          <article class="infra-card">
+            <svg class="infra-icon" viewBox="0 0 24 24" fill="none" stroke="#0b6aa7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="4" y="4" width="16" height="16" rx="3"></rect>
+              <path d="M8 12h8M12 8v8"></path>
+            </svg>
+            <h4 class="infra-title">Integração nacional</h4>
+            <p class="infra-text">Ambiente para uso compartilhado e integração de dados clínicos.</p>
+          </article>
+
+          <article class="infra-card">
+            <svg class="infra-icon" viewBox="0 0 24 24" fill="none" stroke="#0c7f66" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M7 12a3 3 0 0 1 3-3h1"></path>
+              <path d="M13 9h1a3 3 0 1 1 0 6h-1"></path>
+              <path d="M10 12h4"></path>
+            </svg>
+            <h4 class="infra-title">Interoperabilidade</h4>
+            <p class="infra-text">Padrões RNDS/FHIR para continuidade do cuidado em rede.</p>
+          </article>
+
+          <article class="infra-card">
+            <svg class="infra-icon" viewBox="0 0 24 24" fill="none" stroke="#a11d62" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M9 7.5C7 7.5 5.5 9 5.5 11c0 1.2.6 2.2 1.5 2.8-.4 1.5.3 3 1.8 3.6"></path>
+              <path d="M15 7.5c2 0 3.5 1.5 3.5 3.5 0 1.2-.6 2.2-1.5 2.8.4 1.5-.3 3-1.8 3.6"></path>
+              <path d="M12 10v7M9.2 13h5.6"></path>
+            </svg>
+            <h4 class="infra-title">IA aplicada</h4>
+            <p class="infra-text">Inteligência artificial para apoiar decisão clínica e gestão.</p>
+          </article>
+
+          <article class="infra-card">
+            <svg class="infra-icon" viewBox="0 0 24 24" fill="none" stroke="#45556b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 3l7 4v5c0 4.2-2.7 7.8-7 9-4.3-1.2-7-4.8-7-9V7l7-4z"></path>
+              <path d="M9.2 12l1.8 1.8 3.8-3.8"></path>
+            </svg>
+            <h4 class="infra-title">Governança de dados</h4>
+            <p class="infra-text">Segurança, qualidade e uso responsável da informação em saúde.</p>
+          </article>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
+def render_problem_section() -> None:
+    """Renderiza problemas centrais com destaque visual e ícones."""
+    st.markdown("### Problema")
+    st.markdown(
+        """
+        <style>
+          .problem-panel {
+            background: #f7fafc;
+            border: 1px solid #dbe7f1;
+            border-radius: 16px;
+            padding: 12px 14px;
+          }
+          .problem-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 10px 4px;
+          }
+          .problem-row + .problem-row {
+            border-top: 1px solid #e5edf4;
+          }
+          .problem-ic {
+            width: 18px;
+            height: 18px;
+            flex: 0 0 auto;
+            margin-top: 2px;
+          }
+          .problem-title {
+            margin: 0;
+            font: 650 16px "SF Pro Text", "Inter", "Segoe UI", Arial, sans-serif;
+            color: #283b4d;
+          }
+          .problem-desc {
+            margin: 2px 0 0 0;
+            font: 500 14px "SF Pro Text", "Inter", "Segoe UI", Arial, sans-serif;
+            color: #526579;
+            line-height: 1.35;
+          }
+        </style>
+        <div class="problem-panel">
+          <div class="problem-row">
+            <svg class="problem-ic" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 9v4"></path><circle cx="12" cy="16.5" r="0.7"></circle>
+              <path d="M10.3 4.6 2.9 17.4A2 2 0 0 0 4.6 20h14.8a2 2 0 0 0 1.7-2.6L13.7 4.6a2 2 0 0 0-3.4 0z"></path>
+            </svg>
+            <div>
+              <p class="problem-title">Fragmentação de dados</p>
+              <p class="problem-desc">Informações clínicas dispersas entre serviços e níveis de atenção.</p>
+            </div>
+          </div>
+          <div class="problem-row">
+            <svg class="problem-ic" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 9v4"></path><circle cx="12" cy="16.5" r="0.7"></circle>
+              <path d="M10.3 4.6 2.9 17.4A2 2 0 0 0 4.6 20h14.8a2 2 0 0 0 1.7-2.6L13.7 4.6a2 2 0 0 0-3.4 0z"></path>
+            </svg>
+            <div>
+              <p class="problem-title">Baixa interoperabilidade</p>
+              <p class="problem-desc">A integração limitada compromete a continuidade do cuidado na APS.</p>
+            </div>
+          </div>
+          <div class="problem-row">
+            <svg class="problem-ic" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 9v4"></path><circle cx="12" cy="16.5" r="0.7"></circle>
+              <path d="M10.3 4.6 2.9 17.4A2 2 0 0 0 4.6 20h14.8a2 2 0 0 0 1.7-2.6L13.7 4.6a2 2 0 0 0-3.4 0z"></path>
+            </svg>
+            <div>
+              <p class="problem-title">Decisão com informação incompleta</p>
+              <p class="problem-desc">Clínica e gestão operam sem visão consolidada do percurso assistencial.</p>
+            </div>
+          </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
+def render_sus_importance_section() -> None:
+    """Renderiza impacto estratégico para o SUS com ícones de check."""
+    st.markdown("### Por que isso importa para o SUS?")
+    st.markdown(
+        """
+        <style>
+          .sus-impact {
+            display: grid;
+            gap: 12px;
+            margin-top: 8px;
+          }
+          .sus-impact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            border: 1px solid #d9e7dc;
+            border-radius: 14px;
+            padding: 12px 14px;
+            background: #ffffff;
+            box-shadow: 0 6px 16px rgba(19, 56, 84, 0.05);
+          }
+          .sus-check {
+            width: 20px;
+            height: 20px;
+            flex: 0 0 auto;
+            margin-top: 1px;
+          }
+          .sus-impact-title {
+            margin: 0;
+            font: 660 17px "SF Pro Display", "Inter", "Segoe UI", Arial, sans-serif;
+            color: #1f3a2a;
+            line-height: 1.3;
+          }
+          .sus-impact-desc {
+            margin: 2px 0 0 0;
+            font: 500 14px "SF Pro Text", "Inter", "Segoe UI", Arial, sans-serif;
+            color: #4e6a58;
+            line-height: 1.35;
+          }
+        </style>
+        <div class="sus-impact">
+          <div class="sus-impact-item">
+            <svg class="sus-check" viewBox="0 0 24 24" fill="none" stroke="#15803d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="9"></circle><path d="m8.5 12 2.4 2.4L15.8 9.6"></path>
+            </svg>
+            <div>
+              <p class="sus-impact-title">Coordenação do cuidado longitudinal</p>
+              <p class="sus-impact-desc">Melhora acompanhamento de condições crônicas ao longo da rede.</p>
+            </div>
+          </div>
+          <div class="sus-impact-item">
+            <svg class="sus-check" viewBox="0 0 24 24" fill="none" stroke="#15803d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="9"></circle><path d="m8.5 12 2.4 2.4L15.8 9.6"></path>
+            </svg>
+            <div>
+              <p class="sus-impact-title">Gestão e vigilância com oportunidade</p>
+              <p class="sus-impact-desc">Qualifica regulação, monitoramento e resposta com dados atualizados.</p>
+            </div>
+          </div>
+          <div class="sus-impact-item">
+            <svg class="sus-check" viewBox="0 0 24 24" fill="none" stroke="#15803d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="9"></circle><path d="m8.5 12 2.4 2.4L15.8 9.6"></path>
+            </svg>
+            <div>
+              <p class="sus-impact-title">Mais segurança, eficiência e equidade</p>
+              <p class="sus-impact-desc">Fortalece qualidade do cuidado com base em dados integrados.</p>
+            </div>
+          </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
+def render_concept_i3_section() -> None:
+    """Renderiza conceito I3 com ícones coloridos e cards institucionais."""
+    st.markdown("### Conceito I³")
+    st.markdown(
+        """
+        <style>
+          .i3-concept-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+          }
+          .i3-concept-card {
+            border: 1px solid #d7e5ef;
+            border-radius: 16px;
+            background: #ffffff;
+            padding: 18px 18px 16px 18px;
+            min-height: 210px;
+            box-shadow: 0 8px 18px rgba(10, 47, 79, 0.06);
+          }
+          .i3-concept-head {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+          }
+          .i3-concept-icon {
+            width: 28px;
+            height: 28px;
+            flex: 0 0 auto;
+          }
+          .i3-concept-title {
+            margin: 0;
+            font: 700 23px "SF Pro Display", "Inter", "Segoe UI", Arial, sans-serif;
+            color: #2f3342;
+            line-height: 1.2;
+          }
+          .i3-concept-text {
+            margin: 0;
+            font: 510 18px "SF Pro Text", "Inter", "Segoe UI", Arial, sans-serif;
+            color: #353a49;
+            line-height: 1.45;
+          }
+          @media (max-width: 980px) {
+            .i3-concept-grid {
+              grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+          }
+          @media (max-width: 680px) {
+            .i3-concept-grid {
+              grid-template-columns: 1fr;
+            }
+            .i3-concept-title {
+              font-size: 21px;
+            }
+            .i3-concept-text {
+              font-size: 17px;
+            }
+          }
+        </style>
+        <div class="i3-concept-grid">
+          <div class="i3-concept-card">
+            <div class="i3-concept-head">
+              <svg class="i3-concept-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#1f6fb5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M10.5 13.5l3-3"></path>
+                <path d="M7.8 16.2a3 3 0 0 1 0-4.2l2-2a3 3 0 0 1 4.2 4.2l-.7.7"></path>
+                <path d="M16.2 7.8a3 3 0 0 1 0 4.2l-2 2a3 3 0 1 1-4.2-4.2l.7-.7"></path>
+              </svg>
+              <h4 class="i3-concept-title">Interoperabilidade</h4>
+            </div>
+            <p class="i3-concept-text">Integração de sistemas e dados para continuidade do cuidado.</p>
+          </div>
+
+          <div class="i3-concept-card">
+            <div class="i3-concept-head">
+              <svg class="i3-concept-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="3" y="12" width="4" height="9" fill="#22c55e"></rect>
+                <rect x="10" y="8" width="4" height="13" fill="#0ea5e9"></rect>
+                <rect x="17" y="5" width="4" height="16" fill="#64748b"></rect>
+              </svg>
+              <h4 class="i3-concept-title">Informação</h4>
+            </div>
+            <p class="i3-concept-text">Dados qualificados para vigilância, gestão e pesquisa aplicada.</p>
+          </div>
+
+          <div class="i3-concept-card">
+            <div class="i3-concept-head">
+              <svg class="i3-concept-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#e26aa3" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M8 6c-2 0-3.5 1.7-3.5 3.7 0 1.4.7 2.6 1.8 3.2-.6 2 .4 4.1 2.5 4.8"></path>
+                <path d="M16 6c2 0 3.5 1.7 3.5 3.7 0 1.4-.7 2.6-1.8 3.2.6 2-.4 4.1-2.5 4.8"></path>
+                <path d="M9 8.8c1 .6 2 .9 3 .9s2-.3 3-.9"></path>
+                <path d="M12 9.7v8.1"></path>
+                <path d="M9 13h6"></path>
+              </svg>
+              <h4 class="i3-concept-title">Inteligência</h4>
+            </div>
+            <p class="i3-concept-text">Modelos analíticos e IA para apoiar decisões em tempo oportuno.</p>
+          </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
 
 def render_impact_section() -> None:
@@ -800,7 +1193,7 @@ def render_offerings() -> None:
 
 def render_access_section(set_page) -> None:
     """Renderiza atalhos de acesso com destaque visual."""
-    st.markdown("### Como utilizar a infraestrutura")
+    st.markdown("### Botões de ação")
     b1, b2, b3 = st.columns(3, gap="large")
 
     if b1.button(
@@ -811,7 +1204,7 @@ def render_access_section(set_page) -> None:
     ):
         _go_to(set_page, "agendamento")
     if b2.button(
-        "Conhecer casos de uso",
+        "Ver Infraestrutura",
         use_container_width=True,
         key="acesso_casos",
         type="secondary",
@@ -828,69 +1221,171 @@ def render_access_section(set_page) -> None:
 
 def render_partner_logos() -> None:
     """Renderiza logos institucionais no rodapé da homepage."""
-    ufrn_logo, qualisaude_logo, imd_logo = _resolve_logo_candidates()
+    partner_logos = _resolve_logo_candidates()
 
     st.markdown("<br><br>", unsafe_allow_html=True)
     st.markdown("---")
     st.markdown("### Instituições que constroem esta infraestrutura")
 
-    # Três colunas para exibir logos horizontalmente e com tamanho consistente.
-    col1, col2, col3 = st.columns(3)
+    card_items: list[str] = []
+    missing: list[str] = []
+    for name, logo_path in partner_logos:
+        logo_uri = _to_data_uri(logo_path)
+        if logo_uri:
+            card_items.append(
+                f'<div class="partner-logo-card" title="{html.escape(name)}">'
+                f'<img src="{logo_uri}" alt="{html.escape(name)}" />'
+                "</div>"
+            )
+        else:
+            missing.append(name)
 
-    with col1:
-        _, center_col, _ = st.columns([1, 2, 1])
-        with center_col:
-            if ufrn_logo:
-                st.image(str(ufrn_logo), width=120)
-            else:
-                st.warning("Imagem não encontrada")
+    if card_items:
+        logos_html = "".join(card_items)
+        grid_html = (
+            "<style>"
+            ".partner-logo-grid{display:grid;grid-template-columns:repeat(5,minmax(140px,1fr));gap:14px;margin-top:10px;}"
+            ".partner-logo-card{background:#ffffff;border:1px solid #d7e8f4;border-radius:14px;height:128px;display:flex;"
+            "align-items:center;justify-content:center;padding:14px;}"
+            ".partner-logo-card img{max-width:100%;max-height:80px;width:auto;height:auto;object-fit:contain;display:block;}"
+            "@media (max-width:1120px){.partner-logo-grid{grid-template-columns:repeat(3,minmax(140px,1fr));}}"
+            "@media (max-width:760px){.partner-logo-grid{grid-template-columns:repeat(2,minmax(130px,1fr));}}"
+            "</style>"
+            f'<div class="partner-logo-grid">{logos_html}</div>'
+        )
+        st.markdown(
+            grid_html,
+            unsafe_allow_html=True,
+        )
 
-    with col2:
-        _, center_col, _ = st.columns([1, 2, 1])
-        with center_col:
-            if qualisaude_logo:
-                # Usa versão horizontal preferencialmente.
-                try:
-                    with Image.open(qualisaude_logo) as img:
-                        img_to_show = img.copy()
-                        if img_to_show.height > img_to_show.width:
-                            img_to_show = img_to_show.rotate(90, expand=True)
-                    st.image(img_to_show, width=220)
-                except Exception:
-                    st.image(str(qualisaude_logo), width=220)
-            else:
-                st.warning("Imagem não encontrada")
+    if missing:
+        st.warning(f"Logo(s) não encontrada(s): {', '.join(missing)}")
 
-    with col3:
-        _, center_col, _ = st.columns([1, 2, 1])
-        with center_col:
-            if imd_logo:
-                st.image(str(imd_logo), width=120)
+
+def render_partnerships_section() -> None:
+    """Renderiza seção final de parcerias e articulação institucional."""
+    logo_map = {
+        "SUS": _resolve_logo_path("logo-sus", "sus-logo", "sus"),
+        "Ministério da Saúde": _resolve_logo_path("ms-logo", "ministerio", "saude"),
+        "SESAP": _resolve_logo_path("sesap-logo", "sesap"),
+        "ANVISA": _resolve_logo_path("anvisa-logo", "anvisa"),
+        "FINEP": _resolve_logo_path("finep-logo", "finep"),
+        "CNPq": _resolve_logo_path("cnpq-logo", "cnpq"),
+        "CAPES": _resolve_logo_path("capes-logo", "logo-capes", "capes"),
+        "UFRN": _resolve_logo_path("ufrn-alta", "ufrn"),
+        "IMD-InovAI": _resolve_logo_path("imd-inovai", "inovai", "imd"),
+        "Qualisaúde": _resolve_logo_path("qualisaude_horizontal", "qualisaude", "quali"),
+    }
+
+    blocks = [
+        (
+            "Governança do SUS",
+            ["SUS", "Ministério da Saúde", "SESAP", "ANVISA"],
+        ),
+        (
+            "Ciência e tecnologia",
+            ["UFRN", "FINEP", "CNPq", "CAPES"],
+        ),
+        (
+            "Cooperação e inovação",
+            ["IMD-InovAI", "Qualisaúde"],
+        ),
+    ]
+
+    st.markdown("<div style='height:46px'></div>", unsafe_allow_html=True)
+    st.markdown("### Parcerias e articulação institucional")
+
+    section_html = [
+        "<style>",
+        ".inst-partnerships{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:10px;}",
+        ".inst-block{background:#ffffff;border:1px solid #d8e4ee;border-radius:16px;padding:14px 14px 12px;box-shadow:0 8px 16px rgba(12,45,72,.05);}",
+        ".inst-title{margin:0 0 10px 0;font:700 18px \"SF Pro Display\",\"Inter\",\"Segoe UI\",Arial,sans-serif;color:#1f3a4f;}",
+        ".inst-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;}",
+        ".inst-logo-card{height:84px;background:#f8fbfd;border:1px solid #dee8f0;border-radius:12px;display:flex;align-items:center;justify-content:center;padding:10px;}",
+        ".inst-logo-card img{max-width:100%;max-height:46px;object-fit:contain;display:block;filter:grayscale(1) saturate(.45) contrast(.98);opacity:.92;}",
+        ".inst-footer{margin-top:14px;padding-top:10px;border-top:1px solid #dfe8f0;display:flex;align-items:center;justify-content:center;gap:10px;}",
+        ".inst-footer-text{margin:0;font:530 14px \"SF Pro Text\",\"Inter\",\"Segoe UI\",Arial,sans-serif;color:#445b6f;text-align:center;line-height:1.35;}",
+        ".inst-footer-text .inst-footer-line{display:block;}",
+        ".inst-footer img{height:26px;width:auto;object-fit:contain;display:block;filter:grayscale(.7) saturate(.6);opacity:.9;}",
+        "@media (max-width:980px){.inst-partnerships{grid-template-columns:1fr;}.inst-grid{grid-template-columns:repeat(3,minmax(0,1fr));}}",
+        "@media (max-width:640px){.inst-grid{grid-template-columns:repeat(2,minmax(0,1fr));}.inst-logo-card{height:78px;}}",
+        "</style>",
+        '<section class="inst-partnerships">',
+    ]
+
+    missing: list[str] = []
+
+    for title, items in blocks:
+        section_html.append('<article class="inst-block">')
+        section_html.append(f'<h4 class="inst-title">{html.escape(title)}</h4>')
+        section_html.append('<div class="inst-grid">')
+        for name in items:
+            logo_uri = _to_data_uri(logo_map.get(name))
+            if logo_uri:
+                section_html.append(
+                    f'<div class="inst-logo-card" title="{html.escape(name)}">'
+                    f'<img src="{logo_uri}" alt="{html.escape(name)}" />'
+                    "</div>"
+                )
             else:
-                st.warning("Imagem não encontrada")
+                missing.append(name)
+        section_html.append("</div>")
+        section_html.append("</article>")
+
+    section_html.append("</section>")
+
+    footer_text_html = (
+        '<p class="inst-footer-text">'
+        '<span class="inst-footer-line">Projeto coordenado pelo Centro de Ciências da Saúde (CCS)</span>'
+        '<span class="inst-footer-line">Universidade Federal do Rio Grande do Norte (UFRN)</span>'
+        "</p>"
+    )
+
+    ufrn_uri = _to_data_uri(logo_map.get("UFRN"))
+    if ufrn_uri:
+        section_html.append(
+            '<div class="inst-footer">'
+            f"{footer_text_html}"
+            f'<img src="{ufrn_uri}" alt="Universidade Federal do Rio Grande do Norte" />'
+            "</div>"
+        )
+    else:
+        section_html.append(
+            '<div class="inst-footer">'
+            f"{footer_text_html}"
+            "</div>"
+        )
+        missing.append("UFRN")
+
+    st.markdown("".join(section_html), unsafe_allow_html=True)
+
+    if missing:
+        uniq_missing = ", ".join(sorted(set(missing)))
+        st.caption(f"Alguns arquivos de logo não foram encontrados: {uniq_missing}.")
 
 
 def render_homepage(set_page) -> None:
-    """Renderiza a homepage completa com hierarquia institucional."""
-    render_hero(set_page)
+    """Renderiza homepage com foco em comunicação visual e leitura rápida."""
+    render_hero()
 
-    st.markdown("<br><br>", unsafe_allow_html=True)
-    render_impact_section()
+    render_main_diagram()
 
-    st.markdown("<br><br>", unsafe_allow_html=True)
-    render_about_section()
+    st.markdown("<div style='height:40px'></div>", unsafe_allow_html=True)
+    render_infrastructure_overview_section()
 
-    st.markdown("<br><br>", unsafe_allow_html=True)
-    render_capacity_section()
+    st.markdown("<div style='height:44px'></div>", unsafe_allow_html=True)
+    render_problem_section()
 
-    st.markdown("<br><br>", unsafe_allow_html=True)
-    render_offerings()
+    st.markdown("<div style='height:44px'></div>", unsafe_allow_html=True)
+    render_sus_importance_section()
 
-    st.markdown("<br><br>", unsafe_allow_html=True)
+    st.markdown("<div style='height:44px'></div>", unsafe_allow_html=True)
+    render_concept_i3_section()
+
+    st.markdown("<div style='height:44px'></div>", unsafe_allow_html=True)
     render_access_section(set_page)
 
-    st.markdown("<br><br>", unsafe_allow_html=True)
-    render_partner_logos()
+    render_partnerships_section()
 
 
 def render(set_page) -> None:

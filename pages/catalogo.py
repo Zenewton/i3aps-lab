@@ -36,6 +36,38 @@ RESOURCES = [
 ]
 
 
+def _render_resource_heading(title: str) -> None:
+    st.markdown(
+        f"""
+        <style>
+          .catalog-card-head {{
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 4px;
+          }}
+          .catalog-card-head svg {{
+            width: 19px;
+            height: 19px;
+            flex: 0 0 auto;
+          }}
+          .catalog-card-head h3 {{
+            margin: 0;
+            font: 690 1.05rem "SF Pro Display", "Inter", "Segoe UI", Arial, sans-serif;
+            color: #1d3854;
+          }}
+        </style>
+        <div class="catalog-card-head">
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#1f6fb5" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 7h16v13H4z"></path><path d="M9 4h6v3H9z"></path><path d="M4 12h16"></path>
+          </svg>
+          <h3>{title}</h3>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
 def render(set_page) -> None:
     """Renderiza catálogo com cards de recursos."""
     st.title("Catálogo do Laboratório Multiusuário")
@@ -46,7 +78,7 @@ def render(set_page) -> None:
 
     for resource in RESOURCES:
         with st.container(border=True):
-            st.markdown(f"### 🧩 {resource['title']}")
+            _render_resource_heading(resource["title"])
             st.write(resource["description"])
             st.markdown(f"**Casos de uso:** {resource['use_cases']}")
             if st.button(f"Solicitar acesso: {resource['title']}", key=f"request_{resource['title']}"):

@@ -5,7 +5,7 @@ from pathlib import Path
 import streamlit as st
 
 from database import init_db
-from pages import admin, agendamento, catalogo, dashboard, home, servicos, sobre
+from pages import admin, agendamento, catalogo, dashboard, equipe, home, servicos, sobre
 
 
 st.set_page_config(
@@ -72,9 +72,55 @@ def apply_custom_style() -> None:
                 border: 1px solid #7ea6c2;
                 border-radius: 10px;
                 font-weight: 600;
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                gap: 10px;
             }
             [data-testid="stSidebar"] .stButton > button * {
                 color: #0a2f4f !important;
+            }
+            [data-testid="stSidebar"] .stButton > button::before {
+                content: "";
+                width: 17px;
+                height: 17px;
+                flex: 0 0 17px;
+                display: inline-block;
+                background-color: currentColor;
+                -webkit-mask-size: contain;
+                mask-size: contain;
+                -webkit-mask-repeat: no-repeat;
+                mask-repeat: no-repeat;
+                -webkit-mask-position: center;
+                mask-position: center;
+            }
+            [data-testid="stSidebar"] .st-key-nav_home button::before {
+                -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M12 3l9 8h-3v9h-5v-6H11v6H6v-9H3l9-8z'/%3E%3C/svg%3E");
+                mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M12 3l9 8h-3v9h-5v-6H11v6H6v-9H3l9-8z'/%3E%3C/svg%3E");
+            }
+            [data-testid="stSidebar"] .st-key-nav_catalogo button::before {
+                -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M4 6.5C4 5.7 4.7 5 5.5 5h13c.8 0 1.5.7 1.5 1.5S19.3 8 18.5 8h-13C4.7 8 4 7.3 4 6.5zm0 5C4 10.7 4.7 10 5.5 10h13c.8 0 1.5.7 1.5 1.5S19.3 13 18.5 13h-13c-.8 0-1.5-.7-1.5-1.5zm0 5c0-.8.7-1.5 1.5-1.5h13c.8 0 1.5.7 1.5 1.5S19.3 18 18.5 18h-13C4.7 18 4 17.3 4 16.5z'/%3E%3C/svg%3E");
+                mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M4 6.5C4 5.7 4.7 5 5.5 5h13c.8 0 1.5.7 1.5 1.5S19.3 8 18.5 8h-13C4.7 8 4 7.3 4 6.5zm0 5C4 10.7 4.7 10 5.5 10h13c.8 0 1.5.7 1.5 1.5S19.3 13 18.5 13h-13c-.8 0-1.5-.7-1.5-1.5zm0 5c0-.8.7-1.5 1.5-1.5h13c.8 0 1.5.7 1.5 1.5S19.3 18 18.5 18h-13C4.7 18 4 17.3 4 16.5z'/%3E%3C/svg%3E");
+            }
+            [data-testid="stSidebar"] .st-key-nav_servicos button::before {
+                -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M3 7.5A1.5 1.5 0 0 1 4.5 6h6A1.5 1.5 0 0 1 12 7.5v6a1.5 1.5 0 0 1-1.5 1.5h-6A1.5 1.5 0 0 1 3 13.5v-6zm9 3A1.5 1.5 0 0 1 13.5 9h6A1.5 1.5 0 0 1 21 10.5v6a1.5 1.5 0 0 1-1.5 1.5h-6A1.5 1.5 0 0 1 12 16.5v-6z'/%3E%3C/svg%3E");
+                mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M3 7.5A1.5 1.5 0 0 1 4.5 6h6A1.5 1.5 0 0 1 12 7.5v6a1.5 1.5 0 0 1-1.5 1.5h-6A1.5 1.5 0 0 1 3 13.5v-6zm9 3A1.5 1.5 0 0 1 13.5 9h6A1.5 1.5 0 0 1 21 10.5v6a1.5 1.5 0 0 1-1.5 1.5h-6A1.5 1.5 0 0 1 12 16.5v-6z'/%3E%3C/svg%3E");
+            }
+            [data-testid="stSidebar"] .st-key-nav_agendamento button::before {
+                -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1a3 3 0 0 1 3 3v11a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3h1V3a1 1 0 0 1 1-1zm13 8H4v8a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-8z'/%3E%3C/svg%3E");
+                mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1a3 3 0 0 1 3 3v11a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3h1V3a1 1 0 0 1 1-1zm13 8H4v8a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-8z'/%3E%3C/svg%3E");
+            }
+            [data-testid="stSidebar"] .st-key-nav_dashboard button::before {
+                -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5zm-8 9a8 8 0 0 1 16 0z'/%3E%3C/svg%3E");
+                mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5zm-8 9a8 8 0 0 1 16 0z'/%3E%3C/svg%3E");
+            }
+            [data-testid="stSidebar"] .st-key-nav_equipe button::before {
+                -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M8 11a4 4 0 1 0-4-4 4 4 0 0 0 4 4zm8 0a4 4 0 1 0-4-4 4 4 0 0 0 4 4zM1 21a7 7 0 0 1 14 0zm9 0a7 7 0 0 1 13 0z'/%3E%3C/svg%3E");
+                mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M8 11a4 4 0 1 0-4-4 4 4 0 0 0 4 4zm8 0a4 4 0 1 0-4-4 4 4 0 0 0 4 4zM1 21a7 7 0 0 1 14 0zm9 0a7 7 0 0 1 13 0z'/%3E%3C/svg%3E");
+            }
+            [data-testid="stSidebar"] .st-key-nav_sobre button::before {
+                -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 15h-2v-6h2zm0-8h-2V7h2z'/%3E%3C/svg%3E");
+                mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 15h-2v-6h2zm0-8h-2V7h2z'/%3E%3C/svg%3E");
             }
             [data-testid="stSidebar"] .stButton > button:hover {
                 background: #d7e8f4;
@@ -178,13 +224,19 @@ def sidebar_navigation() -> None:
         ("servicos", "Serviços"),
         ("agendamento", "Agendar Uso"),
         ("dashboard", "Área do Usuário"),
+        ("equipe", "Equipe"),
         ("sobre", "Sobre"),
     ]
 
     current_page = st.session_state.get("page", "home")
     for key, label in nav_items:
         button_type = "primary" if current_page == key else "secondary"
-        if st.sidebar.button(label, use_container_width=True, type=button_type):
+        if st.sidebar.button(
+            label,
+            key=f"nav_{key}",
+            use_container_width=True,
+            type=button_type,
+        ):
             set_page(key)
             st.rerun()
 
@@ -197,6 +249,7 @@ def route_page() -> None:
         "home": lambda: home.render(set_page),
         "catalogo": lambda: catalogo.render(set_page),
         "servicos": servicos.render,
+        "equipe": equipe.render,
         "agendamento": agendamento.render,
         "dashboard": lambda: dashboard.render(set_page),
         "admin": admin.render,

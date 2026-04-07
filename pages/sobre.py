@@ -48,28 +48,90 @@ def render() -> None:
 
     st.markdown("### Missão")
     st.write(
-        "Disponibilizar infraestrutura multiusuária com agendamento transparente para apoiar "
-        "interoperabilidade, qualificação de dados e uso responsável de IA no cuidado e na "
-        "gestão da APS."
+        "Disponibilizar infraestrutura nacional segura, interoperável e escalável para integração "
+        "de dados clínicos e operação de serviços digitais, incluindo telemedicina e Inteligência "
+        "Artificial (IA), de modo a fortalecer a coordenação do cuidado às condições crônicas na "
+        "Atenção Primária à Saúde (APS)."
     )
 
     st.markdown("### Governança e parcerias")
-    st.write("- Ministério da Saúde (placeholder)")
-    st.write("- Secretarias Estaduais e Municipais de Saúde (placeholder)")
-    st.write("- Instituições de Ciência e Tecnologia (placeholder)")
-    st.write("- Organizações internacionais e ecossistema de inovação (placeholder)")
+    st.write("- Ministério da Saúde (articulação institucional para integração à RNDS e políticas de saúde digital)")
+    st.write("- Secretarias Estaduais e Municipais de Saúde (implementação e validação da infraestrutura em ambiente real do SUS)")
+    st.write("- Instituições de Ciência e Tecnologia (desenvolvimento metodológico, interoperabilidade e avaliação científica aplicada à APS)")
+    st.write("- Organizações internacionais e ecossistema de inovação (cooperação técnica, escalabilidade e difusão de boas práticas no SUS)")
 
     st.markdown("### Conceito I³")
+    st.markdown(
+        """
+        <style>
+          .sobre-concept-head {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 4px;
+          }
+          .sobre-concept-head svg {
+            width: 20px;
+            height: 20px;
+            flex: 0 0 auto;
+          }
+          .sobre-concept-head h4 {
+            margin: 0;
+            font: 690 1.02rem "SF Pro Display", "Inter", "Segoe UI", Arial, sans-serif;
+            color: #2f3342;
+          }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
     c1, c2, c3 = st.columns(3)
     with c1:
         with st.container(border=True):
-            st.markdown("#### 🔗 Interoperabilidade")
+            st.markdown(
+                """
+                <div class="sobre-concept-head">
+                  <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#1f6fb5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M10.5 13.5l3-3"></path>
+                    <path d="M7.8 16.2a3 3 0 0 1 0-4.2l2-2a3 3 0 0 1 4.2 4.2l-.7.7"></path>
+                    <path d="M16.2 7.8a3 3 0 0 1 0 4.2l-2 2a3 3 0 1 1-4.2-4.2l.7-.7"></path>
+                  </svg>
+                  <h4>Interoperabilidade</h4>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
             st.write("Integração de sistemas e dados para continuidade do cuidado.")
     with c2:
         with st.container(border=True):
-            st.markdown("#### 📊 Informação")
+            st.markdown(
+                """
+                <div class="sobre-concept-head">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <rect x="3" y="12" width="4" height="9" fill="#22c55e"></rect>
+                    <rect x="10" y="8" width="4" height="13" fill="#0ea5e9"></rect>
+                    <rect x="17" y="5" width="4" height="16" fill="#64748b"></rect>
+                  </svg>
+                  <h4>Informação</h4>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
             st.write("Dados qualificados para vigilância, gestão e pesquisa aplicada.")
     with c3:
         with st.container(border=True):
-            st.markdown("#### 🧠 Inteligência")
+            st.markdown(
+                """
+                <div class="sobre-concept-head">
+                  <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#e26aa3" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M8 6c-2 0-3.5 1.7-3.5 3.7 0 1.4.7 2.6 1.8 3.2-.6 2 .4 4.1 2.5 4.8"></path>
+                    <path d="M16 6c2 0 3.5 1.7 3.5 3.7 0 1.4-.7 2.6-1.8 3.2.6 2-.4 4.1-2.5 4.8"></path>
+                    <path d="M9 8.8c1 .6 2 .9 3 .9s2-.3 3-.9"></path>
+                    <path d="M12 9.7v8.1"></path>
+                    <path d="M9 13h6"></path>
+                  </svg>
+                  <h4>Inteligência</h4>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
             st.write("Modelos analíticos e IA para apoiar decisões em tempo oportuno.")

@@ -14,6 +14,66 @@ def _resource_titles() -> list[str]:
     return [r["title"] for r in RESOURCES]
 
 
+def _render_icon_heading(title: str, icon_name: str) -> None:
+    icons = {
+        "solicitacao": """
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#1f6fb5" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M8 3h8l4 4v14H4V3h4z"></path><path d="M8 11h8M8 15h6"></path>
+            </svg>
+        """,
+        "instituicao": """
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#0c7f66" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 10 12 4l9 6"></path><path d="M5 10v9h14v-9"></path><path d="M9 19v-5h6v5"></path>
+            </svg>
+        """,
+        "escopo": """
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#0d5e86" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 3h7v7"></path><path d="M10 14 21 3"></path><path d="M4 7h7v7H4z"></path>
+            </svg>
+        """,
+        "periodo": """
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#6b7280" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M16 3v4M8 3v4M3 10h18"></path>
+            </svg>
+        """,
+        "responsavel": """
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#7c3aed" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="8" r="3.5"></circle><path d="M5 20a7 7 0 0 1 14 0"></path>
+            </svg>
+        """,
+        "termos": """
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#15803d" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 6 9 17l-5-5"></path>
+            </svg>
+        """,
+    }
+    icon_svg = icons.get(icon_name, "")
+    st.markdown(
+        f"""
+        <style>
+          .form-section-head {{
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 10px 0 6px 0;
+          }}
+          .form-section-head svg {{
+            width: 18px;
+            height: 18px;
+            flex: 0 0 auto;
+          }}
+          .form-section-head h3 {{
+            margin: 0;
+            font: 680 1.05rem "SF Pro Display", "Inter", "Segoe UI", Arial, sans-serif;
+            color: #1f3650;
+          }}
+        </style>
+        <div class="form-section-head">{icon_svg}<h3>{title}</h3></div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
 def render() -> None:
     """Renderiza formulário principal de solicitações."""
     st.title("Agendar Uso do Laboratório")
@@ -32,7 +92,7 @@ def render() -> None:
     default_instituicao_nome = auth_user["institution"] if auth_user else ""
 
     with st.form("form_agendamento", clear_on_submit=False):
-        st.markdown("### 🗂️ Dados da Solicitação")
+        _render_icon_heading("Dados da Solicitação", "solicitacao")
         project_name = st.text_input(
             "Nome do projeto",
             placeholder="Ex.: Monitoramento longitudinal de condições crônicas na APS",
@@ -50,7 +110,7 @@ def render() -> None:
 
         infraestrutura = st.selectbox("Infraestrutura desejada", infra_titles, index=default_idx)
 
-        st.markdown("### 🏛️ Instituição")
+        _render_icon_heading("Instituição", "instituicao")
         col_i1, col_i2 = st.columns(2)
         instituicao_nome = col_i1.text_input(
             "Nome da instituição",
@@ -63,17 +123,17 @@ def render() -> None:
 
         finalidade = st.text_area("Finalidade", placeholder="Descreva o objetivo do uso da infraestrutura.")
 
-        st.markdown("### ⚙️ Escopo técnico")
+        _render_icon_heading("Escopo técnico", "escopo")
         col_e1, col_e2 = st.columns(2)
         escopo_dados = col_e1.selectbox("Tipo de dados", ["clínico", "administrativo", "ambos"])
         uso_ia = col_e2.radio("Uso de IA", ["sim", "não"], horizontal=True)
 
-        st.markdown("### 📅 Período")
+        _render_icon_heading("Período", "periodo")
         col_p1, col_p2 = st.columns(2)
         data_inicio = col_p1.date_input("Data início", value=date.today())
         data_fim = col_p2.date_input("Data fim", value=date.today())
 
-        st.markdown("### 👤 Responsável")
+        _render_icon_heading("Responsável", "responsavel")
         col_r1, col_r2 = st.columns(2)
         responsavel_nome = col_r1.text_input(
             "Nome do responsável",
@@ -84,7 +144,7 @@ def render() -> None:
             value=default_responsavel_email,
         )
 
-        st.markdown("### ✅ Termos")
+        _render_icon_heading("Termos", "termos")
         concorda_lgpd = st.checkbox("Concordo com LGPD")
         concorda_etica = st.checkbox("Concordo com uso ético")
 
