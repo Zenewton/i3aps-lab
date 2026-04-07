@@ -103,7 +103,7 @@ def _render_home_flow_animation(animate_once: bool) -> None:
         background: linear-gradient(180deg, #f8fbff 0%, #f2f6fa 100%);
         border: 1px solid #d7e5ef;
         border-radius: 12px;
-        padding: 24px;
+        padding: 18px 20px;
         opacity: 0;
         transform: translateY(6px);
         transition: opacity .4s ease-out, transform .4s ease-out;
@@ -124,12 +124,12 @@ def _render_home_flow_animation(animate_once: bool) -> None:
         border-radius: 12px;
         background: #ffffff;
         box-shadow: 0 10px 20px rgba(20, 58, 87, 0.10);
-        min-height: 274px;
-        padding: 20px 16px;
+        min-height: 0;
+        padding: 14px 16px;
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: flex-start;
+        justify-content: center;
         text-align: center;
       }}
       .flow-card-content {{
@@ -137,7 +137,9 @@ def _render_home_flow_animation(animate_once: bool) -> None:
         display: flex;
         flex-direction: column;
         align-items: center;
+        justify-content: center;
         text-align: center;
+        gap: 6px;
         border-radius: 10px;
         animation: cardPulse 5.6s ease-in-out infinite;
         will-change: filter, box-shadow;
@@ -149,8 +151,8 @@ def _render_home_flow_animation(animate_once: bool) -> None:
         animation-delay: 2s;
       }}
       .flow-center {{
-        min-height: 336px;
-        padding: 34px 22px 28px 22px;
+        min-height: 0;
+        padding: 18px 20px;
         background: linear-gradient(90deg, #0e73c9 0%, #1493da 100%);
         border-color: #0e73c9;
         position: relative;
@@ -161,8 +163,8 @@ def _render_home_flow_animation(animate_once: bool) -> None:
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        padding-top: 8px;
-        margin-bottom: 10px;
+        padding-top: 0;
+        margin-bottom: 6px;
         transform-origin: center;
         will-change: transform;
         animation: centerPulse 3.8s ease-in-out 1.35s infinite;
@@ -170,7 +172,7 @@ def _render_home_flow_animation(animate_once: bool) -> None:
       .icon-wrap {{
         width: 84px;
         height: 84px;
-        margin-bottom: 12px;
+        margin-bottom: 6px;
       }}
       .icon-wrap svg {{
         width: 100%;
@@ -186,12 +188,12 @@ def _render_home_flow_animation(animate_once: bool) -> None:
       .flow-title {{
         font: 700 28px "SF Pro Display", "Inter", "Segoe UI", Arial, sans-serif;
         color: #173e59;
-        margin-bottom: 8px;
+        margin-bottom: 4px;
       }}
       .flow-title-center {{
         font: 700 46px "SF Pro Display", "Inter", "Segoe UI", Arial, sans-serif;
         color: #ffffff;
-        margin: 0 0 10px 0;
+        margin: 0 0 6px 0;
       }}
       .flow-title-center .sup {{
         font-size: 62%;
@@ -201,11 +203,13 @@ def _render_home_flow_animation(animate_once: bool) -> None:
         font: 520 19px "SF Pro Text", "Inter", "Segoe UI", Arial, sans-serif;
         color: #3a5a72;
         line-height: 1.35;
+        margin: 0;
       }}
       .flow-line-center {{
         font: 520 19px "SF Pro Text", "Inter", "Segoe UI", Arial, sans-serif;
         color: #eaf6ff;
         line-height: 1.35;
+        margin: 0;
       }}
       .flow-arrow {{
         position: relative;
@@ -346,7 +350,7 @@ def _render_home_flow_animation(animate_once: bool) -> None:
 
       @media (max-width: 860px) {{
         .i3-flow {{
-          padding: 16px;
+          padding: 14px 14px;
         }}
         .flow-grid {{
           grid-template-columns: 1fr;
@@ -356,24 +360,24 @@ def _render_home_flow_animation(animate_once: bool) -> None:
         }}
         .flow-card {{
           min-height: 0;
-          padding: 14px 12px;
+          padding: 12px 12px;
         }}
         .flow-center {{
           min-height: 0;
-          padding: 20px 14px 16px 14px;
+          padding: 14px 14px;
         }}
         .icon-wrap {{
           width: 58px;
           height: 58px;
-          margin-bottom: 8px;
+          margin-bottom: 6px;
         }}
         .flow-title {{
           font-size: 21px;
-          margin-bottom: 6px;
+          margin-bottom: 3px;
         }}
         .flow-title-center {{
           font-size: 34px;
-          margin-bottom: 8px;
+          margin-bottom: 4px;
         }}
         .flow-line,
         .flow-line-center {{
@@ -460,18 +464,18 @@ def _render_home_flow_animation(animate_once: bool) -> None:
 
       @media (max-width: 520px) {{
         .i3-flow {{
-          padding: 12px;
+          padding: 10px;
         }}
         .flow-card {{
-          padding: 12px 10px;
+          padding: 10px 10px;
         }}
         .flow-center {{
-          padding: 18px 10px 14px 10px;
+          padding: 12px 10px;
         }}
         .icon-wrap {{
           width: 52px;
           height: 52px;
-          margin-bottom: 7px;
+          margin-bottom: 5px;
         }}
         .flow-title {{
           font-size: 19px;
@@ -548,7 +552,7 @@ def _render_home_flow_animation(animate_once: bool) -> None:
       }})();
     </script>
     """
-    components.html(html, height=700, scrolling=False)
+    components.html(html, height=560, scrolling=False)
 
 
 def _to_data_uri(path: Path | None) -> str | None:
