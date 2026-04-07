@@ -54,7 +54,7 @@ def apply_custom_style() -> None:
                 color: #d4e7f7;
                 font-size: 0.88rem;
                 font-weight: 620;
-                margin: 0 0 0.05rem 0;
+                margin: 0 0 0.7rem 0;
             }
             [data-testid="stSidebar"] .sidebar-brand-caption {
                 text-align: center;
@@ -214,7 +214,7 @@ def sidebar_navigation() -> None:
         unsafe_allow_html=True,
     )
     st.sidebar.markdown(
-        '<div class="sidebar-brand-subtitle"><strong>Ambiente multiusuário</strong></div>',
+        '<div class="sidebar-brand-subtitle"><strong>Centro multiusuário</strong></div>',
         unsafe_allow_html=True,
     )
 

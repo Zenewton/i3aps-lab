@@ -68,7 +68,7 @@ def _render_home_flow_animation(animate_once: bool) -> None:
             <div class="center-live">
               <div class="flow-title-center">I<span class="sup">3</span> APS</div>
             </div>
-            <div class="flow-line-center">Dados clínicos interoperáveis para o SUS</div>
+            <div class="flow-line-center">Dados clínicos interoperáveis para coordenação do cuidado</div>
           </div>
         </div>
 
@@ -103,7 +103,7 @@ def _render_home_flow_animation(animate_once: bool) -> None:
         background: linear-gradient(180deg, #f8fbff 0%, #f2f6fa 100%);
         border: 1px solid #d7e5ef;
         border-radius: 12px;
-        padding: 18px 20px;
+        padding: 11px 14px;
         opacity: 0;
         transform: translateY(6px);
         transition: opacity .4s ease-out, transform .4s ease-out;
@@ -125,7 +125,7 @@ def _render_home_flow_animation(animate_once: bool) -> None:
         background: #ffffff;
         box-shadow: 0 10px 20px rgba(20, 58, 87, 0.10);
         min-height: 0;
-        padding: 14px 16px;
+        padding: 8px 11px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -139,7 +139,7 @@ def _render_home_flow_animation(animate_once: bool) -> None:
         align-items: center;
         justify-content: center;
         text-align: center;
-        gap: 6px;
+        gap: 3px;
         border-radius: 10px;
         animation: cardPulse 5.6s ease-in-out infinite;
         will-change: filter, box-shadow;
@@ -152,9 +152,10 @@ def _render_home_flow_animation(animate_once: bool) -> None:
       }}
       .flow-center {{
         min-height: 0;
-        padding: 18px 20px;
-        background: linear-gradient(90deg, #0e73c9 0%, #1493da 100%);
+        padding: 10px 13px;
+        background: linear-gradient(90deg, #0b69be 0%, #128dd7 100%);
         border-color: #0e73c9;
+        box-shadow: 0 10px 24px rgba(10, 94, 156, 0.22), 0 0 0 1px rgba(209, 235, 255, 0.24) inset;
         position: relative;
       }}
       .center-live {{
@@ -164,15 +165,15 @@ def _render_home_flow_animation(animate_once: bool) -> None:
         align-items: center;
         justify-content: center;
         padding-top: 0;
-        margin-bottom: 6px;
+        margin-bottom: 2px;
         transform-origin: center;
         will-change: transform;
         animation: centerPulse 3.8s ease-in-out 1.35s infinite;
       }}
       .icon-wrap {{
-        width: 84px;
-        height: 84px;
-        margin-bottom: 6px;
+        width: 72px;
+        height: 72px;
+        margin-bottom: 4px;
       }}
       .icon-wrap svg {{
         width: 100%;
@@ -188,12 +189,12 @@ def _render_home_flow_animation(animate_once: bool) -> None:
       .flow-title {{
         font: 700 28px "SF Pro Display", "Inter", "Segoe UI", Arial, sans-serif;
         color: #173e59;
-        margin-bottom: 4px;
+        margin-bottom: 2px;
       }}
       .flow-title-center {{
         font: 700 46px "SF Pro Display", "Inter", "Segoe UI", Arial, sans-serif;
         color: #ffffff;
-        margin: 0 0 6px 0;
+        margin: 0 0 4px 0;
       }}
       .flow-title-center .sup {{
         font-size: 62%;
@@ -213,16 +214,16 @@ def _render_home_flow_animation(animate_once: bool) -> None:
       }}
       .flow-arrow {{
         position: relative;
-        height: 24px;
+        height: 20px;
       }}
       .flow-arrow::before {{
         content: "";
         position: absolute;
         left: 0;
-        right: 12px;
+        right: 10px;
         top: 50%;
         transform: translateY(-50%);
-        border-top: 5px solid #1186d4;
+        border-top: 3px solid #8fb6d2;
       }}
       .flow-arrow::after {{
         content: "";
@@ -230,19 +231,19 @@ def _render_home_flow_animation(animate_once: bool) -> None:
         top: 50%;
         transform: translateY(-50%);
         right: -1px;
-        border-top: 9px solid transparent;
-        border-bottom: 9px solid transparent;
-        border-left: 14px solid #1186d4;
+        border-top: 7px solid transparent;
+        border-bottom: 7px solid transparent;
+        border-left: 11px solid #8fb6d2;
       }}
       .arrow-stream {{
         position: absolute;
         top: 50%;
         left: 0;
-        width: 42px;
-        height: 5px;
+        width: 30px;
+        height: 3px;
         border-radius: 999px;
         transform: translate(-8px, -50%);
-        background: linear-gradient(90deg, rgba(17, 134, 212, 0), rgba(208, 238, 255, 0.90), rgba(17, 134, 212, 0));
+        background: linear-gradient(90deg, rgba(143, 182, 210, 0), rgba(217, 233, 245, 0.88), rgba(143, 182, 210, 0));
         animation: flowTravel 4.8s ease-in-out infinite;
         will-change: transform, opacity;
       }}
@@ -252,12 +253,12 @@ def _render_home_flow_animation(animate_once: bool) -> None:
       .arrow-node {{
         position: absolute;
         top: 50%;
-        width: 9px;
-        height: 9px;
-        margin-top: -4.5px;
+        width: 6px;
+        height: 6px;
+        margin-top: -3px;
         border-radius: 999px;
-        background: #a6dbfb;
-        opacity: 0.55;
+        background: #c6dceb;
+        opacity: 0.5;
         animation: nodeBreathe 4.2s ease-in-out infinite;
       }}
       .node-start {{
@@ -350,7 +351,7 @@ def _render_home_flow_animation(animate_once: bool) -> None:
 
       @media (max-width: 860px) {{
         .i3-flow {{
-          padding: 14px 14px;
+          padding: 10px 10px;
         }}
         .flow-grid {{
           grid-template-columns: 1fr;
@@ -360,24 +361,24 @@ def _render_home_flow_animation(animate_once: bool) -> None:
         }}
         .flow-card {{
           min-height: 0;
-          padding: 12px 12px;
+          padding: 7px 9px;
         }}
         .flow-center {{
           min-height: 0;
-          padding: 14px 14px;
+          padding: 8px 10px;
         }}
         .icon-wrap {{
-          width: 58px;
-          height: 58px;
+          width: 50px;
+          height: 50px;
           margin-bottom: 6px;
         }}
         .flow-title {{
           font-size: 21px;
-          margin-bottom: 3px;
+          margin-bottom: 2px;
         }}
         .flow-title-center {{
           font-size: 34px;
-          margin-bottom: 4px;
+          margin-bottom: 3px;
         }}
         .flow-line,
         .flow-line-center {{
@@ -386,7 +387,7 @@ def _render_home_flow_animation(animate_once: bool) -> None:
         }}
         .flow-arrow {{
           width: 0;
-          height: 30px;
+          height: 24px;
           margin: 0 auto;
         }}
         .flow-arrow::before {{
@@ -396,25 +397,25 @@ def _render_home_flow_animation(animate_once: bool) -> None:
           height: 100%;
           transform: translateX(-50%);
           border-top: 0;
-          border-left: 5px solid #1186d4;
+          border-left: 3px solid #8fb6d2;
         }}
         .flow-arrow::after {{
           top: auto;
           right: -6px;
           bottom: -1px;
           transform: none;
-          border-left: 9px solid transparent;
-          border-right: 9px solid transparent;
-          border-top: 14px solid #1186d4;
+          border-left: 7px solid transparent;
+          border-right: 7px solid transparent;
+          border-top: 11px solid #8fb6d2;
           border-bottom: 0;
         }}
         .arrow-stream {{
-          width: 5px;
-          height: 34px;
+          width: 3px;
+          height: 24px;
           left: 50%;
           top: 0;
           transform: translateX(-50%);
-          background: linear-gradient(180deg, rgba(17, 134, 212, 0), rgba(208, 238, 255, 0.88), rgba(17, 134, 212, 0));
+          background: linear-gradient(180deg, rgba(143, 182, 210, 0), rgba(217, 233, 245, 0.84), rgba(143, 182, 210, 0));
           animation: flowTravelMobile 5.2s ease-in-out infinite;
         }}
         .arrow-node {{
@@ -464,17 +465,17 @@ def _render_home_flow_animation(animate_once: bool) -> None:
 
       @media (max-width: 520px) {{
         .i3-flow {{
-          padding: 10px;
+          padding: 8px;
         }}
         .flow-card {{
-          padding: 10px 10px;
+          padding: 7px 8px;
         }}
         .flow-center {{
-          padding: 12px 10px;
+          padding: 8px 8px;
         }}
         .icon-wrap {{
-          width: 52px;
-          height: 52px;
+          width: 46px;
+          height: 46px;
           margin-bottom: 5px;
         }}
         .flow-title {{
@@ -488,9 +489,7 @@ def _render_home_flow_animation(animate_once: bool) -> None:
           font-size: 14px;
           line-height: 1.26;
         }}
-        .flow-arrow {{
-          height: 24px;
-        }}
+        .flow-arrow {{ height: 20px; }}
       }}
 
       @media (prefers-reduced-motion: reduce) {{
@@ -524,18 +523,45 @@ def _render_home_flow_animation(animate_once: bool) -> None:
           return;
         }}
 
+        const setFrameHeight = () => {{
+          const height = Math.max(
+            document.body.scrollHeight || 0,
+            document.documentElement.scrollHeight || 0,
+          );
+          window.parent.postMessage(
+            {{
+              isStreamlitMessage: true,
+              type: "streamlit:setFrameHeight",
+              height: height,
+            }},
+            "*"
+          );
+          window.parent.postMessage(
+            {{
+              type: "streamlit:setFrameHeight",
+              height: height,
+            }},
+            "*"
+          );
+        }};
+
         const prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
         if (prefersReduced) {{
           root.classList.add("static", "in-view");
+          setFrameHeight();
           return;
         }}
 
         if (root.classList.contains("static")) {{
           if (root) root.classList.add("in-view");
+          setFrameHeight();
           return;
         }}
 
-        const reveal = () => root.classList.add("in-view");
+        const reveal = () => {{
+          root.classList.add("in-view");
+          setTimeout(setFrameHeight, 30);
+        }};
         if ("IntersectionObserver" in window) {{
           const io = new IntersectionObserver((entries) => {{
             entries.forEach((entry) => {{
@@ -549,10 +575,13 @@ def _render_home_flow_animation(animate_once: bool) -> None:
         }} else {{
           setTimeout(reveal, 40);
         }}
+
+        setTimeout(setFrameHeight, 0);
+        window.addEventListener("resize", setFrameHeight);
       }})();
     </script>
     """
-    components.html(html, height=560, scrolling=False)
+    components.html(html, height=300, scrolling=False)
 
 
 def _to_data_uri(path: Path | None) -> str | None:
@@ -663,6 +692,103 @@ def _resolve_logo_candidates() -> list[tuple[str, Path | None]]:
     ]
 
 
+def render_ui_refinements_style() -> None:
+    """Aplica refinamentos visuais globais da homepage."""
+    st.markdown(
+        """
+        <style>
+          :root {
+            --ui-blue-700: #0d5e86;
+            --ui-blue-600: #1a76b1;
+            --ui-text-900: #1f2a37;
+            --ui-text-700: #41576b;
+            --ui-border: #d8e4ee;
+            --ui-surface: #ffffff;
+            --ui-surface-soft: #f8fbfe;
+            --ui-radius: 14px;
+            --ui-shadow: 0 8px 18px rgba(10, 47, 79, 0.08);
+          }
+
+          .hero-brand-text,
+          .hero-main,
+          .hero-subtitle {
+            max-width: 800px !important;
+          }
+          .hero-name {
+            color: #0b3350 !important;
+          }
+          .hero-main {
+            color: var(--ui-text-900) !important;
+          }
+          .hero-subtitle {
+            color: var(--ui-text-700) !important;
+          }
+
+          .i3-flow,
+          .flow-card,
+          .infra-card,
+          .problem-panel,
+          .sus-impact-item,
+          .i3-concept-card,
+          .inst-block,
+          .inst-logo-card,
+          .partner-logo-card {
+            border-radius: var(--ui-radius) !important;
+            border-color: var(--ui-border) !important;
+          }
+
+          .flow-card,
+          .infra-card,
+          .problem-panel,
+          .sus-impact-item,
+          .i3-concept-card,
+          .inst-block,
+          .partner-logo-card {
+            box-shadow: var(--ui-shadow) !important;
+          }
+
+          .flow-center {
+            background: linear-gradient(90deg, var(--ui-blue-700) 0%, var(--ui-blue-600) 100%) !important;
+            box-shadow: var(--ui-shadow), inset 0 0 0 1px rgba(215, 233, 245, 0.28) !important;
+          }
+
+          .flow-arrow::before {
+            border-top-color: #9db7cb !important;
+          }
+          .flow-arrow::after {
+            border-left-color: #9db7cb !important;
+          }
+          .arrow-node {
+            background: #c4d8e6 !important;
+          }
+
+          .infra-grid,
+          .sus-impact,
+          .i3-concept-grid,
+          .inst-partnerships {
+            gap: 16px !important;
+          }
+
+          .infra-title,
+          .problem-title,
+          .sus-impact-title,
+          .i3-concept-title,
+          .inst-title {
+            color: #1e3850 !important;
+          }
+          .infra-text,
+          .problem-desc,
+          .sus-impact-desc,
+          .i3-concept-text,
+          .inst-footer-text {
+            color: var(--ui-text-700) !important;
+          }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
 def render_hero() -> None:
     """Renderiza topo enxuto com label, título e linha dos 3 Is."""
     hero_logo_candidates = [
@@ -681,21 +807,28 @@ def render_hero() -> None:
     st.markdown(
         """
         <style>
+          .hero-shell {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            padding: 8px 0 2px 0;
+            margin-bottom: 2px;
+          }
           .hero-brand {
             display: flex;
-            align-items: flex-start;
-            gap: 16px;
-            padding-top: 18px;
-            margin-bottom: 12px;
+            align-items: center;
+            gap: 24px;
+            margin-bottom: 0;
           }
           .hero-logo-wrap {
-            width: 72px;
-            height: 72px;
-            flex: 0 0 72px;
-            border-radius: 16px;
+            width: 136px;
+            height: 136px;
+            flex: 0 0 136px;
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
+            margin-top: -4px;
           }
           .hero-logo {
             width: 100%;
@@ -706,93 +839,75 @@ def render_hero() -> None:
           .hero-brand-text {
             display: flex;
             flex-direction: column;
-            gap: 6px;
-            padding-top: 1px;
-          }
-          .hero-name {
-            font: 780 30px "SF Pro Display", "Inter", "Segoe UI", Arial, sans-serif;
-            color: #0b2f49;
-            line-height: 1;
-            letter-spacing: 0.2px;
-            text-transform: uppercase;
-          }
-          .hero-name .sup {
-            font-size: 50%;
-            vertical-align: super;
+            gap: 0;
+            padding-top: 0;
+            max-width: 920px;
           }
           .hero-main {
-            font: 680 40px "SF Pro Display", "Inter", "Segoe UI", Arial, sans-serif;
+            font: 680 clamp(2.05rem, 2.7vw, 2.9rem) "SF Pro Display", "Inter", "Segoe UI", Arial, sans-serif;
             color: #0b2f49;
-            line-height: 1.12;
+            line-height: 1.14;
             letter-spacing: -0.3px;
-            margin: 0 0 4px 0;
-            max-width: 800px;
+            margin: 0;
+            max-width: 920px;
+            text-wrap: balance;
           }
-          .hero-three-is {
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 8px;
-            font: 560 16px "SF Pro Text", "Inter", "Segoe UI", Arial, sans-serif;
-            color: #374151;
+          .hero-subtitle {
+            margin: 8px 0 0 0;
+            font: 520 17px "SF Pro Text", "Inter", "Segoe UI", Arial, sans-serif;
+            color: #4f6375;
             line-height: 1.35;
             letter-spacing: 0.1px;
-            margin: 0;
-            max-width: 820px;
+            max-width: 800px;
           }
-          .hero-is-item {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            white-space: nowrap;
-          }
-          .hero-is-item svg {
-            width: 14px;
-            height: 14px;
-            display: block;
-          }
-          .hero-is-dot {
-            color: #6b7280;
-            font-weight: 600;
+          .hero-subtitle .sup {
+            font-size: 68%;
+            vertical-align: super;
           }
           @media (max-width: 860px) {
+            .hero-shell {
+              gap: 6px;
+              padding: 8px 0 2px 0;
+            }
             .hero-brand {
-              gap: 12px;
-              padding-top: 14px;
-              margin-bottom: 10px;
+              gap: 16px;
             }
             .hero-logo-wrap {
-              width: 64px;
-              height: 64px;
-              flex-basis: 64px;
-            }
-            .hero-name {
-              font-size: 26px;
+              width: 112px;
+              height: 112px;
+              flex-basis: 112px;
             }
             .hero-main {
-              font-size: 31px;
+              font-size: 30px;
+              line-height: 1.15;
+              max-width: 100%;
             }
-            .hero-three-is {
+            .hero-subtitle {
               font-size: 15px;
+              margin-top: 8px;
+              max-width: 100%;
             }
           }
           @media (max-width: 620px) {
             .hero-brand {
               align-items: center;
+              gap: 12px;
             }
             .hero-logo-wrap {
-              width: 60px;
-              height: 60px;
-              flex-basis: 60px;
+              width: 92px;
+              height: 92px;
+              flex-basis: 92px;
             }
             .hero-brand-text {
-              gap: 5px;
+              gap: 0;
             }
             .hero-main {
-              font-size: 28px;
+              font-size: 22px;
+              line-height: 1.16;
             }
-            .hero-three-is {
-              gap: 6px;
+            .hero-subtitle {
+              font-size: 14px;
+              margin-top: 8px;
             }
           }
         </style>
@@ -811,40 +926,12 @@ def render_hero() -> None:
 
     st.markdown(
         f"""
-        <div class="hero-brand">
-          {hero_logo_html}
-          <div class="hero-brand-text">
-            <div class="hero-name">I<span class="sup">3</span> APS</div>
-            <h1 class="hero-main">Centro nacional de dados clínicos interoperáveis para o cuidado integrado na Atenção Primária à Saúde</h1>
-            <div class="hero-three-is">
-              <span class="hero-is-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#0f6fb9" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M10.5 13.5l3-3"></path>
-                  <path d="M7.8 16.2a3 3 0 0 1 0-4.2l2-2a3 3 0 0 1 4.2 4.2l-.7.7"></path>
-                  <path d="M16.2 7.8a3 3 0 0 1 0 4.2l-2 2a3 3 0 1 1-4.2-4.2l.7-.7"></path>
-                </svg>
-                Interoperabilidade
-              </span>
-              <span class="hero-is-dot">•</span>
-              <span class="hero-is-item">
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <rect x="3" y="12" width="4" height="9" fill="#16a34a"></rect>
-                  <rect x="10" y="8" width="4" height="13" fill="#0ea5e9"></rect>
-                  <rect x="17" y="5" width="4" height="16" fill="#64748b"></rect>
-                </svg>
-                Informação
-              </span>
-              <span class="hero-is-dot">•</span>
-              <span class="hero-is-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#be185d" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M8 6c-2 0-3.5 1.7-3.5 3.7 0 1.4.7 2.6 1.8 3.2-.6 2 .4 4.1 2.5 4.8"></path>
-                  <path d="M16 6c2 0 3.5 1.7 3.5 3.7 0 1.4-.7 2.6-1.8 3.2.6 2-.4 4.1-2.5 4.8"></path>
-                  <path d="M9 8.8c1 .6 2 .9 3 .9s2-.3 3-.9"></path>
-                  <path d="M12 9.7v8.1"></path>
-                  <path d="M9 13h6"></path>
-                </svg>
-                Inteligência
-              </span>
+        <div class="hero-shell">
+          <div class="hero-brand">
+            {hero_logo_html}
+            <div class="hero-brand-text">
+              <h1 class="hero-main">Infraestrutura nacional de dados clínicos interoperáveis para o cuidado na Atenção Primária à&nbsp;Saúde</h1>
+              <p class="hero-subtitle">I<span class="sup">3</span>-APS: plataforma nacional para integração segura de dados clínicos, inteligência artificial e telemedicina, voltada ao cuidado longitudinal de condições crônicas na APS.</p>
             </div>
           </div>
         </div>
@@ -989,8 +1076,8 @@ def render_problem_section() -> None:
               <path d="M10.3 4.6 2.9 17.4A2 2 0 0 0 4.6 20h14.8a2 2 0 0 0 1.7-2.6L13.7 4.6a2 2 0 0 0-3.4 0z"></path>
             </svg>
             <div>
-              <p class="problem-title">Fragmentação de dados</p>
-              <p class="problem-desc">Informações clínicas dispersas entre serviços e níveis de atenção.</p>
+              <p class="problem-title">Dados clínicos fragmentados no SUS</p>
+              <p class="problem-desc">Informações dispersas entre serviços e níveis de atenção.</p>
             </div>
           </div>
           <div class="problem-row">
@@ -999,8 +1086,8 @@ def render_problem_section() -> None:
               <path d="M10.3 4.6 2.9 17.4A2 2 0 0 0 4.6 20h14.8a2 2 0 0 0 1.7-2.6L13.7 4.6a2 2 0 0 0-3.4 0z"></path>
             </svg>
             <div>
-              <p class="problem-title">Baixa interoperabilidade</p>
-              <p class="problem-desc">A integração limitada compromete a continuidade do cuidado na APS.</p>
+              <p class="problem-title">Sistemas não interoperáveis</p>
+              <p class="problem-desc">A integração limitada compromete a continuidade do cuidado.</p>
             </div>
           </div>
           <div class="problem-row">
@@ -1009,8 +1096,8 @@ def render_problem_section() -> None:
               <path d="M10.3 4.6 2.9 17.4A2 2 0 0 0 4.6 20h14.8a2 2 0 0 0 1.7-2.6L13.7 4.6a2 2 0 0 0-3.4 0z"></path>
             </svg>
             <div>
-              <p class="problem-title">Decisão com informação incompleta</p>
-              <p class="problem-desc">Clínica e gestão operam sem visão consolidada do percurso assistencial.</p>
+              <p class="problem-title">Decisão clínica sem visão longitudinal</p>
+              <p class="problem-desc">Profissionais atuam sem acesso ao histórico completo do paciente.</p>
             </div>
           </div>
         </div>
@@ -1019,83 +1106,109 @@ def render_problem_section() -> None:
     )
 
 
-def render_sus_importance_section() -> None:
-    """Renderiza impacto estratégico para o SUS com ícones de check."""
-    st.markdown("### Por que isso importa para o SUS?")
-    st.markdown(
+def render_sus_importance_section(
+    start_idx: int = 0,
+    max_items: int | None = None,
+    heading: str | None = "### Por que isso importa para o SUS?",
+) -> None:
+    """Renderiza impacto estratégico para o SUS com possibilidade de fatiamento."""
+    cards = [
+        (
+            "Coordenação do cuidado longitudinal",
+            "Melhora acompanhamento de condições crônicas ao longo da rede.",
+        ),
+        (
+            "Gestão e vigilância com oportunidade",
+            "Qualifica regulação, monitoramento e resposta com dados atualizados.",
+        ),
+        (
+            "Mais segurança, eficiência e equidade",
+            "Fortalece qualidade do cuidado com base em dados integrados.",
+        ),
+    ]
+
+    end_idx = None if max_items is None else start_idx + max_items
+    selected_cards = cards[start_idx:end_idx]
+    if not selected_cards:
+        return
+
+    if heading:
+        st.markdown(heading)
+
+    card_items_html = []
+    for title, desc in selected_cards:
+        card_items_html.append(
+            "<div class=\"sus-impact-item\">"
+            "<svg class=\"sus-check\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#15803d\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\">"
+            "<circle cx=\"12\" cy=\"12\" r=\"9\"></circle><path d=\"m8.5 12 2.4 2.4L15.8 9.6\"></path>"
+            "</svg>"
+            "<div>"
+            f"<p class=\"sus-impact-title\">{html.escape(title)}</p>"
+            f"<p class=\"sus-impact-desc\">{html.escape(desc)}</p>"
+            "</div>"
+            "</div>"
+        )
+
+    section_html = (
         """
         <style>
           .sus-impact {
             display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
             gap: 12px;
             margin-top: 8px;
           }
           .sus-impact-item {
             display: flex;
             align-items: flex-start;
-            gap: 10px;
+            gap: 9px;
             border: 1px solid #d9e7dc;
             border-radius: 14px;
-            padding: 12px 14px;
+            padding: 10px 12px;
             background: #ffffff;
             box-shadow: 0 6px 16px rgba(19, 56, 84, 0.05);
           }
           .sus-check {
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             flex: 0 0 auto;
             margin-top: 1px;
           }
           .sus-impact-title {
             margin: 0;
-            font: 660 17px "SF Pro Display", "Inter", "Segoe UI", Arial, sans-serif;
+            font: 650 16px "SF Pro Display", "Inter", "Segoe UI", Arial, sans-serif;
             color: #1f3a2a;
-            line-height: 1.3;
+            line-height: 1.25;
           }
           .sus-impact-desc {
             margin: 2px 0 0 0;
-            font: 500 14px "SF Pro Text", "Inter", "Segoe UI", Arial, sans-serif;
+            font: 500 13px "SF Pro Text", "Inter", "Segoe UI", Arial, sans-serif;
             color: #4e6a58;
-            line-height: 1.35;
+            line-height: 1.3;
+          }
+          @media (max-width: 1120px) {
+            .sus-impact {
+              grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+          }
+          @media (max-width: 760px) {
+            .sus-impact {
+              grid-template-columns: 1fr;
+            }
           }
         </style>
-        <div class="sus-impact">
-          <div class="sus-impact-item">
-            <svg class="sus-check" viewBox="0 0 24 24" fill="none" stroke="#15803d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <circle cx="12" cy="12" r="9"></circle><path d="m8.5 12 2.4 2.4L15.8 9.6"></path>
-            </svg>
-            <div>
-              <p class="sus-impact-title">Coordenação do cuidado longitudinal</p>
-              <p class="sus-impact-desc">Melhora acompanhamento de condições crônicas ao longo da rede.</p>
-            </div>
-          </div>
-          <div class="sus-impact-item">
-            <svg class="sus-check" viewBox="0 0 24 24" fill="none" stroke="#15803d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <circle cx="12" cy="12" r="9"></circle><path d="m8.5 12 2.4 2.4L15.8 9.6"></path>
-            </svg>
-            <div>
-              <p class="sus-impact-title">Gestão e vigilância com oportunidade</p>
-              <p class="sus-impact-desc">Qualifica regulação, monitoramento e resposta com dados atualizados.</p>
-            </div>
-          </div>
-          <div class="sus-impact-item">
-            <svg class="sus-check" viewBox="0 0 24 24" fill="none" stroke="#15803d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <circle cx="12" cy="12" r="9"></circle><path d="m8.5 12 2.4 2.4L15.8 9.6"></path>
-            </svg>
-            <div>
-              <p class="sus-impact-title">Mais segurança, eficiência e equidade</p>
-              <p class="sus-impact-desc">Fortalece qualidade do cuidado com base em dados integrados.</p>
-            </div>
-          </div>
-        </div>
-        """,
-        unsafe_allow_html=True,
+        """
+        + f'<div class="sus-impact">{"".join(card_items_html)}</div>'
     )
+    st.markdown(section_html, unsafe_allow_html=True)
 
 
 def render_concept_i3_section() -> None:
     """Renderiza conceito I3 com ícones coloridos e cards institucionais."""
     st.markdown("### Conceito I³")
+    st.markdown(
+        "O I³-APS é estruturado a partir de três pilares integrados:"
+    )
     st.markdown(
         """
         <style>
@@ -1281,7 +1394,51 @@ def render_offerings() -> None:
 def render_access_section(set_page) -> None:
     """Renderiza atalhos de acesso com destaque visual."""
     st.markdown("### Botões de ação")
-    b1, b2, b3 = st.columns(3, gap="large")
+    st.markdown(
+        """
+        <style>
+          .st-key-acesso_solicitar button,
+          .st-key-acesso_casos button,
+          .st-key-acesso_area button {
+            min-height: 48px;
+            border-radius: 10px;
+            font-weight: 620;
+          }
+          .st-key-acesso_solicitar button[kind="primary"] {
+            background: #0d5e86;
+            border-color: #0d5e86;
+            box-shadow: 0 8px 16px rgba(13, 94, 134, 0.20);
+          }
+          .st-key-acesso_solicitar button[kind="primary"]:hover {
+            background: #0a4f72;
+            border-color: #0a4f72;
+          }
+          .st-key-acesso_casos button[kind="secondary"] {
+            background: #ffffff;
+            border: 1px solid #8faeca;
+            color: #164666;
+          }
+          .st-key-acesso_casos button[kind="secondary"]:hover {
+            background: #eef5fb;
+            border-color: #7ea6c2;
+            color: #123e5a;
+          }
+          .st-key-acesso_area button[kind="secondary"] {
+            background: #f6f9fc;
+            border: 1px solid #d6e1eb;
+            color: #5a6f82;
+            box-shadow: none;
+          }
+          .st-key-acesso_area button[kind="secondary"]:hover {
+            background: #eff4f8;
+            border-color: #c6d3df;
+            color: #4f6477;
+          }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+    b1, b2, b3 = st.columns(3, gap="medium")
 
     if b1.button(
         "Solicitar acesso institucional",
@@ -1291,7 +1448,7 @@ def render_access_section(set_page) -> None:
     ):
         _go_to(set_page, "agendamento")
     if b2.button(
-        "Ver Infraestrutura",
+        "Ver infraestrutura",
         use_container_width=True,
         key="acesso_casos",
         type="secondary",
@@ -1379,7 +1536,7 @@ def render_partnerships_section() -> None:
         ),
     ]
 
-    st.markdown("<div style='height:46px'></div>", unsafe_allow_html=True)
+    st.markdown("<div style='height:24px'></div>", unsafe_allow_html=True)
     st.markdown("### Parcerias e articulação institucional")
 
     section_html = [
@@ -1453,23 +1610,24 @@ def render_partnerships_section() -> None:
 
 def render_homepage(set_page) -> None:
     """Renderiza homepage com foco em comunicação visual e leitura rápida."""
+    render_ui_refinements_style()
     render_hero()
 
     render_main_diagram()
 
-    st.markdown("<div style='height:40px'></div>", unsafe_allow_html=True)
-    render_infrastructure_overview_section()
-
-    st.markdown("<div style='height:44px'></div>", unsafe_allow_html=True)
-    render_problem_section()
-
-    st.markdown("<div style='height:44px'></div>", unsafe_allow_html=True)
+    st.markdown("<div style='height:24px'></div>", unsafe_allow_html=True)
     render_sus_importance_section()
 
-    st.markdown("<div style='height:44px'></div>", unsafe_allow_html=True)
+    st.markdown("<div style='height:24px'></div>", unsafe_allow_html=True)
     render_concept_i3_section()
 
-    st.markdown("<div style='height:44px'></div>", unsafe_allow_html=True)
+    st.markdown("<div style='height:24px'></div>", unsafe_allow_html=True)
+    render_infrastructure_overview_section()
+
+    st.markdown("<div style='height:24px'></div>", unsafe_allow_html=True)
+    render_problem_section()
+
+    st.markdown("<div style='height:24px'></div>", unsafe_allow_html=True)
     render_access_section(set_page)
 
     render_partnerships_section()
