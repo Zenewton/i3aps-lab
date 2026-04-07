@@ -6,7 +6,6 @@ import html
 from pathlib import Path
 
 import streamlit as st
-import streamlit.components.v1 as components
 
 def _go_to(set_page, page_key: str) -> None:
     """Navegação reutilizável para botões de ação."""
@@ -36,7 +35,8 @@ def _resolve_logo_path(*patterns: str) -> Path | None:
 
 def _render_home_flow_animation(animate_once: bool) -> None:
     """Renderiza diagrama com entrada única e microanimações contínuas sutis."""
-    mode = "first-run" if animate_once else "static"
+    _ = animate_once
+    mode = "static in-view"
     html = f"""
     <div class="i3-flow-shell">
       <div id="i3-flow" class="i3-flow {mode}">
@@ -516,72 +516,8 @@ def _render_home_flow_animation(animate_once: bool) -> None:
       }}
     </style>
 
-    <script>
-      (function() {{
-        const root = document.getElementById("i3-flow");
-        if (!root) {{
-          return;
-        }}
-
-        const setFrameHeight = () => {{
-          const height = Math.max(
-            document.body.scrollHeight || 0,
-            document.documentElement.scrollHeight || 0,
-          );
-          window.parent.postMessage(
-            {{
-              isStreamlitMessage: true,
-              type: "streamlit:setFrameHeight",
-              height: height,
-            }},
-            "*"
-          );
-          window.parent.postMessage(
-            {{
-              type: "streamlit:setFrameHeight",
-              height: height,
-            }},
-            "*"
-          );
-        }};
-
-        const prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-        if (prefersReduced) {{
-          root.classList.add("static", "in-view");
-          setFrameHeight();
-          return;
-        }}
-
-        if (root.classList.contains("static")) {{
-          if (root) root.classList.add("in-view");
-          setFrameHeight();
-          return;
-        }}
-
-        const reveal = () => {{
-          root.classList.add("in-view");
-          setTimeout(setFrameHeight, 30);
-        }};
-        if ("IntersectionObserver" in window) {{
-          const io = new IntersectionObserver((entries) => {{
-            entries.forEach((entry) => {{
-              if (entry.isIntersecting) {{
-                reveal();
-                io.disconnect();
-              }}
-            }});
-          }}, {{ threshold: 0.35 }});
-          io.observe(root);
-        }} else {{
-          setTimeout(reveal, 40);
-        }}
-
-        setTimeout(setFrameHeight, 0);
-        window.addEventListener("resize", setFrameHeight);
-      }})();
-    </script>
     """
-    components.html(html, height=400, scrolling=False)
+    st.markdown(html, unsafe_allow_html=True)
 
 
 def _to_data_uri(path: Path | None) -> str | None:
