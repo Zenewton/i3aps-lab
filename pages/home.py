@@ -3,6 +3,7 @@
 from __future__ import annotations
 import base64
 import html
+import textwrap
 from pathlib import Path
 
 import streamlit as st
@@ -517,7 +518,7 @@ def _render_home_flow_animation(animate_once: bool) -> None:
     </style>
 
     """
-    st.markdown(html, unsafe_allow_html=True)
+    st.markdown(textwrap.dedent(html), unsafe_allow_html=True)
 
 
 def _to_data_uri(path: Path | None) -> str | None:
