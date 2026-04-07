@@ -868,8 +868,8 @@ def render_hero() -> None:
           <div class="hero-brand">
             {hero_logo_html}
             <div class="hero-brand-text">
-              <h1 class="hero-main">Infraestrutura nacional de dados clínicos interoperáveis para o cuidado na Atenção Primária à&nbsp;Saúde</h1>
-              <p class="hero-subtitle">I<span class="sup">3</span> APS: plataforma nacional para integração segura de dados clínicos, inteligência artificial e telemedicina, voltada ao cuidado longitudinal de condições crônicas na APS.</p>
+              <h1 class="hero-main">Infraestrutura nacional de dados clínicos interoperáveis para o cuidado na APS</h1>
+              <p class="hero-subtitle">I3 APS: plataforma nacional para integração segura de dados clínicos, inteligência artificial e telemedicina, voltada ao cuidado longitudinal de condições crônicas na Atenção Primária à Saúde</p>
             </div>
           </div>
         </div>
