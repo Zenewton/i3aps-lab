@@ -5,7 +5,7 @@ from pathlib import Path
 import streamlit as st
 
 from database import init_db
-from pages import admin, agendamento, catalogo, dashboard, equipe, home, servicos, sobre
+from pages import acesso, admin, agendamento, dashboard, equipe, home, servicos, sobre
 
 
 st.set_page_config(
@@ -98,9 +98,9 @@ def apply_custom_style() -> None:
                 -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M12 3l9 8h-3v9h-5v-6H11v6H6v-9H3l9-8z'/%3E%3C/svg%3E");
                 mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M12 3l9 8h-3v9h-5v-6H11v6H6v-9H3l9-8z'/%3E%3C/svg%3E");
             }
-            [data-testid="stSidebar"] .st-key-nav_catalogo button::before {
-                -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M4 6.5C4 5.7 4.7 5 5.5 5h13c.8 0 1.5.7 1.5 1.5S19.3 8 18.5 8h-13C4.7 8 4 7.3 4 6.5zm0 5C4 10.7 4.7 10 5.5 10h13c.8 0 1.5.7 1.5 1.5S19.3 13 18.5 13h-13c-.8 0-1.5-.7-1.5-1.5zm0 5c0-.8.7-1.5 1.5-1.5h13c.8 0 1.5.7 1.5 1.5S19.3 18 18.5 18h-13C4.7 18 4 17.3 4 16.5z'/%3E%3C/svg%3E");
-                mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M4 6.5C4 5.7 4.7 5 5.5 5h13c.8 0 1.5.7 1.5 1.5S19.3 8 18.5 8h-13C4.7 8 4 7.3 4 6.5zm0 5C4 10.7 4.7 10 5.5 10h13c.8 0 1.5.7 1.5 1.5S19.3 13 18.5 13h-13c-.8 0-1.5-.7-1.5-1.5zm0 5c0-.8.7-1.5 1.5-1.5h13c.8 0 1.5.7 1.5 1.5S19.3 18 18.5 18h-13C4.7 18 4 17.3 4 16.5z'/%3E%3C/svg%3E");
+            [data-testid="stSidebar"] .st-key-nav_acesso button::before {
+                -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M12 2l9 4v6c0 5-3.4 9.4-9 10-5.6-.6-9-5-9-10V6l9-4zm0 5a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-3 8h6v-1.2a3 3 0 0 0-6 0V15z'/%3E%3C/svg%3E");
+                mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M12 2l9 4v6c0 5-3.4 9.4-9 10-5.6-.6-9-5-9-10V6l9-4zm0 5a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-3 8h6v-1.2a3 3 0 0 0-6 0V15z'/%3E%3C/svg%3E");
             }
             [data-testid="stSidebar"] .st-key-nav_servicos button::before {
                 -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M3 7.5A1.5 1.5 0 0 1 4.5 6h6A1.5 1.5 0 0 1 12 7.5v6a1.5 1.5 0 0 1-1.5 1.5h-6A1.5 1.5 0 0 1 3 13.5v-6zm9 3A1.5 1.5 0 0 1 13.5 9h6A1.5 1.5 0 0 1 21 10.5v6a1.5 1.5 0 0 1-1.5 1.5h-6A1.5 1.5 0 0 1 12 16.5v-6z'/%3E%3C/svg%3E");
@@ -220,8 +220,8 @@ def sidebar_navigation() -> None:
 
     nav_items = [
         ("home", "Início"),
-        ("catalogo", "Infraestrutura"),
         ("servicos", "Serviços"),
+        ("acesso", "Acesso"),
         ("agendamento", "Agendar Uso"),
         ("dashboard", "Área do Usuário"),
         ("equipe", "Equipe"),
@@ -247,8 +247,9 @@ def route_page() -> None:
 
     routes = {
         "home": lambda: home.render(set_page),
-        "catalogo": lambda: catalogo.render(set_page),
-        "servicos": servicos.render,
+        "catalogo": lambda: servicos.render(set_page),
+        "acesso": lambda: acesso.render(set_page),
+        "servicos": lambda: servicos.render(set_page),
         "equipe": equipe.render,
         "agendamento": agendamento.render,
         "dashboard": lambda: dashboard.render(set_page),

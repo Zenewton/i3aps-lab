@@ -33,10 +33,16 @@ def init_db() -> None:
             """
             CREATE TABLE IF NOT EXISTS requests (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
+                tipo_solicitacao TEXT NOT NULL DEFAULT '',
                 tipo_uso TEXT NOT NULL,
                 infraestrutura TEXT NOT NULL,
                 instituicao_nome TEXT NOT NULL,
+                perfil_instituicao TEXT NOT NULL DEFAULT '',
                 instituicao_tipo TEXT NOT NULL,
+                objetivos_solicitacao TEXT NOT NULL DEFAULT '',
+                demanda_descricao TEXT NOT NULL DEFAULT '',
+                dados_sistemas_envolvidos TEXT NOT NULL DEFAULT '',
+                prazo_urgencia TEXT NOT NULL DEFAULT '',
                 finalidade TEXT NOT NULL,
                 escopo_dados TEXT NOT NULL,
                 uso_ia TEXT NOT NULL,
@@ -74,6 +80,19 @@ def init_db() -> None:
             conn.execute(
                 "ALTER TABLE requests ADD COLUMN project_name TEXT NOT NULL DEFAULT ''"
             )
+        new_request_columns = {
+            "tipo_solicitacao": "TEXT NOT NULL DEFAULT ''",
+            "perfil_instituicao": "TEXT NOT NULL DEFAULT ''",
+            "objetivos_solicitacao": "TEXT NOT NULL DEFAULT ''",
+            "demanda_descricao": "TEXT NOT NULL DEFAULT ''",
+            "dados_sistemas_envolvidos": "TEXT NOT NULL DEFAULT ''",
+            "prazo_urgencia": "TEXT NOT NULL DEFAULT ''",
+        }
+        for column_name, column_type in new_request_columns.items():
+            if column_name not in request_columns:
+                conn.execute(
+                    f"ALTER TABLE requests ADD COLUMN {column_name} {column_type}"
+                )
         conn.commit()
 
 
@@ -169,18 +188,26 @@ def create_request(payload: dict[str, Any]) -> int:
         cursor = conn.execute(
             """
             INSERT INTO requests (
-                project_name, tipo_uso, infraestrutura, instituicao_nome, instituicao_tipo,
-                finalidade, escopo_dados, uso_ia, data_inicio, data_fim,
+                project_name, tipo_solicitacao, tipo_uso, infraestrutura,
+                instituicao_nome, perfil_instituicao, instituicao_tipo,
+                objetivos_solicitacao, demanda_descricao, dados_sistemas_envolvidos,
+                prazo_urgencia, finalidade, escopo_dados, uso_ia, data_inicio, data_fim,
                 responsavel_nome, responsavel_email, concorda_lgpd,
                 concorda_etica, status, notas_admin, created_at
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """,
             (
                 payload.get("project_name", "").strip(),
+                payload.get("tipo_solicitacao", "").strip(),
                 payload["tipo_uso"],
                 payload["infraestrutura"],
                 payload["instituicao_nome"],
+                payload.get("perfil_instituicao", payload["instituicao_tipo"]),
                 payload["instituicao_tipo"],
+                payload.get("objetivos_solicitacao", ""),
+                payload.get("demanda_descricao", payload["finalidade"]),
+                payload.get("dados_sistemas_envolvidos", ""),
+                payload.get("prazo_urgencia", ""),
                 payload["finalidade"],
                 payload["escopo_dados"],
                 payload["uso_ia"],

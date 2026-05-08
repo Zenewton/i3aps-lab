@@ -162,7 +162,7 @@ export default function TeamSection() {
         <div className="max-w-4xl">
           <h2 className="text-2xl font-semibold tracking-tight text-slate-900 sm:text-3xl">Equipe</h2>
           <p className="mt-4 text-sm leading-relaxed text-slate-700 sm:text-base">
-            A equipe do I³-APS reúne pesquisadores líderes nas áreas de saúde coletiva, engenharia de
+            A equipe do I³ APS reúne pesquisadores líderes nas áreas de saúde coletiva, engenharia de
             software, inteligência artificial e epidemiologia, refletindo a natureza interdisciplinar
             necessária para a construção de uma infraestrutura nacional de dados clínicos interoperáveis
             voltada ao cuidado longitudinal no SUS.

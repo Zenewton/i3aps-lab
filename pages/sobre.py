@@ -6,6 +6,112 @@ from pathlib import Path
 
 import streamlit as st
 
+DOCS_DIR = Path("assets/docs")
+
+GOVERNANCE_DOCUMENTS = [
+    {
+        "title": "Criação do I³ APS",
+        "description": "Portaria que institui formalmente o Laboratório Multiusuário I³ APS.",
+        "tokens": ("portaria 1", "cria"),
+        "file_name": "portaria_criacao_i3_aps.pdf",
+    },
+    {
+        "title": "Regimento interno",
+        "description": "Documento que define finalidade, estrutura, funcionamento e regras institucionais.",
+        "tokens": ("regimento",),
+        "file_name": "regimento_i3_aps.pdf",
+    },
+    {
+        "title": "Coordenação",
+        "description": "Portaria de designação da coordenação do laboratório.",
+        "tokens": ("portaria 2", "coorden"),
+        "file_name": "portaria_coordenacao_i3_aps.pdf",
+    },
+    {
+        "title": "Comitê Gestor",
+        "description": "Portaria que institui a instância de gestão e acompanhamento institucional.",
+        "tokens": ("portaria 3", "gestor"),
+        "file_name": "portaria_comite_gestor_i3_aps.pdf",
+    },
+    {
+        "title": "Comitê de Usuários",
+        "description": "Portaria que institui a representação de usuários da infraestrutura multiusuária.",
+        "tokens": ("portaria 4", "usua"),
+        "file_name": "portaria_comite_usuarios_i3_aps.pdf",
+    },
+]
+
+PARTNER_LABS = [
+    {
+        "name": "Centro Multiusuário de Bioinformática - BIOME",
+        "description": (
+            "Apoio à bioinformática, análise de dados biológicos e integração com pesquisa "
+            "translacional em saúde."
+        ),
+        "capabilities": [
+            "Bioinformática aplicada",
+            "Análise de dados biológicos",
+            "Pesquisa translacional",
+        ],
+        "url": "https://bioinfo.imd.ufrn.br/site/pt",
+    },
+    {
+        "name": "Laboratório de Inovação em Inteligência Artificial - InovaAI Lab",
+        "description": (
+            "Infraestrutura e desenvolvimento aplicado em inteligência artificial, aprendizado "
+            "de máquina e modelos analíticos."
+        ),
+        "capabilities": [
+            "Inteligência artificial aplicada",
+            "Modelos analíticos",
+            "Validação tecnológica",
+        ],
+        "url": "https://inovailab.imd.ufrn.br",
+    },
+    {
+        "name": "Núcleo de Processamento de Alto Desempenho - NPAD",
+        "description": (
+            "Infraestrutura computacional de alto desempenho para processamento escalável, "
+            "análise intensiva de dados e suporte analítico."
+        ),
+        "capabilities": [
+            "Computação de alto desempenho",
+            "Processamento escalável",
+            "Infraestrutura analítica",
+        ],
+        "url": "https://npad.ufrn.br/npad/bemvindo",
+    },
+    {
+        "name": (
+            "Laboratório Multiusuário de Interoperabilidade, Informação e Inteligência na "
+            "Atenção Primária à Saúde - I³ APS"
+        ),
+        "description": (
+            "Integração de dados clínicos interoperáveis, monitoramento longitudinal e apoio "
+            "analítico aplicado ao SUS."
+        ),
+        "capabilities": [
+            "Interoperabilidade clínica",
+            "Dados longitudinais",
+            "Monitoramento assistencial",
+            "Saúde digital aplicada",
+        ],
+        "url": "https://www.i3aps.ccs.ufrn.br",
+    },
+    {
+        "name": "Laboratório de Avaliação e Intervenção Respiratória - LAIRE",
+        "description": (
+            "Pesquisa aplicada e validação clínica em doenças respiratórias e cuidado longitudinal."
+        ),
+        "capabilities": [
+            "Validação clínica",
+            "Doenças respiratórias",
+            "Pesquisa aplicada em cuidado longitudinal",
+        ],
+        "url": "http://laire.ufrn.br/",
+    },
+]
+
 
 def _resolve_about_figure() -> Path | None:
     """Localiza figura institucional da seção Sobre."""
@@ -17,6 +123,168 @@ def _resolve_about_figure() -> Path | None:
         if path.exists():
             return path
     return None
+
+
+def _resolve_document_path(tokens: tuple[str, ...]) -> Path | None:
+    """Localiza documento institucional por partes do nome do arquivo."""
+    if not DOCS_DIR.exists():
+        return None
+
+    for path in sorted(DOCS_DIR.glob("*.pdf")):
+        name = path.name.lower()
+        if all(token.lower() in name for token in tokens):
+            return path
+    return None
+
+
+def _load_pdf(path: Path | None) -> bytes | None:
+    if path is None or not path.exists():
+        return None
+    try:
+        return path.read_bytes()
+    except OSError:
+        return None
+
+
+def _render_governance_documents() -> None:
+    """Renderiza documentos formais de criação e governança institucional."""
+    st.markdown("### Governança institucional")
+    st.write(
+        "O I³ APS conta com atos formais de criação, regimento próprio e instâncias de "
+        "governança que apoiam o uso multiusuário, a transparência institucional e a "
+        "priorização responsável da infraestrutura."
+    )
+
+    cols = st.columns(2, gap="large")
+    for idx, document in enumerate(GOVERNANCE_DOCUMENTS):
+        path = _resolve_document_path(document["tokens"])
+        pdf_data = _load_pdf(path)
+        with cols[idx % 2]:
+            with st.container(border=True):
+                st.markdown(f"#### {document['title']}")
+                st.write(document["description"])
+                if pdf_data:
+                    st.download_button(
+                        "Ver documento (PDF)",
+                        data=pdf_data,
+                        file_name=document["file_name"],
+                        mime="application/pdf",
+                        use_container_width=True,
+                        key=f"sobre_governance_doc_{idx}",
+                    )
+                    st.caption(f"Arquivo: {path.name}")
+                else:
+                    st.info("Documento ainda não localizado em `assets/docs`.")
+
+
+def _render_partner_labs() -> None:
+    """Renderiza laboratórios parceiros como ecossistema agregado."""
+    st.markdown("### Laboratórios parceiros e infraestrutura agregada")
+    st.write(
+        "O I³ APS atua de forma articulada com laboratórios e infraestruturas parceiras da UFRN, "
+        "compondo uma base agregada de capacidades em bioinformática, inteligência artificial, "
+        "processamento de alto desempenho, interoperabilidade e avaliação em saúde."
+    )
+
+    st.markdown(
+        """
+        <style>
+          .partner-lab-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+            margin-top: 8px;
+          }
+          .partner-lab-card {
+            border: 1px solid #d8e3ec;
+            border-radius: 12px;
+            background: #ffffff;
+            box-shadow: 0 6px 16px rgba(19, 56, 84, 0.07);
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            min-height: 245px;
+          }
+          .partner-lab-name {
+            margin: 0 0 8px 0;
+            font: 700 18px "SF Pro Display", "Inter", "Segoe UI", Arial, sans-serif;
+            color: #12354f;
+            line-height: 1.28;
+          }
+          .partner-lab-description {
+            margin: 0 0 10px 0;
+            font: 510 14px "SF Pro Text", "Inter", "Segoe UI", Arial, sans-serif;
+            color: #38556c;
+            line-height: 1.45;
+          }
+          .partner-lab-capabilities {
+            margin: 0 0 14px 0;
+            padding-left: 18px;
+            color: #4f6678;
+            font-size: 13px;
+            line-height: 1.42;
+          }
+          .partner-lab-capabilities li + li {
+            margin-top: 4px;
+          }
+          .partner-lab-link {
+            margin-top: auto;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            min-height: 40px;
+            border: 1px solid #9ab6ca;
+            border-radius: 10px;
+            color: #0b3a56;
+            background: #f8fbfd;
+            font-weight: 650;
+            text-decoration: none;
+          }
+          .partner-lab-link:hover {
+            background: #eef5fb;
+            border-color: #7ea6c2;
+          }
+          .partner-lab-note {
+            margin: 10px 0 0 0;
+            color: #50697d;
+            font-size: 0.94rem;
+          }
+          @media (max-width: 860px) {
+            .partner-lab-grid {
+              grid-template-columns: 1fr;
+            }
+          }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    cards_html: list[str] = []
+    for lab in PARTNER_LABS:
+        capabilities = "".join(
+            f"<li>{capability}</li>" for capability in lab["capabilities"]
+        )
+        cards_html.append(
+            '<article class="partner-lab-card">'
+            f'<h4 class="partner-lab-name">{lab["name"]}</h4>'
+            f'<p class="partner-lab-description">{lab["description"]}</p>'
+            f'<ul class="partner-lab-capabilities">{capabilities}</ul>'
+            f'<a class="partner-lab-link" href="{lab["url"]}" target="_blank" rel="noopener noreferrer">'
+            "Acessar infraestrutura</a>"
+            "</article>"
+        )
+
+    st.markdown(
+        f'<div class="partner-lab-grid">{"".join(cards_html)}</div>',
+        unsafe_allow_html=True,
+    )
+    st.markdown(
+        '<p class="partner-lab-note">As capacidades do I³ APS são ampliadas por articulação '
+        "com infraestruturas complementares da UFRN, fortalecendo interoperabilidade, análise "
+        "de dados, inteligência analítica e pesquisa aplicada no SUS.</p>",
+        unsafe_allow_html=True,
+    )
 
 
 def render() -> None:
@@ -53,6 +321,10 @@ def render() -> None:
         "Artificial (IA), de modo a fortalecer a coordenação do cuidado às condições crônicas na "
         "Atenção Primária à Saúde (APS)."
     )
+
+    _render_governance_documents()
+
+    _render_partner_labs()
 
     st.markdown("### Governança e parcerias")
     st.write("- Ministério da Saúde (articulação institucional para integração à RNDS e políticas de saúde digital)")

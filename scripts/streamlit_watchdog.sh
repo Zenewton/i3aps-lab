@@ -4,6 +4,7 @@ set -euo pipefail
 PROJECT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 HOST="${HOST:-127.0.0.1}"
 PORT="${PORT:-8503}"
+FILE_WATCHER_TYPE="${FILE_WATCHER_TYPE:-none}"
 LOG_DIR="$PROJECT_DIR/.runlogs"
 RUN_LOG="$LOG_DIR/watchdog.log"
 
@@ -19,7 +20,7 @@ else
   exit 1
 fi
 
-echo "[$(date '+%F %T')] watchdog iniciado (host=$HOST port=$PORT bin=$STREAMLIT_BIN)" >> "$RUN_LOG"
+echo "[$(date '+%F %T')] watchdog iniciado (host=$HOST port=$PORT watcher=$FILE_WATCHER_TYPE bin=$STREAMLIT_BIN)" >> "$RUN_LOG"
 
 while true; do
   (
@@ -28,7 +29,7 @@ while true; do
       --server.headless true \
       --server.address "$HOST" \
       --server.port "$PORT" \
-      --server.fileWatcherType poll \
+      --server.fileWatcherType "$FILE_WATCHER_TYPE" \
       --browser.gatherUsageStats false
   ) >> "$LOG_DIR/streamlit.out.log" 2>> "$LOG_DIR/streamlit.err.log"
 

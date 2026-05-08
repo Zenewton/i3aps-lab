@@ -33,6 +33,14 @@ TEAM_BLOCKS = [
                 "lattes": "http://lattes.cnpq.br/0023445563721084",
                 "orcid": "https://orcid.org/0000-0001-5311-697X",
             },
+            {
+                "nome": "Severina Alice da Costa Uchoa",
+                "afiliacao": "UFRN – Departamento de Saúde Coletiva",
+                "area": "Saúde coletiva, atenção primária e saúde internacional",
+                "lattes": "http://lattes.cnpq.br/8414233332373275",
+                "orcid": "https://orcid.org/0000-0002-2531-9937",
+                "sigaa": "https://sigaa.ufrn.br/sigaa/public/docente/portal.jsf?siape=1245215",
+            },
         ],
     },
     {
@@ -91,6 +99,22 @@ TEAM_BLOCKS = [
                 "area": "Doenças respiratórias e inovação clínica",
                 "lattes": "http://lattes.cnpq.br/1736384836028397",
                 "orcid": "https://orcid.org/0000-0001-5734-3707",
+            },
+            {
+                "nome": "Thiago Gomes da Trindade",
+                "afiliacao": "UFRN – Departamento de Medicina Clínica",
+                "area": "Linhas de cuidado às condições crônicas e prática clínica",
+                "lattes": "http://lattes.cnpq.br/5992470800302814",
+                "orcid": "https://orcid.org/0000-0001-8178-0982",
+                "sigaa": "https://sigaa.ufrn.br/sigaa/public/docente/portal.jsf?siape=1576805",
+            },
+            {
+                "nome": "Marise Reis de Freitas",
+                "afiliacao": "UFRN – Departamento de Infectologia",
+                "area": "Linhas de cuidado, doenças infecciosas, segurança do paciente e qualidade",
+                "lattes": "http://lattes.cnpq.br/9028554205811163",
+                "orcid": "https://orcid.org/0000-0002-5679-6672",
+                "sigaa": "https://sigaa.ufrn.br/sigaa/public/docente/portal.jsf?siape=1645299",
             },
         ],
     },
@@ -163,8 +187,9 @@ def _render_member_cards(
         nome = html.escape(member["nome"])
         afiliacao = html.escape(member["afiliacao"])
         area = html.escape(member["area"])
-        lattes = html.escape(member["lattes"])
-        orcid = html.escape(member["orcid"])
+        lattes = html.escape(member.get("lattes", ""))
+        orcid = html.escape(member.get("orcid", ""))
+        sigaa = html.escape(member.get("sigaa", ""))
         if lattes_logo_uri:
             lattes_icon = f'<img src="{lattes_logo_uri}" alt="" class="lattes-logo" />'
         else:
@@ -174,6 +199,23 @@ def _render_member_cards(
         else:
             orcid_icon = '<span class="orcid-dot">iD</span>'
 
+        links_html: list[str] = []
+        if lattes:
+            links_html.append(
+                f'<a href="{lattes}" target="_blank" rel="noopener noreferrer" aria-label="Currículo Lattes de {nome}">'
+                f"{lattes_icon}<span>Lattes</span></a>"
+            )
+        if orcid:
+            links_html.append(
+                f'<a href="{orcid}" target="_blank" rel="noopener noreferrer" aria-label="Perfil ORCID de {nome}">'
+                f"{orcid_icon}<span>ORCID</span></a>"
+            )
+        if sigaa:
+            links_html.append(
+                f'<a href="{sigaa}" target="_blank" rel="noopener noreferrer" aria-label="Perfil SIGAA de {nome}">'
+                '<span class="sigaa-dot">S</span><span>SIGAA</span></a>'
+            )
+
         cards_html.append(
             f'<article class="team-card">'
             f'<h4 class="team-name">{nome}</h4>'
@@ -181,10 +223,7 @@ def _render_member_cards(
             f'<p class="team-area">{area}</p>'
             f'<div class="team-footer">'
             f'<div class="team-links">'
-            f'<a href="{lattes}" target="_blank" rel="noopener noreferrer" aria-label="Currículo Lattes de {nome}">'
-            f"{lattes_icon}<span>Lattes</span></a>"
-            f'<a href="{orcid}" target="_blank" rel="noopener noreferrer" aria-label="Perfil ORCID de {nome}">'
-            f"{orcid_icon}<span>ORCID</span></a>"
+            f"{''.join(links_html)}"
             "</div></div></article>"
         )
 
@@ -320,6 +359,19 @@ def render() -> None:
             border-radius: 4px;
             object-fit: cover;
             display: inline-block;
+          }
+          .sigaa-dot {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 16px;
+            height: 16px;
+            border-radius: 999px;
+            background: #0d5e86;
+            color: #fff;
+            font-size: 9px;
+            font-weight: 800;
+            line-height: 1;
           }
           @media (max-width: 1024px) {
             .team-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }

@@ -1,4 +1,4 @@
-# I3-APS Lab
+# I³ APS Lab
 
 Plataforma de infraestrutura interoperável para dados clínicos no SUS.
 

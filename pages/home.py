@@ -9,6 +9,9 @@ from pathlib import Path
 import streamlit as st
 import streamlit.components.v1 as components
 
+NORMS_PDF_PATH = Path("assets/docs/normas_acesso_uso_governanca_i3_aps.pdf")
+
+
 def _go_to(set_page, page_key: str) -> None:
     """Navegação reutilizável para botões de ação."""
     set_page(page_key)
@@ -99,7 +102,7 @@ def _render_home_flow_animation(animate_once: bool) -> None:
     <style>
       .i3-flow-shell {{
         max-width: 1360px;
-        margin: 0 auto;
+        margin: 2px auto 0 auto;
       }}
       .i3-flow {{
         background: linear-gradient(180deg, #f8fbff 0%, #f2f6fa 100%);
@@ -517,9 +520,40 @@ def _render_home_flow_animation(animate_once: bool) -> None:
         }}
       }}
     </style>
+    <script>
+      (function () {{
+        const notifyHeight = () => {{
+          const height = Math.ceil(
+            Math.max(
+              document.body.scrollHeight,
+              document.documentElement.scrollHeight
+            )
+          );
+          window.parent.postMessage(
+            {{
+              isStreamlitMessage: true,
+              type: "streamlit:setFrameHeight",
+              height: height
+            }},
+            "*"
+          );
+        }};
+
+        window.addEventListener("load", () => {{
+          notifyHeight();
+          setTimeout(notifyHeight, 120);
+        }});
+        window.addEventListener("resize", notifyHeight);
+
+        if ("ResizeObserver" in window) {{
+          const ro = new ResizeObserver(() => notifyHeight());
+          ro.observe(document.body);
+        }}
+      }})();
+    </script>
 
     """
-    components.html(textwrap.dedent(html), height=560, scrolling=False)
+    components.html(textwrap.dedent(html), height=300, scrolling=False)
 
 
 def _to_data_uri(path: Path | None) -> str | None:
@@ -628,6 +662,16 @@ def _resolve_logo_candidates() -> list[tuple[str, Path | None]]:
         ("SUS", sus_logo),
         ("FINEP", finep_logo),
     ]
+
+
+def _load_access_norms_pdf() -> bytes | None:
+    """Carrega PDF de normas de acesso para botões de download."""
+    if not NORMS_PDF_PATH.exists():
+        return None
+    try:
+        return NORMS_PDF_PATH.read_bytes()
+    except OSError:
+        return None
 
 
 def render_ui_refinements_style() -> None:
@@ -749,12 +793,12 @@ def render_hero() -> None:
             display: flex;
             flex-direction: column;
             gap: 4px;
-            padding: 8px 0 2px 0;
-            margin-bottom: 2px;
+            padding: 6px 0 0 0;
+            margin-bottom: 0;
           }
           .hero-brand {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             gap: 24px;
             margin-bottom: 0;
           }
@@ -828,7 +872,7 @@ def render_hero() -> None:
           }
           @media (max-width: 620px) {
             .hero-brand {
-              align-items: center;
+              align-items: flex-start;
               gap: 12px;
             }
             .hero-logo-wrap {
@@ -856,7 +900,7 @@ def render_hero() -> None:
     if hero_logo_uri:
         hero_logo_html = (
             '<div class="hero-logo-wrap">'
-            f'<img class="hero-logo" src="{hero_logo_uri}" alt="I3 APS" />'
+            f'<img class="hero-logo" src="{hero_logo_uri}" alt="I³ APS" />'
             "</div>"
         )
     else:
@@ -869,7 +913,7 @@ def render_hero() -> None:
             {hero_logo_html}
             <div class="hero-brand-text">
               <h1 class="hero-main">Infraestrutura nacional de dados clínicos interoperáveis para o cuidado na APS</h1>
-              <p class="hero-subtitle">I3 APS: plataforma nacional para integração segura de dados clínicos, inteligência artificial e telemedicina, voltada ao cuidado longitudinal de condições crônicas na Atenção Primária à Saúde</p>
+              <p class="hero-subtitle">I³ APS: plataforma nacional para integração segura de dados clínicos, inteligência artificial e telemedicina, voltada ao cuidado longitudinal de condições crônicas na Atenção Primária à Saúde</p>
             </div>
           </div>
         </div>
@@ -881,6 +925,55 @@ def render_hero() -> None:
 def render_main_diagram() -> None:
     """Renderiza diagrama principal da home."""
     _render_home_flow_animation(animate_once=True)
+
+
+def render_concept_impact_transition_section() -> None:
+    """Renderiza ponte narrativa entre conceito e impacto no SUS."""
+    st.markdown(
+        """
+        <style>
+          .concept-impact-bridge {
+            max-width: 1360px;
+            margin: 6px auto 0 auto;
+            padding: 10px 14px 11px 14px;
+            border: 1px solid #d9e7f1;
+            border-radius: 14px;
+            background: linear-gradient(180deg, #f9fcff 0%, #f3f8fd 100%);
+          }
+          .concept-impact-title {
+            margin: 0;
+            font: 700 20px "SF Pro Display", "Inter", "Segoe UI", Arial, sans-serif;
+            color: #1f3b53;
+            line-height: 1.2;
+          }
+          .concept-impact-text {
+            margin: 5px 0 0 0;
+            font: 520 15px "SF Pro Text", "Inter", "Segoe UI", Arial, sans-serif;
+            color: #466177;
+            line-height: 1.4;
+            max-width: 980px;
+          }
+          @media (max-width: 760px) {
+            .concept-impact-bridge {
+              margin-top: 4px;
+              padding: 9px 10px 10px 10px;
+            }
+            .concept-impact-title {
+              font-size: 18px;
+            }
+            .concept-impact-text {
+              font-size: 14px;
+              line-height: 1.35;
+            }
+          }
+        </style>
+        <section class="concept-impact-bridge">
+          <h3 class="concept-impact-title">Do conceito ao impacto</h3>
+          <p class="concept-impact-text">Ao conectar dados clínicos interoperáveis, informação e inteligência, o I³ APS transforma dados em coordenação do cuidado, com decisões mais oportunas e maior efetividade para o SUS.</p>
+        </section>
+        """,
+        unsafe_allow_html=True,
+    )
 
 
 def render_infrastructure_overview_section() -> None:
@@ -1094,7 +1187,8 @@ def render_sus_importance_section(
             display: grid;
             grid-template-columns: repeat(3, minmax(0, 1fr));
             gap: 12px;
-            margin-top: 8px;
+            margin: 8px auto 0 auto;
+            max-width: 1360px;
           }
           .sus-impact-item {
             display: flex;
@@ -1329,6 +1423,125 @@ def render_offerings() -> None:
                 st.markdown(f"#### {service}")
 
 
+def render_infrastructure_access_section(set_page) -> None:
+    """Renderiza seção estratégica de acesso e governança na home."""
+    st.markdown("### Acesso à infraestrutura")
+    st.write(
+        "Instituições do SUS, pesquisadores, gestores e empresas podem utilizar o I³ APS. "
+        "O acesso segue critérios claros de segurança, ética, governança e uso responsável "
+        "dos dados clínicos interoperáveis."
+    )
+
+    st.markdown(
+        """
+        <style>
+          .access-home-grid {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            gap: 14px;
+            margin-top: 6px;
+          }
+          .access-home-card {
+            border: 1px solid #d8e5ef;
+            border-radius: 14px;
+            background: #ffffff;
+            box-shadow: 0 8px 18px rgba(10, 47, 79, 0.06);
+            padding: 14px;
+          }
+          .access-home-title {
+            margin: 0 0 8px 0;
+            font: 700 18px "SF Pro Display", "Inter", "Segoe UI", Arial, sans-serif;
+            color: #1c3a53;
+          }
+          .access-home-list {
+            margin: 0;
+            padding-left: 18px;
+            font: 510 14px "SF Pro Text", "Inter", "Segoe UI", Arial, sans-serif;
+            color: #445d71;
+            line-height: 1.45;
+          }
+          .access-home-list li + li {
+            margin-top: 6px;
+          }
+          @media (max-width: 900px) {
+            .access-home-grid {
+              grid-template-columns: 1fr;
+            }
+          }
+        </style>
+        <div class="access-home-grid">
+          <article class="access-home-card">
+            <h4 class="access-home-title">Como utilizar o I³ APS</h4>
+            <ul class="access-home-list">
+              <li>Escolha a infraestrutura e o tipo de uso (SUS, pesquisa, gestão ou inovação).</li>
+              <li>Preencha a solicitação institucional com escopo técnico e período.</li>
+              <li>Acompanhe a análise e o status na Área do Usuário.</li>
+            </ul>
+          </article>
+          <article class="access-home-card">
+            <h4 class="access-home-title">Transparência e governança</h4>
+            <ul class="access-home-list">
+              <li>Regras públicas de elegibilidade, responsabilidades e priorização.</li>
+              <li>Diretrizes de segurança da informação, LGPD e uso ético.</li>
+              <li>Operação multiusuária com rastreabilidade institucional.</li>
+            </ul>
+          </article>
+          <article class="access-home-card">
+            <h4 class="access-home-title">Governança institucional</h4>
+            <ul class="access-home-list">
+              <li>Portarias de criação, coordenação e comitês do laboratório.</li>
+              <li>Regimento interno e instâncias formais de governança.</li>
+              <li>Base institucional para operação multiusuária e uso responsável.</li>
+            </ul>
+          </article>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    actions_col, download_col = st.columns([1, 1], gap="medium")
+    with actions_col:
+        if st.button(
+            "Como utilizar o I³ APS",
+            key="home_como_utilizar_i3",
+            use_container_width=True,
+            type="secondary",
+        ):
+            _go_to(set_page, "acesso")
+        if st.button(
+            "Solicitar acesso institucional",
+            key="home_solicitar_acesso_i3",
+            use_container_width=True,
+            type="primary",
+        ):
+            _go_to(set_page, "agendamento")
+        if st.button(
+            "Conhecer governança institucional",
+            key="home_governanca_institucional",
+            use_container_width=True,
+            type="secondary",
+        ):
+            _go_to(set_page, "sobre")
+
+    with download_col:
+        pdf_data = _load_access_norms_pdf()
+        if pdf_data:
+            st.download_button(
+                "Ver regras completas (PDF)",
+                data=pdf_data,
+                file_name="normas_acesso_uso_governanca_i3_aps.pdf",
+                mime="application/pdf",
+                use_container_width=True,
+                key="home_download_normas_pdf",
+            )
+            st.caption("Documento oficial de normas de acesso, uso e governança.")
+        else:
+            st.info(
+                "O PDF de normas não foi encontrado em "
+                f"`{NORMS_PDF_PATH}`."
+            )
+
+
 def render_access_section(set_page) -> None:
     """Renderiza atalhos de acesso com destaque visual."""
     st.markdown("### Botões de ação")
@@ -1386,12 +1599,12 @@ def render_access_section(set_page) -> None:
     ):
         _go_to(set_page, "agendamento")
     if b2.button(
-        "Ver infraestrutura",
+        "Ver serviços",
         use_container_width=True,
         key="acesso_casos",
         type="secondary",
     ):
-        _go_to(set_page, "catalogo")
+        _go_to(set_page, "servicos")
     if b3.button(
         "Área do usuário",
         use_container_width=True,
@@ -1548,24 +1761,32 @@ def render_partnerships_section() -> None:
 
 def render_homepage(set_page) -> None:
     """Renderiza homepage com foco em comunicação visual e leitura rápida."""
+    top_rhythm_gap = 16
+    section_gap = 24
+
     render_ui_refinements_style()
     render_hero()
 
+    st.markdown(f"<div style='height:{top_rhythm_gap}px'></div>", unsafe_allow_html=True)
     render_main_diagram()
+    render_concept_impact_transition_section()
 
-    st.markdown("<div style='height:24px'></div>", unsafe_allow_html=True)
-    render_sus_importance_section()
+    st.markdown(f"<div style='height:{top_rhythm_gap}px'></div>", unsafe_allow_html=True)
+    render_sus_importance_section(heading="### Impacto no SUS")
 
-    st.markdown("<div style='height:24px'></div>", unsafe_allow_html=True)
+    st.markdown(f"<div style='height:{section_gap}px'></div>", unsafe_allow_html=True)
     render_concept_i3_section()
 
-    st.markdown("<div style='height:24px'></div>", unsafe_allow_html=True)
+    st.markdown(f"<div style='height:{section_gap}px'></div>", unsafe_allow_html=True)
     render_infrastructure_overview_section()
 
-    st.markdown("<div style='height:24px'></div>", unsafe_allow_html=True)
+    st.markdown(f"<div style='height:{section_gap}px'></div>", unsafe_allow_html=True)
+    render_infrastructure_access_section(set_page)
+
+    st.markdown(f"<div style='height:{section_gap}px'></div>", unsafe_allow_html=True)
     render_problem_section()
 
-    st.markdown("<div style='height:24px'></div>", unsafe_allow_html=True)
+    st.markdown(f"<div style='height:{section_gap}px'></div>", unsafe_allow_html=True)
     render_access_section(set_page)
 
     render_partnerships_section()
