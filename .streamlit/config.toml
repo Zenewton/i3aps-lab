@@ -7,3 +7,10 @@ address = "0.0.0.0"
 
 [browser]
 gatherUsageStats = false
+
+[theme]
+base = "light"
+primaryColor = "#0d5e86"
+backgroundColor = "#ffffff"
+secondaryBackgroundColor = "#f4f8fb"
+textColor = "#0b3a56"
