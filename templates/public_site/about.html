@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Sobre - I³ APS{% endblock %}
+{% block content %}
+<h1 class="page-title">Sobre o Laboratório Multiusuário I<sup>3</sup> APS</h1>
+<p class="lead-copy">O Laboratório Multiusuário I<sup>3</sup> APS é uma estrutura operacional vinculada ao Centro Nacional de Interoperabilidade, Informação e Inteligência na Atenção Primária à Saúde.</p>
+
+<section class="section">
+  <h2 class="section-title">Visão integrada da plataforma</h2>
+  <img src="{% static 'img/capa_i3_aps.svg' %}" class="img-fluid rounded border bg-white p-3" alt="Fluxo de integração da plataforma I³ APS">
+</section>
+
+<section class="section">
+  <h2 class="section-title">Missão</h2>
+  <div class="i3-card">Disponibilizar infraestrutura nacional segura, interoperável e escalável para integração de dados clínicos e operação de serviços digitais, incluindo telemedicina e Inteligência Artificial, de modo a fortalecer a coordenação do cuidado às condições crônicas na APS.</div>
+</section>
+
+<section class="section">
+  <h2 class="section-title">Governança institucional</h2>
+  <div class="row g-3">
+    {% for document in documents %}
+      <div class="col-md-6"><div class="i3-card"><h3>{{ document.title }}</h3><p>{{ document.description }}</p><a href="{% url 'public_site:download_document' document.slug %}">Ver documento</a></div></div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section">
+  <h2 class="section-title">Laboratórios parceiros e infraestrutura agregada</h2>
+  <div class="row g-3">
+    {% for lab in partner_labs %}
+      <div class="col-lg-6"><article class="i3-card"><h3>{{ lab.name }}</h3><p>{{ lab.description }}</p><a href="{{ lab.url }}" target="_blank" rel="noopener noreferrer">Acessar infraestrutura</a></article></div>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

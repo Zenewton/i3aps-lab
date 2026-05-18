@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Atualizar solicitação - I³ APS{% endblock %}
+{% block content %}
+<h1 class="page-title">Atualizar solicitação #{{ access_request.pk }}</h1>
+<div class="i3-card section" style="max-width: 760px;">
+  <p><strong>{{ access_request.project_name }}</strong></p>
+  <p class="muted">{{ access_request.instituicao_nome }} - {{ access_request.responsavel_email }}</p>
+  <form method="post">
+    {% csrf_token %}
+    {% include "form_field.html" with field=form.status %}
+    {% include "form_field.html" with field=form.notas_admin %}
+    <button class="btn btn-primary">Salvar atualização</button>
+    <a class="btn btn-outline-primary" href="{% url 'access_requests:admin_panel' %}">Voltar</a>
+  </form>
+</div>
+{% endblock %}

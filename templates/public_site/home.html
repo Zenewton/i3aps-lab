@@ -1,0 +1,249 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}I³ APS - Plataforma nacional de saúde digital{% endblock %}
+{% block content %}
+<section class="home-hero">
+  <div class="hero-copy">
+    <div class="hero-kicker">
+      <span>Infraestrutura nacional</span>
+      <span>Integração de dados clínicos e cuidado longitudinal no SUS</span>
+    </div>
+    <h1>
+      <span>Infraestrutura nacional para</span>
+      <span>interoperabilidade clínica, inteligência analítica</span>
+      <span>e cuidado longitudinal no SUS.</span>
+    </h1>
+    <p>
+      O I<sup>3</sup> APS integra interoperabilidade clínica, telessaúde, inteligência analítica
+      e governança segura para apoiar a coordenação do cuidado das condições crônicas
+      na Atenção Primária à Saúde.
+    </p>
+    <p class="hero-problem-note">
+      O SUS ainda enfrenta dificuldades para coordenar o cuidado longitudinal devido à
+      fragmentação dos dados clínicos entre diferentes pontos da rede de atenção.
+    </p>
+    <div class="hero-actions">
+      <a class="btn btn-primary btn-lg" href="{% url 'access_requests:create' %}">Solicitar acesso institucional</a>
+      <a class="btn btn-light btn-lg" href="{% url 'public_site:services' %}">Explorar serviços</a>
+      <a class="btn btn-ghost btn-lg" href="{% url 'public_site:about' %}">Conhecer governança</a>
+    </div>
+    <dl class="hero-metrics" aria-label="Capacidades da plataforma">
+      <div><dt>HL7 FHIR</dt><dd>padrões interoperáveis</dd></div>
+      <div><dt>LGPD</dt><dd>governança e rastreabilidade</dd></div>
+      <div><dt>APS</dt><dd>cuidado longitudinal</dd></div>
+    </dl>
+  </div>
+
+  <div class="hero-platform" aria-label="Arquitetura visual da plataforma I³ APS">
+    <div class="platform-status">
+      <span class="status-dot"></span>
+      Plataforma multiusuária em implantação
+    </div>
+    <div class="platform-grid">
+      <div class="platform-node node-source">
+        <em>Rede do SUS</em>
+        <span>Entrada</span>
+        <strong>APS, hospitais, RNDS e serviços</strong>
+        <small>APS coordenadora do cuidado</small>
+      </div>
+      <div class="platform-rail">
+        <span></span><span></span><span></span>
+      </div>
+      <div class="platform-core">
+        <img src="{% static 'logo_i3_aps_institucional_mark_v3.svg' %}" alt="">
+        <strong>I<sup>3</sup> APS</strong>
+        <b>Dados clínicos interoperáveis para coordenação do cuidado</b>
+        <span>interoperabilidade + informação + inteligência</span>
+      </div>
+      <div class="platform-rail rail-out">
+        <span></span><span></span><span></span>
+      </div>
+      <div class="platform-node node-output">
+        <span>Saída</span>
+        <strong>cuidado longitudinal, coordenação APS-hospital, telessaúde integrada e suporte à decisão clínica</strong>
+      </div>
+    </div>
+    <div class="platform-capabilities">
+      <span>Ambiente seguro de dados clínicos</span>
+      <span>Monitoramento populacional</span>
+      <span>Integração APS-hospital</span>
+      <span>Suporte à decisão clínica</span>
+    </div>
+  </div>
+</section>
+
+<section class="i3-concept-band" aria-label="Conceito institucional I³ APS">
+  <div class="concept-brand">
+    <strong>I<sup>3</sup> APS</strong>
+    <span>Infraestrutura digital para transformar dados clínicos em coordenação do cuidado no SUS.</span>
+  </div>
+  <div class="concept-pillars">
+    <span>Interoperabilidade</span>
+    <span>Informação</span>
+    <span>Inteligência</span>
+  </div>
+</section>
+
+<section class="strategy-strip" aria-label="Narrativa estratégica do I³ APS">
+  <article>
+    <span>Problema</span>
+    <h2>Dados clínicos fragmentados</h2>
+    <p>Informações dispersas entre APS, atenção especializada, hospitais e sistemas administrativos dificultam continuidade do cuidado.</p>
+  </article>
+  <article>
+    <span>Solução</span>
+    <h2>Infraestrutura interoperável</h2>
+    <p>Ambientes seguros, padrões HL7 FHIR, governança institucional, telessaúde e inteligência analítica conectam dados e serviços.</p>
+  </article>
+  <article>
+    <span>Impacto</span>
+    <h2>Cuidado longitudinal</h2>
+    <p>Gestores e equipes acompanham condições crônicas, perdas de seguimento, risco assistencial e fluxos APS-hospital.</p>
+  </article>
+</section>
+
+<section class="sus-critical" aria-label="Por que isso importa para o SUS">
+  <div>
+    <span class="section-eyebrow">Por que isso importa</span>
+    <h2>Infraestrutura crítica para o SUS digital</h2>
+  </div>
+  <div class="critical-items">
+    <span>integração de dados clínicos</span>
+    <span>coordenação da APS</span>
+    <span>cuidado longitudinal</span>
+    <span>telessaúde integrada</span>
+    <span>soberania tecnológica</span>
+  </div>
+</section>
+
+<section class="section home-section">
+  <div class="section-heading">
+    <span class="section-eyebrow">Capacidades nacionais</span>
+    <h2>Infraestrutura para operar serviços digitais de saúde em escala.</h2>
+    <p>O I<sup>3</sup> APS opera uma infraestrutura multiusuária voltada à integração de dados clínicos, telessaúde, inteligência analítica e validação tecnológica em cenários reais do SUS.</p>
+  </div>
+  <div class="capability-grid">
+    {% for resource in resources %}
+      <article class="capability-card">
+        <div class="capability-icon" aria-hidden="true">{{ forloop.counter|stringformat:"02d" }}</div>
+        <h3>{{ resource.title }}</h3>
+        <p>{{ resource.description }}</p>
+        <span>{{ resource.use_cases }}</span>
+      </article>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="impact-section">
+  <div class="impact-copy">
+    <span class="section-eyebrow">Impacto no SUS</span>
+    <h2>Da integração de dados ao acompanhamento ativo das linhas de cuidado.</h2>
+    <p>
+      A proposta do I<sup>3</sup> APS é transformar dados interoperáveis em coordenação concreta:
+      identificar lacunas assistenciais, priorizar usuários, apoiar equipes e monitorar resultados.
+    </p>
+    <div class="impact-badges">
+      <span>continuidade do cuidado</span>
+      <span>APS-hospital</span>
+      <span>condições crônicas</span>
+      <span>telessaúde integrada</span>
+    </div>
+  </div>
+  <div class="care-flow" aria-label="Fluxo assistencial integrado">
+    <div class="care-step">
+      <strong>1. Integração</strong>
+      <span>PEC, prontuários, RNDS e bases autorizadas.</span>
+    </div>
+    <div class="care-step">
+      <strong>2. Qualificação</strong>
+      <span>Governança, padronização, segurança e LGPD.</span>
+    </div>
+    <div class="care-step">
+      <strong>3. Inteligência</strong>
+      <span>Indicadores, estratificação de risco e IA explicável.</span>
+    </div>
+    <div class="care-step">
+      <strong>4. Ação</strong>
+      <span>Telessaúde integrada, coordenação do cuidado e suporte à decisão.</span>
+    </div>
+  </div>
+</section>
+
+<section class="section service-signal">
+  <div class="section-heading compact">
+    <span class="section-eyebrow">Serviços digitais</span>
+    <h2>Frentes prioritárias para instituições, serviços, pesquisa e inovação.</h2>
+  </div>
+  <div class="service-signal-grid">
+    <article>
+      <strong>Interoperabilidade clínica</strong>
+      <span>FHIR, RNDS, integração APS-hospital e sandbox de validação.</span>
+    </article>
+    <article>
+      <strong>Inteligência analítica</strong>
+      <span>Painéis, indicadores, coortes e monitoramento de condições crônicas.</span>
+    </article>
+    <article>
+      <strong>Ambiente seguro</strong>
+      <span>Rastreabilidade, acesso governado e análise de dados sensíveis.</span>
+    </article>
+    <article>
+      <strong>Telessaúde integrada</strong>
+      <span>Acompanhamento remoto, comunicação digital e coordenação entre pontos da rede.</span>
+    </article>
+  </div>
+</section>
+
+<section class="partner-band" aria-label="Articulação institucional do I³ APS">
+  <div class="partner-heading">
+    <span class="section-eyebrow">Articulação institucional</span>
+    <h2>Infraestrutura nacional articulada com instituições públicas, SUS e parceiros estratégicos.</h2>
+    <p>Organização em camadas para evidenciar execução federal, integração com o SUS real e ecossistema de colaboração.</p>
+  </div>
+
+  <div class="partner-layers">
+    <article class="partner-layer partner-layer-primary">
+      <div class="partner-layer-copy">
+        <span>Grupo 1</span>
+        <h3>Execução institucional</h3>
+        <p>Infraestrutura pública federal, governança institucional e capacidade executora.</p>
+      </div>
+      <div class="institution-logo-grid primary-logos">
+        <figure class="logo-card logo-ufrn"><img src="{% static 'img/partners/ufrn-trim.png' %}" alt="UFRN"></figure>
+        <figure class="logo-card logo-ccs"><img src="{% static 'img/partners/ccs-trim.png' %}" alt="CCS UFRN"></figure>
+        <figure class="logo-card logo-nesc"><img src="{% static 'img/partners/nesc-trim.png' %}" alt="NESC UFRN"></figure>
+        <figure class="logo-card logo-imd"><img src="{% static 'img/partners/imd-logo.svg' %}" alt="Instituto Metrópole Digital UFRN"></figure>
+      </div>
+    </article>
+
+    <article class="partner-layer">
+      <div class="partner-layer-copy">
+        <span>Grupo 2</span>
+        <h3>SUS e gestão pública</h3>
+        <p>Articulação federativa, uso assistencial e operação em cenários reais da rede.</p>
+      </div>
+      <div class="institution-logo-grid public-logos">
+        <figure><img src="{% static 'img/partners/sesap-rn-trim.png' %}" alt="SESAP-RN"></figure>
+        <figure><img src="{% static 'img/partners/sms-natal-trim.png' %}" alt="SMS Natal"></figure>
+        <figure class="logo-sms-parnamirim"><img src="{% static 'img/partners/sms-parnamirim-sesad-transparent.png' %}" alt="SMS Parnamirim"></figure>
+        <figure><img src="{% static 'img/partners/anvisa-trim.png' %}" alt="Anvisa"></figure>
+      </div>
+    </article>
+
+    <article class="partner-layer partner-layer-summary">
+      <div class="partner-layer-copy">
+        <span>Grupo 3</span>
+        <h3>Parceiros estratégicos</h3>
+        <div class="ecosystem-chips" aria-label="Exemplos de parceiros estratégicos">
+          <span>Rede APS ABRASCO</span>
+          <span>SBMFC</span>
+          <span>Universidade Nova de Lisboa</span>
+          <span>IDSS Laboratory</span>
+          <span>NUT e HAIS TECH</span>
+        </div>
+      </div>
+      <a href="{% url 'public_site:about' %}" class="partner-ecosystem-link">Ver ecossistema institucional completo</a>
+    </article>
+  </div>
+</section>
+{% endblock %}

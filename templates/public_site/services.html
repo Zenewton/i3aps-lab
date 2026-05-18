@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}Serviços - I³ APS{% endblock %}
+{% block content %}
+<h1 class="page-title">Infraestrutura para integrar dados clínicos e apoiar o cuidado longitudinal no SUS</h1>
+<p class="lead-copy">O I<sup>3</sup> APS apoia secretarias de saúde, serviços assistenciais, pesquisadores, programas de pós-graduação, empresas e startups na integração e no uso responsável de dados clínicos interoperáveis.</p>
+<div class="alert alert-info">Infraestrutura em implantação progressiva no âmbito do projeto FINEP, com priorização de demandas alinhadas ao SUS, à pesquisa aplicada e à validação tecnológica.</div>
+
+<section class="section">
+  <h2 class="section-title">Como o I<sup>3</sup> APS pode ajudar você?</h2>
+  <div class="row g-3">
+    {% for profile in profiles %}
+      <div class="col-lg-6">
+        <article class="i3-card">
+          <h3>{{ profile.title }}</h3>
+          <p>{{ profile.description }}</p>
+          <ul>{% for item in profile.examples %}<li>{{ item }}</li>{% endfor %}</ul>
+          <a class="btn btn-outline-primary w-100" href="{% url 'access_requests:create' %}">{{ profile.cta }}</a>
+        </article>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section">
+  <h2 class="section-title">Serviços prioritários</h2>
+  <div class="row g-3">
+    {% for service in services %}
+      <div class="col-lg-6">
+        <article class="i3-card">
+          <h3>{{ service.title }}</h3>
+          <p>{{ service.summary }}</p>
+          <p><strong>Problema que resolve:</strong> {{ service.problem }}</p>
+          <ul>{% for item in service.examples %}<li>{{ item }}</li>{% endfor %}</ul>
+          <p class="muted mb-1">Quem pode usar: {{ service.users }}</p>
+          <p class="muted">Infraestrutura associada: {{ service.infra }}</p>
+          <a class="btn btn-outline-primary w-100" href="{% url 'access_requests:create' %}">{{ service.cta }}</a>
+        </article>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section">
+  <h2 class="section-title">Governança e uso responsável dos dados</h2>
+  <div class="row g-3">
+    {% for item in governance_items %}
+      <div class="col-md-4"><div class="i3-card"><strong>{{ item }}</strong></div></div>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

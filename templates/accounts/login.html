@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Entrar - I³ APS{% endblock %}
+{% block content %}
+<h1 class="page-title">Área do usuário</h1>
+<p class="lead-copy">Faça login para acompanhar solicitações com rastreabilidade e governança de acesso alinhadas à LGPD.</p>
+
+<div class="i3-card section" style="max-width: 560px;">
+  <form method="post">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    <div class="mb-3">
+      <label class="form-label fw-semibold" for="{{ form.username.id_for_label }}">Email</label>
+      <input class="form-control" type="text" name="{{ form.username.name }}" id="{{ form.username.id_for_label }}" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label fw-semibold" for="{{ form.password.id_for_label }}">Senha</label>
+      <input class="form-control" type="password" name="{{ form.password.name }}" id="{{ form.password.id_for_label }}" required>
+    </div>
+    <button class="btn btn-primary w-100">Entrar</button>
+  </form>
+  <hr>
+  <a href="{% url 'accounts:register' %}">Criar conta institucional</a>
+</div>
+{% endblock %}

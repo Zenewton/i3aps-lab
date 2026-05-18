@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Minhas solicitações - I³ APS{% endblock %}
+{% block content %}
+<h1 class="page-title">Minhas solicitações de uso da infraestrutura</h1>
+<div class="i3-card mb-3">
+  <strong>{{ user.get_full_name|default:user.email }}</strong>
+  <div class="muted">{{ user.profile.institution }} - {{ user.email }}</div>
+</div>
+
+<div class="d-flex flex-wrap gap-2 align-items-center mb-3">
+  <a class="btn btn-primary" href="{% url 'access_requests:create' %}">+ Nova solicitação de uso</a>
+  <form method="get" class="d-flex gap-2">
+    <select class="form-select" name="status">
+      <option value="">Todos</option>
+      {% for value, label in status_choices %}
+        <option value="{{ value }}" {% if selected_status == value %}selected{% endif %}>{{ label }}</option>
+      {% endfor %}
+    </select>
+    <button class="btn btn-outline-primary">Filtrar</button>
+  </form>
+</div>
+
+{% if requests %}
+  <div class="table-wrap i3-card">
+    <table class="table align-middle">
+      <thead><tr><th>Projeto</th><th>Instituição</th><th>Status</th><th>Data de envio</th></tr></thead>
+      <tbody>
+        {% for item in requests %}
+          <tr>
+            <td>{{ item.project_name }}</td>
+            <td>{{ item.instituicao_nome }}</td>
+            <td><span class="badge text-bg-info">{{ item.get_status_display }}</span></td>
+            <td>{{ item.created_at|date:"d/m/Y H:i" }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% else %}
+  <div class="alert alert-info">Você ainda não possui solicitações. Clique em "Nova solicitação" para começar.</div>
+{% endif %}
+{% endblock %}

@@ -1,37 +1,26 @@
 # syntax=docker/dockerfile:1.7
 
-FROM python:3.12-slim AS base
+FROM python:3.12-slim AS runtime
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
     PIP_NO_CACHE_DIR=1 \
     PIP_DISABLE_PIP_VERSION_CHECK=1 \
-    STREAMLIT_SERVER_HEADLESS=true \
-    STREAMLIT_SERVER_PORT=8501 \
-    STREAMLIT_SERVER_ADDRESS=0.0.0.0 \
-    STREAMLIT_BROWSER_GATHER_USAGE_STATS=false
+    DJANGO_SETTINGS_MODULE=i3aps_platform.settings.prod
 
 WORKDIR /app
 
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends curl \
+    && apt-get install -y --no-install-recommends build-essential libpq-dev curl \
     && rm -rf /var/lib/apt/lists/*
 
-COPY requirements.txt ./
+COPY requirements.txt /app/
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY . .
+COPY . /app/
 
-RUN groupadd --system --gid 1001 app \
-    && useradd  --system --uid 1001 --gid app --home /app app \
-    && mkdir -p /app/data \
-    && chown -R app:app /app
+RUN python manage.py collectstatic --noinput
 
-USER app
+EXPOSE 8000
 
-EXPOSE 8501
-
-HEALTHCHECK --interval=30s --timeout=5s --start-period=20s --retries=3 \
-    CMD curl -fsS http://localhost:8501/_stcore/health || exit 1
-
-CMD ["streamlit", "run", "app.py"]
+CMD ["gunicorn", "i3aps_platform.wsgi:application", "--bind", "0.0.0.0:8000", "--workers", "3", "--timeout", "90"]

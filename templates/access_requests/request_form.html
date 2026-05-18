@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}Solicitar uso - I³ APS{% endblock %}
+{% block content %}
+<h1 class="page-title">Solicitar uso ou apoio do I<sup>3</sup> APS</h1>
+<p class="lead-copy">Use este formulário para solicitar uso da infraestrutura, apoio técnico, reunião inicial, demonstração ou validação técnica. A equipe fará a triagem conforme escopo, viabilidade, disponibilidade operacional e critérios de governança.</p>
+
+<form method="post" class="section">
+  {% csrf_token %}
+  {{ form.non_field_errors }}
+
+  <div class="i3-card mb-3">
+    <h2 class="section-title">Dados da solicitação</h2>
+    <div class="row g-3">
+      <div class="col-md-6">{% include "form_field.html" with field=form.tipo_solicitacao %}</div>
+      <div class="col-md-6">{% include "form_field.html" with field=form.project_name %}</div>
+      <div class="col-12">{% include "form_field.html" with field=form.infraestrutura %}</div>
+    </div>
+  </div>
+
+  <div class="i3-card mb-3">
+    <h2 class="section-title">Instituição e escopo</h2>
+    <div class="row g-3">
+      <div class="col-md-6">{% include "form_field.html" with field=form.instituicao_nome %}</div>
+      <div class="col-md-6">{% include "form_field.html" with field=form.perfil_instituicao %}</div>
+      <div class="col-12">
+        <fieldset class="objective-fieldset">
+          <legend>{{ form.objetivos_solicitacao.label }}</legend>
+          <div class="objective-grid">
+            {% for checkbox in form.objetivos_solicitacao %}
+              <div class="form-check objective-option">
+                {{ checkbox.tag }}
+                <label class="form-check-label" for="{{ checkbox.id_for_label }}">{{ checkbox.choice_label }}</label>
+              </div>
+            {% endfor %}
+          </div>
+          {% for error in form.objetivos_solicitacao.errors %}
+            <div class="invalid-feedback d-block">{{ error }}</div>
+          {% endfor %}
+        </fieldset>
+      </div>
+      <div class="col-12">{% include "form_field.html" with field=form.demanda_descricao %}</div>
+      <div class="col-md-6">{% include "form_field.html" with field=form.dados_sistemas_envolvidos %}</div>
+      <div class="col-md-6">{% include "form_field.html" with field=form.prazo_urgencia %}</div>
+      <div class="col-12">{% include "form_field.html" with field=form.detalhes_tecnicos %}</div>
+    </div>
+  </div>
+
+  <div class="i3-card mb-3">
+    <h2 class="section-title">Período e responsável</h2>
+    <div class="row g-3">
+      <div class="col-md-6">{% include "form_field.html" with field=form.data_inicio %}</div>
+      <div class="col-md-6">{% include "form_field.html" with field=form.data_fim %}</div>
+      <div class="col-md-6">{% include "form_field.html" with field=form.responsavel_nome %}</div>
+      <div class="col-md-6">{% include "form_field.html" with field=form.responsavel_email %}</div>
+    </div>
+  </div>
+
+  <div class="alert alert-info">O envio deste formulário não implica aprovação automática do uso da infraestrutura. As solicitações serão avaliadas quanto a missão, disponibilidade, governança dos dados, viabilidade técnica e conformidade ética e legal.</div>
+  <div class="mb-2">{% include "form_field.html" with field=form.concorda_lgpd %}</div>
+  <div class="mb-4">{% include "form_field.html" with field=form.concorda_etica %}</div>
+  <button class="btn btn-primary btn-lg">Enviar solicitação</button>
+</form>
+{% endblock %}

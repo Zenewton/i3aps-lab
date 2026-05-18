@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Acesso - I³ APS{% endblock %}
+{% block content %}
+<h1 class="page-title">Acesso à Infraestrutura I<sup>3</sup> APS</h1>
+<p class="lead-copy">O acesso à infraestrutura é realizado mediante solicitação institucional, triagem técnica, análise de governança, conformidade com LGPD e disponibilidade operacional.</p>
+
+<section class="section">
+  <h2 class="section-title">Como funciona o acesso</h2>
+  <div class="row g-3">
+    <div class="col-md-4"><div class="i3-card"><h3>1. Defina seu objetivo</h3><p>Informe qual problema, serviço ou projeto será desenvolvido com a infraestrutura.</p></div></div>
+    <div class="col-md-4"><div class="i3-card"><h3>2. Envie a solicitação</h3><p>Preencha o formulário com dados institucionais, escopo técnico e período de uso.</p></div></div>
+    <div class="col-md-4"><div class="i3-card"><h3>3. Passe pela análise</h3><p>A equipe avalia aderência técnica, LGPD, governança e disponibilidade operacional.</p></div></div>
+  </div>
+</section>
+
+<section class="section">
+  <h2 class="section-title">Normas, governança e documentos institucionais</h2>
+  <div class="row g-3">
+    {% for document in documents %}
+      <div class="col-md-6">
+        <article class="i3-card">
+          <h3>{{ document.title }}</h3>
+          <p>{{ document.description }}</p>
+          <a class="btn btn-outline-primary" href="{% url 'public_site:download_document' document.slug %}">Baixar PDF</a>
+        </article>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section">
+  <a class="btn btn-primary" href="{% url 'access_requests:create' %}">Solicitar acesso institucional</a>
+  <a class="btn btn-outline-primary" href="{% url 'public_site:services' %}">Ver serviços disponíveis</a>
+</section>
+{% endblock %}

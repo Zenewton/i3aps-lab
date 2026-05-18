@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Equipe - I³ APS{% endblock %}
+{% block content %}
+<h1 class="page-title">Equipe do I<sup>3</sup> APS</h1>
+<p class="lead-copy">A equipe reúne pesquisadores líderes nas áreas de saúde coletiva, engenharia de software, inteligência artificial e epidemiologia, refletindo a natureza interdisciplinar da infraestrutura.</p>
+
+{% for block in team_blocks %}
+  <section class="section team-section">
+    <h2 class="section-title">{{ block.titulo }}</h2>
+    <div class="row g-3">
+      {% for member in block.membros %}
+        <div class="col-md-6 col-xl-4">
+          <article class="i3-card team-card">
+            <h3>{{ member.nome }}</h3>
+            <p class="team-affiliation">{{ member.afiliacao }}</p>
+            <p class="team-area">{{ member.area }}</p>
+            <div class="team-links" aria-label="Perfis acadêmicos de {{ member.nome }}">
+              {% if member.lattes %}
+                <a class="team-profile-link" href="{{ member.lattes }}" target="_blank" rel="noopener noreferrer" aria-label="Currículo Lattes de {{ member.nome }}">
+                  <img src="{% static 'lattes-logo.jpg' %}" alt="" class="team-profile-icon" loading="lazy">
+                  <span>Lattes</span>
+                </a>
+              {% endif %}
+              {% if member.orcid %}
+                <a class="team-profile-link" href="{{ member.orcid }}" target="_blank" rel="noopener noreferrer" aria-label="Perfil ORCID de {{ member.nome }}">
+                  <img src="{% static 'orcid-icone.png' %}" alt="" class="team-profile-icon" loading="lazy">
+                  <span>ORCID</span>
+                </a>
+              {% endif %}
+              {% if member.sigaa %}
+                <a class="team-profile-link" href="{{ member.sigaa }}" target="_blank" rel="noopener noreferrer" aria-label="Perfil SIGAA de {{ member.nome }}">
+                  <span class="team-profile-dot">S</span>
+                  <span>SIGAA</span>
+                </a>
+              {% endif %}
+            </div>
+          </article>
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+{% endfor %}
+{% endblock %}
