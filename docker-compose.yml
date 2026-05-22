@@ -13,8 +13,8 @@ services:
     volumes:
       - staticfiles:/app/staticfiles
       - media:/app/media
-    expose:
-      - "8000"
+    ports:
+      - "8080:8000"
     healthcheck:
       test: ["CMD", "curl", "-f", "-H", "X-Forwarded-Proto: https", "http://127.0.0.1:8000/health/"]
       interval: 30s
@@ -49,17 +49,6 @@ services:
     command: redis-server --appendonly yes
     volumes:
       - redis_data:/data
-
-  nginx:
-    image: nginx:1.27-alpine
-    ports:
-      - "8080:80"
-    depends_on:
-      - web
-    volumes:
-      - ./deploy/nginx/i3aps.conf:/etc/nginx/conf.d/default.conf:ro
-      - staticfiles:/var/www/static:ro
-      - media:/var/www/media:ro
 
 volumes:
   postgres_data:
