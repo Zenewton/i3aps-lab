@@ -94,11 +94,12 @@ TEAM_BLOCKS = [
                 "orcid": "https://orcid.org/0000-0002-8351-5119",
             },
             {
-                "nome": "Karla Morganna P. P. Mendonça",
-                "afiliacao": "UFRN – Fisioterapia",
-                "area": "Doenças respiratórias e inovação clínica",
+                "nome": "Karla Morganna Pereira Pinto de Mendonça",
+                "afiliacao": "UFRN – Departamento de Fisioterapia",
+                "area": "Doenças respiratórias crônicas",
                 "lattes": "http://lattes.cnpq.br/1736384836028397",
                 "orcid": "https://orcid.org/0000-0001-5734-3707",
+                "sigaa": "https://sigaa.ufrn.br/sigaa/public/docente/portal.jsf?siape=2291421",
             },
             {
                 "nome": "Thiago Gomes da Trindade",
