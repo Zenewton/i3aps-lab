@@ -160,6 +160,7 @@ TEAM_BLOCKS = [
         "membros": [
             {"nome": "Dyego Leandro Bezerra de Souza", "afiliacao": "UFRN - Saúde Coletiva", "area": "Epidemiologia e oncologia", "lattes": "http://buscatextual.cnpq.br/buscatextual/visualizacv.do?id=K4702617H2", "orcid": "https://orcid.org/0000-0001-8426-3120"},
             {"nome": "Viviane Souza do Amaral", "afiliacao": "UFRN - Saúde da Mulher", "area": "Saúde materna e cuidado clínico", "lattes": "http://lattes.cnpq.br/4440806451383783", "orcid": "https://orcid.org/0000-0002-9326-9054"},
+            {"nome": "Ana Katherine da Silveira Goncalves de Oliveira", "afiliacao": "UFRN - Departamento de Toco-Ginecologia", "area": "Ginecologia, obstetrícia e saúde da mulher", "lattes": "http://lattes.cnpq.br/3436756337251449", "orcid": "https://orcid.org/0000-0002-8351-5119"},
             {"nome": "Thiago Gomes da Trindade", "afiliacao": "UFRN - Departamento de Medicina Clínica", "area": "Linhas de cuidado às condições crônicas e prática clínica", "lattes": "http://lattes.cnpq.br/5992470800302814", "orcid": "https://orcid.org/0000-0001-8178-0982"},
             {"nome": "Marise Reis de Freitas", "afiliacao": "UFRN - Departamento de Infectologia", "area": "Linhas de cuidado, doenças infecciosas, segurança do paciente e qualidade", "lattes": "http://lattes.cnpq.br/9028554205811163", "orcid": "https://orcid.org/0000-0002-5679-6672"},
         ],

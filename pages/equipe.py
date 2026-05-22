@@ -87,9 +87,9 @@ TEAM_BLOCKS = [
                 "orcid": "https://orcid.org/0000-0002-9326-9054",
             },
             {
-                "nome": "Ana Katherine Oliveira",
-                "afiliacao": "UFRN – Saúde da Mulher",
-                "area": "Ginecologia e obstetrícia",
+                "nome": "Ana Katherine da Silveira Goncalves de Oliveira",
+                "afiliacao": "UFRN – Departamento de Toco-Ginecologia",
+                "area": "Ginecologia, obstetrícia e saúde da mulher",
                 "lattes": "http://lattes.cnpq.br/3436756337251449",
                 "orcid": "https://orcid.org/0000-0002-8351-5119",
             },
